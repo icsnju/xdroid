@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Xdroid</string>
+    <string name="title_activity_main">Xdroid</string>
+    <string name="test_mode">测试模式</string>
+    <!--<string name="pre_not_self">自己发的不抢</string>-->
+    <!--<string name="pref_delay">延时抢红包</string>-->
+    <!--<string name="pref_delay_time">延时时长</string>-->
+    <!--<string name="pref_whisper">私聊不抢</string>-->
+    <!--<string name="pref_not_mute">免打扰不抢</string>-->
+    <!--<string name="quick_open">快速拆包</string>-->
+    <!--<string name="delay_message">延迟0毫秒拆开红包</string>-->
+    <string name="setting">设置</string>
+    <string name="about">关于</string>
+    <string name="author">作者</string>
+    <string name="alipay_donate">支付宝捐赠</string>
+</resources>

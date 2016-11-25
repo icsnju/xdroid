@@ -1,0 +1,53 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/setting">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="test_mode"
+            android:title="@string/test_mode" />
+
+
+        <!--<SwitchPreference-->
+            <!--android:defaultValue="false"-->
+            <!--android:dependency="open"-->
+            <!--android:key="not_self"-->
+            <!--android:title="@string/pre_not_self" />-->
+
+        <!--<SwitchPreference-->
+            <!--android:defaultValue="false"-->
+            <!--android:dependency="open"-->
+            <!--android:key="not_whisper"-->
+            <!--android:title="@string/pref_whisper" />-->
+
+        <!--<SwitchPreference-->
+            <!--android:defaultValue="false"-->
+            <!--android:dependency="open"-->
+            <!--android:key="not_mute"-->
+            <!--android:title="@string/pref_not_mute" />-->
+
+        <!--<SwitchPreference-->
+            <!--android:defaultValue="false"-->
+            <!--android:dependency="open"-->
+            <!--android:key="delay"-->
+            <!--android:title="@string/pref_delay" />-->
+
+        <!--<SwitchPreference-->
+            <!--android:defaultValue="true"-->
+            <!--android:key="quick_open"-->
+            <!--android:title="@string/quick_open" />-->
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/about">
+        <Preference
+            android:key="author"
+            android:summary="兼续"
+            android:title="@string/author" />
+
+        <Preference
+            android:key="donate_alipay"
+            android:title="@string/alipay_donate" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
