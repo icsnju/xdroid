@@ -1,26 +1,10 @@
 package com.nata.xdroid;
 
-import android.app.ApplicationErrorReport;
-import android.os.IBinder;
-
-import com.nata.xdroid.Hooks.ActionHook;
-import com.nata.xdroid.Hooks.ActivityCoverageHook;
-import com.nata.xdroid.Hooks.ContentHook;
-import com.nata.xdroid.Hooks.CrashHook;
-import com.nata.xdroid.Hooks.EditTextHook;
-import com.nata.xdroid.Hooks.ExceptionHook;
-import com.nata.xdroid.Hooks.GPSLocationHook;
-import com.nata.xdroid.Hooks.MotionEventHook;
-import com.nata.xdroid.Utils.PreferencesUtils;
+import com.nata.xdroid.hooks.BroadcastHook;
+import com.nata.xdroid.hooks.CrashHook;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
-import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XSharedPreferences;
-import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
-
-import static de.robv.android.xposed.XposedBridge.log;
-import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 /**
  * Created by Calvin on 2016/11/21.
@@ -40,6 +24,19 @@ public class Main implements IXposedHookLoadPackage {
 
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable {
         ClassLoader loader = loadPackageParam.classLoader;
+
+
+
+
+        if(loadPackageParam.packageName.equals("android")) {
+            new CrashHook().hook(loader);
+//            new BroadcastHook().hook(loader);
+        }
+
+
+        /**
+         * App specific hook
+         */
         if (loadPackageParam.packageName.equals(packageName)) {
 //            new ActivityCoverageHook(packageName).hook(loader);
 //            new EditTextHook().hook(loader);
@@ -50,8 +47,6 @@ public class Main implements IXposedHookLoadPackage {
 //            new ExceptionHook().hook(loader);
         }
 
-        if(loadPackageParam.packageName.equals("android")) {
-            new CrashHook().hook(loader);
-        }
+
     }
 }

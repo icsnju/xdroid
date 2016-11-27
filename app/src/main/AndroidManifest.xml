@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nata.xdroid">
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
         android:allowBackup="true"
@@ -27,6 +28,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".CrashReportReceiver">
+            <intent-filter>
+                <action android:name="com.nata.xdroid.action.REPORT_CRASH"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

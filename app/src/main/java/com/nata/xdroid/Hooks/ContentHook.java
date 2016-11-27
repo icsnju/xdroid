@@ -1,12 +1,7 @@
-package com.nata.xdroid.Hooks;
+package com.nata.xdroid.hooks;
 
-import android.app.Activity;
 import android.net.Uri;
 import android.os.CancellationSignal;
-import android.view.View;
-import android.widget.EditText;
-
-import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;

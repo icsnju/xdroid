@@ -1,8 +1,6 @@
-package com.nata.xdroid.Utils;
-import android.util.Log;
+package com.nata.xdroid.utils;
 
 import com.nata.xdroid.BuildConfig;
-import com.nata.xdroid.Main;
 
 import de.robv.android.xposed.XSharedPreferences;
 

@@ -1,4 +1,4 @@
-package com.nata.xdroid.Utils;
+package com.nata.xdroid.utils;
 
 import android.view.View;
 import android.view.ViewGroup;

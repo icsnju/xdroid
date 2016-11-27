@@ -1,4 +1,4 @@
-package com.nata.xdroid.Hooks;
+package com.nata.xdroid.hooks;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import de.robv.android.xposed.XC_MethodHook;
-import static com.nata.xdroid.Utils.PreferencesUtils.inMonitorMode;
-import static com.nata.xdroid.Utils.PreferencesUtils.inTestMode;
-import static com.nata.xdroid.Utils.ViewUtil.getAllChildViews;
+import static com.nata.xdroid.utils.PreferencesUtils.inMonitorMode;
+import static com.nata.xdroid.utils.PreferencesUtils.inTestMode;
+import static com.nata.xdroid.utils.ViewUtil.getAllChildViews;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 

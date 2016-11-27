@@ -1,4 +1,4 @@
-package com.nata.xdroid.Hooks;
+package com.nata.xdroid.hooks;
 
 import android.view.MotionEvent;
 import de.robv.android.xposed.XC_MethodHook;

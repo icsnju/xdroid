@@ -1,7 +1,5 @@
-package com.nata.xdroid.Hooks;
+package com.nata.xdroid.hooks;
 
-import android.app.PendingIntent;
-import android.location.Criteria;
 import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;

@@ -1,13 +1,13 @@
-package com.nata.xdroid.Hooks;
+package com.nata.xdroid.hooks;
 
 import android.content.Context;
 import android.os.Bundle;
-import com.nata.xdroid.Utils.ActivityUtil;
+import com.nata.xdroid.utils.ActivityUtil;
 import java.util.HashSet;
 import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
-import static com.nata.xdroid.Utils.PreferencesUtils.inTestMode;
+import static com.nata.xdroid.utils.PreferencesUtils.inTestMode;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
