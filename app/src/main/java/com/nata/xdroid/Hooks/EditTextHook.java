@@ -26,7 +26,6 @@ public class EditTextHook {
         findAndHookMethod("android.app.Activity", loader, "onPause", new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-
                 if (inMonitorMode()) {
                     Activity rootActivity = (Activity) param.thisObject;
                     List<View> views = getAllChildViews(rootActivity.getWindow().getDecorView(), EditText.class);
@@ -44,34 +43,36 @@ public class EditTextHook {
         findAndHookMethod("android.app.Activity", loader, "onStart", new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                if (inTestMode()) {
-                    Activity rootActivity = (Activity) param.thisObject;
-                    List<View> views = getAllChildViews(rootActivity.getWindow().getDecorView(), EditText.class);
-                    for (int i = 0; i < views.size(); i++) {
-                        EditText et = (EditText) views.get(i);
-                        int id = et.getId();
-                        String text = dataMap.get(id);
+            if (inTestMode()) {
+                Activity rootActivity = (Activity) param.thisObject;
+                List<View> views = getAllChildViews(rootActivity.getWindow().getDecorView(), EditText.class);
+                for (int i = 0; i < views.size(); i++) {
+                    EditText et = (EditText) views.get(i);
+                    int id = et.getId();
+                    String text = dataMap.get(id);
+                    if(text != null && !text.trim().equals("")){
                         et.setText(text);
                         log("onStart put text: " + id + " " + text);
                     }
                 }
+            }
             }
         });
 
         findAndHookMethod("android.app.Dialog", loader, "dismiss", new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                if (!inMonitorMode()) {
-                    Dialog dialog = (Dialog) param.thisObject;
-                    List<View> views = getAllChildViews(dialog.getWindow().getDecorView(), EditText.class);
-                    for (int i = 0; i < views.size(); i++) {
-                        EditText et = (EditText) views.get(i);
-                        String text = et.getText().toString();
-                        int id = et.getId();
-                        if(!text.trim().equals("")) dataMap.put(id, text);
-                        log("dismiss: " + id + " " + text);
-                    }
+            if (!inMonitorMode()) {
+                Dialog dialog = (Dialog) param.thisObject;
+                List<View> views = getAllChildViews(dialog.getWindow().getDecorView(), EditText.class);
+                for (int i = 0; i < views.size(); i++) {
+                    EditText et = (EditText) views.get(i);
+                    String text = et.getText().toString();
+                    int id = et.getId();
+                    if(!text.trim().equals("")) dataMap.put(id, text);
+                    log("dismiss: " + id + " " + text);
                 }
+            }
             }
         });
     }

@@ -38,15 +38,10 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/about">
+    <PreferenceCategory android:title="@string/statistics">
         <Preference
-            android:key="author"
-            android:summary="兼续"
-            android:title="@string/author" />
-
-        <Preference
-            android:key="donate_alipay"
-            android:title="@string/alipay_donate" />
+            android:key="crash"
+            android:title="@string/crash" />
 
     </PreferenceCategory>
 

@@ -28,7 +28,7 @@ public class CrashHook implements Hook {
                     @Override
                     protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                         ApplicationErrorReport.CrashInfo info = (ApplicationErrorReport.CrashInfo) param.args[1];
-                        log("Crash: " + info.exceptionClassName + " -> " + info.exceptionMessage);
+                        log("Crash: " +info.throwClassName +"->" + info.exceptionClassName + " -> " + info.exceptionMessage + " -> " + info.stackTrace);
                         Intent intent = CrashReportReceiver.getCrashBroadCastIntent(info, context.getPackageName());
                         context.sendBroadcast(intent);
                     }

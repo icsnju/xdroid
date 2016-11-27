@@ -1,4 +1,4 @@
-package com.nata.xdroid;
+package com.nata.xdroid.ui;
 
 /**
  * Created by Calvin on 2016/11/26.
@@ -16,6 +16,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.WindowManager;
 
+import com.nata.xdroid.R;
 import com.nata.xdroid.db.CrashInfo;
 
 

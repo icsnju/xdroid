@@ -13,10 +13,6 @@ import com.nata.xdroid.db.CrashInfo;
 import com.nata.xdroid.db.RecordDao;
 import com.nata.xdroid.utils.CrashUtil;
 
-/**
- * 收到崩溃通知
- * Created by 杨金阳 on 2014/10/26.
- */
 public class CrashReportReceiver extends BroadcastReceiver {
     public static final String EXTRA_NAME_CRASH_INFO = "crash_info";
     public static final String EXTRA_NAME_PACKAGE_NAME = "pkg_name";
@@ -46,7 +42,7 @@ public class CrashReportReceiver extends BroadcastReceiver {
             RecordDao recordDao = new RecordDao(context);
             recordDao.insert(crashInfo);
 
-            CrashDialog.show(context, crashInfo);
+//            CrashDialog.show(context, crashInfo);
 
         }
     }
