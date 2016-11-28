@@ -30,15 +30,7 @@ public class EditTextHook {
     private UserDataDao userDataDao;
 
     public EditTextHook(Context context) {
-        try {
-            Context moduleContext = AndroidAppHelper.currentApplication().createPackageContext("com.nata.xdroid", Context.CONTEXT_IGNORE_SECURITY);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
         userDataDao = new UserDataDao(context);
-//        List<UserData> list = userDataDao.getAll();
-//        log(Arrays.toString(list.toArray()));
     }
 
     public void hook(ClassLoader loader) {

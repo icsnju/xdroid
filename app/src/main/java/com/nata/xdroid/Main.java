@@ -20,9 +20,9 @@ public class Main implements IXposedHookLoadPackage {
     public static final String LOGCAT_PACKAGE_NAME = "org.jtb.alogcat";
     public static final String MM_PACKAGE_NAME = "com.tencent.mm";
     public static final String MULTISMS_PACKAGE_NAME = "com.hectorone.multismssender";
-    public static final String CRASH_PACKAGE_NAME="com.nata.crashapplication";
+    public static final String CRASH_PACKAGE_NAME = "com.nata.crashapplication";
 
-    public static final String []sut =
+    public static final String[] sut =
             {
                     "android",
                     "com.fsck.k9",
@@ -43,11 +43,9 @@ public class Main implements IXposedHookLoadPackage {
 
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable {
         final ClassLoader loader = loadPackageParam.classLoader;
+        final String packageName = loadPackageParam.packageName;
 
-
-        if (list.contains(loadPackageParam.packageName)) {
-            final String packageName = loadPackageParam.packageName;
-
+        if (list.contains(packageName)) {
             findAndHookMethod(Application.class, "onCreate", new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
