@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nata.xdroid.R;
-import com.nata.xdroid.db.CrashInfo;
+import com.nata.xdroid.db.beans.CrashInfo;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

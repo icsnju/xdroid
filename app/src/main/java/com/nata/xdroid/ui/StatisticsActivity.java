@@ -7,8 +7,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.nata.xdroid.R;
-import com.nata.xdroid.db.CrashInfo;
-import com.nata.xdroid.db.RecordDao;
+import com.nata.xdroid.db.beans.CrashInfo;
+import com.nata.xdroid.db.daos.RecordDao;
 
 import java.util.List;
 

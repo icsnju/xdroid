@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.nata.xdroid.db.CrashInfo;
+import com.nata.xdroid.db.beans.CrashInfo;
 
 import java.util.ArrayList;
 import java.util.List;

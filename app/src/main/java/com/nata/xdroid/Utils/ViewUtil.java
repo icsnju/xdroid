@@ -23,7 +23,7 @@ public class ViewUtil {
 
                 View viewchild = vp.getChildAt(i);
 
-                if (viewchild.getClass().equals(T)) {
+                if (T.isAssignableFrom(viewchild.getClass())) {
                     allchildren.add(viewchild);
                 }
 

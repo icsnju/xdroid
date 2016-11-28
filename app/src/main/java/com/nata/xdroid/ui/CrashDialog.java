@@ -17,7 +17,7 @@ import android.graphics.drawable.Drawable;
 import android.view.WindowManager;
 
 import com.nata.xdroid.R;
-import com.nata.xdroid.db.CrashInfo;
+import com.nata.xdroid.db.beans.CrashInfo;
 
 
 /**

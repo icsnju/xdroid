@@ -1,13 +1,14 @@
 package com.nata.xdroid;
 
+import android.app.Application;
 import com.nata.xdroid.hooks.CrashHook;
 import com.nata.xdroid.hooks.EditTextHook;
-
 import java.util.Arrays;
 import java.util.List;
-
 import de.robv.android.xposed.IXposedHookLoadPackage;
+import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 /**
  * Created by Calvin on 2016/11/21.
@@ -22,7 +23,9 @@ public class Main implements IXposedHookLoadPackage {
     public static final String CRASH_PACKAGE_NAME="com.nata.crashapplication";
 
     public static final String []sut =
-            {       "com.fsck.k9",
+            {
+                    "android",
+                    "com.fsck.k9",
                     "com.eleybourn.bookcatalogue",
                     "org.totschnig.myexpenses",
                     "com.nloko.android.syncmypix",
@@ -37,31 +40,36 @@ public class Main implements IXposedHookLoadPackage {
             };
 
     List<String> list = Arrays.asList(sut);
-    public static final String packageName = CRASH_PACKAGE_NAME;
-
 
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable {
-        ClassLoader loader = loadPackageParam.classLoader;
-
-        if(loadPackageParam.packageName.equals("android")) {
-            new CrashHook().hook(loader);
-//            new BroadcastHook().hook(loader);
-        }
+        final ClassLoader loader = loadPackageParam.classLoader;
 
 
-        /**
-         * App specific hook
-         */
         if (list.contains(loadPackageParam.packageName)) {
-//            new ActivityCoverageHook(packageName).hook(loader);
-            new EditTextHook().hook(loader);
-//            new MotionEventHook().hook(loader);
-//            new GPSLocationHook().hook(loader);
-//            new ActionHook().hook(loader);
-//            new ContentHook().hook(loader);
-//            new ExceptionHook().hook(loader);
-        }
+            final String packageName = loadPackageParam.packageName;
 
+            findAndHookMethod(Application.class, "onCreate", new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    final Application context = (Application) param.thisObject;
+
+                    if (packageName.equals("android")) {
+                        new CrashHook(context).hook(loader);
+//                      new BroadcastHook().hook(loader);
+                    }
+
+                    new EditTextHook(context).hook(loader);
+//                    new ActivityCoverageHook(packageName).hook(loader);
+//                    new MotionEventHook().hook(loader);
+//                    new GPSLocationHook().hook(loader);
+//                    new ActionHook().hook(loader);
+//                    new ContentHook().hook(loader);
+//                    new ExceptionHook().hook(loader);
+
+
+                }
+            });
+        }
 
     }
 }

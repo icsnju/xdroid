@@ -9,8 +9,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.nata.xdroid.db.CrashInfo;
-import com.nata.xdroid.db.RecordDao;
+import com.nata.xdroid.db.beans.CrashInfo;
+import com.nata.xdroid.db.daos.RecordDao;
 import com.nata.xdroid.utils.CrashUtil;
 
 public class CrashReportReceiver extends BroadcastReceiver {
