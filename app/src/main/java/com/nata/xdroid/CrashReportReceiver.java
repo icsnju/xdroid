@@ -11,7 +11,7 @@ import android.content.Intent;
 
 import com.nata.xdroid.db.beans.CrashInfo;
 import com.nata.xdroid.db.daos.RecordDao;
-import com.nata.xdroid.utils.CrashUtil;
+import com.nata.xdroid.utils.FormatUtil;
 
 public class CrashReportReceiver extends BroadcastReceiver {
     public static final String EXTRA_NAME_CRASH_INFO = "crash_info";
@@ -21,7 +21,7 @@ public class CrashReportReceiver extends BroadcastReceiver {
     public static Intent getCrashBroadCastIntent(ApplicationErrorReport.CrashInfo info, String pkgName) {
         Intent intent = new Intent(ACTION_REPORT_CRASH);
 
-        intent.putExtra(EXTRA_NAME_CRASH_INFO, CrashUtil.getCrashInfoDetail(info));
+        intent.putExtra(EXTRA_NAME_CRASH_INFO, FormatUtil.getCrashInfoDetail(info));
         intent.putExtra(EXTRA_NAME_PACKAGE_NAME, pkgName);
         return intent;
     }

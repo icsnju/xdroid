@@ -13,11 +13,12 @@ import java.io.Serializable;
  * 崩溃信息
  */
 @DatabaseTable(tableName = "userdata")
-public class UserData {
+public class UserData implements Serializable{
 
     public static final String PACKAGE_FIELD_NAME = "packageName";
     public static final String ACTIVITY_FIELD_NAME = "activityName";
-    public static final String RESOURCEID_FIELD_NAME = "resourceId";
+    public static final String RESOURCE_ID_FIELD_NAME = "resourceId";
+    public static final String RESOURCE_NAME_FIELD_NAME = "resourceName";
     public static final String CONTENT_FIELD_NAME = "content";
     public static final String TIME_FIELD_NAME = "stampTime";
 
@@ -31,8 +32,11 @@ public class UserData {
     @DatabaseField(canBeNull = false, columnName = ACTIVITY_FIELD_NAME)
     private String activityName;
 
-    @DatabaseField(canBeNull = false, columnName = RESOURCEID_FIELD_NAME)
+    @DatabaseField(canBeNull = false, columnName = RESOURCE_ID_FIELD_NAME)
     private int resourceId;
+
+    @DatabaseField(canBeNull = false, columnName = RESOURCE_NAME_FIELD_NAME)
+    private String resourceName;
 
     @DatabaseField(canBeNull = false, columnName = CONTENT_FIELD_NAME)
     private String content;
@@ -88,6 +92,14 @@ public class UserData {
         this.stampTime = stampTime;
     }
 
+    public String getResourceName() {
+        return resourceName;
+    }
+
+    public void setResourceName(String resourceName) {
+        this.resourceName = resourceName;
+    }
+
     @Override
     public String toString() {
         return "UserData{" +
@@ -95,7 +107,9 @@ public class UserData {
                 ", packageName='" + packageName + '\'' +
                 ", activityName='" + activityName + '\'' +
                 ", resourceId=" + resourceId +
+                ", resourceName=" + resourceName +
                 ", content='" + content + '\'' +
+                ", stampTime=" + stampTime +
                 '}';
     }
 }

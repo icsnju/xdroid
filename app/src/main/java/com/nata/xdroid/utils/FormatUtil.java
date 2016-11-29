@@ -2,11 +2,15 @@ package com.nata.xdroid.utils;
 
 import android.app.ApplicationErrorReport;
 
+import com.nata.xdroid.db.beans.UserData;
+
+import java.util.List;
+
 /**
  * Created by Calvin on 2016/11/26.
  */
 
-public class CrashUtil {
+public class FormatUtil {
     public static String getExceptionDetail(Throwable t) {
         if (t == null) return "";
 
@@ -40,5 +44,14 @@ public class CrashUtil {
         err.append("\n");
 
         return err.toString();
+    }
+
+    public static String getUserDataInfo(List<UserData> userDatas) {
+        StringBuilder sb =new StringBuilder();
+        for(int i = 0 ; i < userDatas.size(); i++) {
+            UserData userData = userDatas.get(i);
+            sb.append(userData.getResourceName() + " " + userData.getContent() + "\n");
+        }
+        return sb.toString();
     }
 }

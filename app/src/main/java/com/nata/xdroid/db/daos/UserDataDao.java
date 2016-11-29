@@ -8,6 +8,7 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.nata.xdroid.db.DatabaseHelper;
 import com.nata.xdroid.db.beans.UserData;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 
 
-public class UserDataDao {
+public class UserDataDao implements Serializable{
     private Dao<UserData, Integer> dao;
     private DatabaseHelper helper;
 
@@ -50,7 +51,7 @@ public class UserDataDao {
                     .and()
                     .eq(UserData.ACTIVITY_FIELD_NAME, activityName)
                     .and()
-                    .eq(UserData.RESOURCEID_FIELD_NAME, resourceId)
+                    .eq(UserData.RESOURCE_ID_FIELD_NAME, resourceId)
                     .queryForFirst();
         } catch (SQLException e) {
             e.printStackTrace();

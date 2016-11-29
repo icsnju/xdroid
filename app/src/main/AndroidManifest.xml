@@ -37,6 +37,12 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".UserDataReceiver">
+            <intent-filter>
+                <action android:name="com.nata.xdroid.action.LOG_DATA" />
+            </intent-filter>
+        </receiver>
+
         <activity android:name=".ui.StatisticsActivity"></activity>
     </application>
 

@@ -8,5 +8,5 @@ package com.nata.xdroid.db;
  */
 public class DBInfo {
     public static final String DB_NAME = "xdroid";
-    public static final int VERSION = 5;
+    public static final int VERSION = 7;
 }
