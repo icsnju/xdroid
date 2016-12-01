@@ -7,34 +7,14 @@
             android:title="@string/test_mode" />
 
 
-        <!--<SwitchPreference-->
-            <!--android:defaultValue="false"-->
-            <!--android:dependency="open"-->
-            <!--android:key="not_self"-->
-            <!--android:title="@string/pre_not_self" />-->
+    </PreferenceCategory>
 
-        <!--<SwitchPreference-->
-            <!--android:defaultValue="false"-->
-            <!--android:dependency="open"-->
-            <!--android:key="not_whisper"-->
-            <!--android:title="@string/pref_whisper" />-->
+    <PreferenceCategory android:title="@string/test">
 
-        <!--<SwitchPreference-->
-            <!--android:defaultValue="false"-->
-            <!--android:dependency="open"-->
-            <!--android:key="not_mute"-->
-            <!--android:title="@string/pref_not_mute" />-->
+        <Preference
+            android:key="broadcast"
+            android:title="@string/broadcast" />
 
-        <!--<SwitchPreference-->
-            <!--android:defaultValue="false"-->
-            <!--android:dependency="open"-->
-            <!--android:key="delay"-->
-            <!--android:title="@string/pref_delay" />-->
-
-        <!--<SwitchPreference-->
-            <!--android:defaultValue="true"-->
-            <!--android:key="quick_open"-->
-            <!--android:title="@string/quick_open" />-->
 
     </PreferenceCategory>
 

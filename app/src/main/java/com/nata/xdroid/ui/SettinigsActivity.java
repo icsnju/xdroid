@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.nata.xdroid.R;
@@ -41,6 +42,7 @@ public class SettinigsActivity extends AppCompatActivity {
             PreferenceManager prefMgr = getPreferenceManager();
             prefMgr.setSharedPreferencesName("pref_mine");
             prefMgr.setSharedPreferencesMode(MODE_WORLD_READABLE);
+            final Context context = getActivity().getApplicationContext();
 
 
 //            getPreferenceManager().setSharedPreferencesMode(MODE_WORLD_READABLE);
@@ -57,11 +59,21 @@ public class SettinigsActivity extends AppCompatActivity {
                 }
             });
 
+            Preference broadcast = findPreference("broadcast");
+            broadcast.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference pref) {
+                    Intent intent = new Intent("com.fsck.k9.service.CoreReceiver.wakeLockRelease");
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                    return true;
+                }
+            });
+
             Preference userdata = findPreference("userdata");
             userdata.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference pref) {
-                    Context context = getActivity().getApplicationContext();
+
                     List<UserData> userDatas = new UserDataDao(context).getAll();
                     String userData = FormatUtil.getUserDataInfo(userDatas);
 

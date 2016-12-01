@@ -1,0 +1,130 @@
+## 
+## Makefile to generate all the coverage results
+## 
+
+.SECONDARY:
+.SILENT:
+
+# VARS TO DEFINE
+TOOL=Monkey
+HTML_DIR=coverage/_files
+
+HTML_FILES=$(shell ls $(HTML_DIR)/*.html)
+
+ALL_HTML_COV:=$(HTML_FILES:%=%.cov)
+ALL_HTML_NOTCOV:=$(HTML_FILES:%=%.notcov)
+ALL_HTML_CLASSNAME:=$(HTML_FILES:%=%.classname)
+ALL_HTML_PACKAGENAME:=$(HTML_FILES:%=%.packagename)
+
+all: AllLines-$(TOOL).txt
+
+help:
+	echo " "
+	echo "* Invoke make by providing the tool name and the path the _files directory "
+	echo "  containing EMMA's HTML reports. This will produce the following files"
+	echo "  in the current directory: AllLines -- listing all line numbers, AllCovered -- "
+	echo "  listing all covered lines, AllNotCovered -- listing all not covered lines."
+	echo "     make -f covres-makefile TOOL=<tool name> HTML_DIR=<path to _files dir>:	"
+	echo " "
+	echo "* Remove intermediate files:"
+	echo "     make -f covres-makefile clean HTML_DIR=<path to _files dir>"
+	echo " "
+	echo "* Remove coverage summary files and intermediate files:"
+	echo "     make -f covres-makefile cleanAll HTML_DIR=<path to _files dir>"
+
+
+# aggregates all covered and not covered lines
+AllLines-$(TOOL).txt: AllCovered-$(TOOL).txt AllNotCovered-$(TOOL).txt
+	cat AllCovered-$(TOOL).txt >> $@.tp
+	cat AllNotCovered-$(TOOL).txt >> $@.tp
+	cat $@.tp | sort >$@
+	rm $@.tp
+	echo "** $@: all covered and non covered lines for $(TOOL)."
+
+# aggregates the covered lines from all html files
+AllCovered-$(TOOL).txt: $(ALL_HTML_COV) $(ALL_HTML_CLASSNAME) $(ALL_HTML_PACKAGENAME)
+	for h in $(HTML_FILES); do \
+	  if grep -q 'COVERAGESUMMARYFORSOURCEFILE' $$h.subst; then \
+	    classname=`cat $$h.classname`; \
+	    packagename=`cat $$h.packagename`; \
+	    (while read line; do \
+	      echo $$packagename:$$classname:$$line >> $@.tp; \
+	    done;) < $$h.cov; \
+	  fi; \
+	done
+	cat $@.tp | sort >$@
+	rm $@.tp
+	echo "** $@: all covered lines for $(TOOL)."
+
+# aggregates the non covered lines from all html files
+AllNotCovered-$(TOOL).txt: $(ALL_HTML_NOTCOV) $(ALL_HTML_CLASSNAME) $(ALL_HTML_PACKAGENAME)
+	for h in $(HTML_FILES); do \
+	  if grep -q 'COVERAGESUMMARYFORSOURCEFILE' $$h.subst; then \
+	    classname=`cat $$h.classname`; \
+	    packagename=`cat $$h.packagename`; \
+	    (while read line; do \
+	      echo $$packagename:$$classname:$$line >> $@.tp; \
+	    done;) < $$h.notcov; \
+	  fi; \
+	done
+	cat $@.tp | sort >$@
+	rm $@.tp
+	echo "** $@: all not covered lines for $(TOOL)."
+
+
+## -------- targets to get information from a specific html file
+
+## creates a file with the covered line numbers of a specific html file
+$(HTML_DIR)/%.cov: $(HTML_DIR)/%.subst
+	if grep -q 'COVERAGESUMMARYFORSOURCEFILE' $(HTML_DIR)/$*.subst; then \
+		grep -o '<TR CLASS="c">.*</TD><TD>' $(HTML_DIR)/$*.subst \
+		| grep -oh "[[:digit:]]\+<" | tr '<' ' ' > $@; \
+		echo "$@: file with covered lines"; \
+	fi
+
+## creates a file with the non covered line numbers of a specific html file
+$(HTML_DIR)/%.notcov: $(HTML_DIR)/%.subst
+	if grep -q 'COVERAGESUMMARYFORSOURCEFILE' $(HTML_DIR)/$*.subst; then \
+		grep -o '<TR CLASS="z">.*</TD><TD>' $(HTML_DIR)/$*.subst \
+		| grep -oh "[[:digit:]]\+<" | tr '<' ' ' > $@; \
+		echo "$@: file with not covered lines"; \
+	fi
+
+## creates a file with the class name of a specific html file
+$(HTML_DIR)/%.classname: $(HTML_DIR)/%.subst
+	if grep -q 'COVERAGESUMMARYFORSOURCEFILE' $(HTML_DIR)/$*.subst; then \
+		grep -o 'CLASS="in">.*</SPAN>' $(HTML_DIR)/$*.subst \
+		  | tr '<' '>' | cut -d'>' -f2 > $@; \
+		echo "$@: file with class name"; \
+	fi
+
+## creates a file with the package name of a specific html file
+$(HTML_DIR)/%.packagename: $(HTML_DIR)/%.subst
+	if grep -q 'COVERAGESUMMARYFORSOURCEFILE' $(HTML_DIR)/$*.subst; then \
+		grep -o 'HREF=".*.html">.*</A>]' $(HTML_DIR)/$*.subst \
+		  | tr "<" ">" | cut -d'>' -f6 \
+		  | uniq > $@; \
+		echo "$@: file with package name"; \
+	fi
+
+## removes weird chars from the html file and adds a new line at every TR
+$(HTML_DIR)/%.subst:
+	-iconv -c -f utf-8 -t ascii $(HTML_DIR)/$* >$@.tp
+	sed $$'s/<TR>/\\\n<TR>/g' $@.tp > $@.tp1
+	sed $$'s/<TR CLASS/\\\n<TR CLASS/g' $@.tp1 > $@
+	rm $@.tp $@.tp1
+	echo "$@: Cleaned and reformatted"; \
+
+## -------- cleaning targets 
+
+clean:
+	echo "Deleting all intermediate files"
+	rm -f $(HTML_DIR)/*.subst
+	rm -f $(HTML_DIR)/*.cov
+	rm -f $(HTML_DIR)/*.notcov
+	rm -f $(HTML_DIR)/*.packagename
+	rm -f $(HTML_DIR)/*.classname
+
+cleanAll: clean
+	echo "Deleting the coverage report files"
+	rm -f AllLines* AllCovered* AllNotCovered*

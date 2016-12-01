@@ -6,4 +6,6 @@
     <string name="statistics">统计</string>
     <string name="crash">崩溃报告</string>
     <string name="userdata">用户数据</string>
+    <string name="test">系统测试</string>
+    <string name="broadcast">系统广播</string>
 </resources>
