@@ -2,6 +2,8 @@ package com.nata.xdroid.utils;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,5 +36,34 @@ public class ViewUtil {
         }
 
         return allchildren;
+    }
+
+    public static void exploreTest(View parent) {
+        if (parent instanceof ViewGroup) {
+
+            ViewGroup vp = (ViewGroup) parent;
+
+            for (int i = 0; i < vp.getChildCount(); i++) {
+
+                View viewchild = vp.getChildAt(i);
+
+                if(EditText.class.isAssignableFrom(viewchild.getClass())) {
+                    ((EditText) viewchild).setText("hello, filled by xdroid");
+                }
+
+                // 长按
+                if(viewchild.isLongClickable())
+                    viewchild.performLongClick();
+
+                // 点击
+                if(viewchild.isClickable())
+                    viewchild.performClick();
+
+
+                exploreTest(viewchild);
+
+            }
+
+        }
     }
 }

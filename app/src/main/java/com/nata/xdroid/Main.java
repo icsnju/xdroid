@@ -2,6 +2,7 @@ package com.nata.xdroid;
 
 import android.app.Application;
 
+import com.nata.xdroid.hooks.AutoTestHook;
 import com.nata.xdroid.hooks.BroadcastHook;
 import com.nata.xdroid.hooks.CrashHook;
 import com.nata.xdroid.hooks.EditTextHook;
@@ -54,12 +55,13 @@ public class Main implements IXposedHookLoadPackage {
                     final Application context = (Application) param.thisObject;
 
                     if (packageName.equals("android")) {
-                        int uid = context.getApplicationInfo().uid;
+//                        int uid = context.getApplicationInfo().uid;
                         new CrashHook(context).hook(loader);
-                        new BroadcastHook(uid).hook(loader);
+//                        new BroadcastHook(uid).hook(loader);
                     }
 
                     new EditTextHook(context).hook(loader);
+//                    new AutoTestHook().hook(loader);
 //                    new ActivityCoverageHook(packageName).hook(loader);
 //                    new MotionEventHook().hook(loader);
 //                    new GPSLocationHook().hook(loader);
