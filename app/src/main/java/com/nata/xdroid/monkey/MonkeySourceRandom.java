@@ -120,9 +120,10 @@ public class MonkeySourceRandom implements MonkeyEventSource {
         mFactors[FACTOR_NAV] = 25.0f;
         mFactors[FACTOR_MAJORNAV] = 15.0f;
         mFactors[FACTOR_SYSOPS] = 2.0f;
-        mFactors[FACTOR_APPSWITCH] = 2.0f;
+        mFactors[FACTOR_APPSWITCH] = 0.0f;
+        // prevent  app switch event 2.0f ,add to anything
         mFactors[FACTOR_FLIP] = 1.0f;
-        mFactors[FACTOR_ANYTHING] = 13.0f;
+        mFactors[FACTOR_ANYTHING] = 15.0f;
         mFactors[FACTOR_PINCHZOOM] = 2.0f;
 
         mRandom = random;

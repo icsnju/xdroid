@@ -43,7 +43,7 @@ public class MonkeyTrackballEvent extends MonkeyMotionEvent {
 
 		} catch (Exception e) {
 			System.out.println(":Touching Key (" + getTypeLabel()
-					+ ") rejected ");
+					+ ") rejected "+ e.toString());
 
 			return MonkeyEvent.INJECT_FAIL;
 

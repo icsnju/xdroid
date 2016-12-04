@@ -17,6 +17,7 @@
 package com.nata.xdroid.monkey;
 
 import android.app.Instrumentation;
+import android.app.admin.SystemUpdatePolicy;
 import android.view.KeyEvent;
 
 /**
@@ -122,6 +123,7 @@ public class MonkeyKeyEvent extends MonkeyEvent {
 		} catch (Exception e) {
 			System.out.println("Failed to send key (" + note + "): " + mKeyCode
 					+ "    // ");
+			System.out.println(e.toString());
 			return MonkeyEvent.INJECT_FAIL;
 		}
 

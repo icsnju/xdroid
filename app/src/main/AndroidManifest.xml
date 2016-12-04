@@ -3,6 +3,7 @@
     package="com.nata.xdroid">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!--<uses-permission android:name="android.permission.INJECT_EVENTS"></uses-permission>-->
 
     <application
         android:allowBackup="true"
@@ -40,6 +41,11 @@
         <receiver android:name=".UserDataReceiver">
             <intent-filter>
                 <action android:name="com.nata.xdroid.action.LOG_DATA" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".StartTestReceiver">
+            <intent-filter>
+                <action android:name="com.nata.xdroid.action.START_TEST" />
             </intent-filter>
         </receiver>
 
