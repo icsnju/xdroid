@@ -39,6 +39,7 @@ public class PreferencesUtils {
         return getInstance().getBoolean("test_mode", false);
     }
 
+
 //    public static boolean notSelf() {
 //        return getInstance().getBoolean("not_self", false);
 //    }

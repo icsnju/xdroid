@@ -77,9 +77,18 @@ public class Main implements IXposedHookLoadPackage {
 
                         new Thread() {
                             public void run() {
-                                while(inTestMode()) {
-                                    String event = monkey.nextRandomEvent();
-                                    log(event);
+                                while(true) {
+                                    if(inTestMode()) {
+                                        String event = monkey.nextRandomEvent();
+                                        log(event);
+                                    } else {
+                                        try {
+                                            Thread.sleep(100);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
                                 }
                             }
                         }.start();

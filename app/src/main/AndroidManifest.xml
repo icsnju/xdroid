@@ -50,6 +50,7 @@
         </receiver>
 
         <activity android:name=".ui.StatisticsActivity"></activity>
+        <service android:name=".services.TestService" />
     </application>
 
 </manifest>
