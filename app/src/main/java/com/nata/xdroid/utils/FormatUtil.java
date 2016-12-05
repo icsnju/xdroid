@@ -6,6 +6,8 @@ import com.nata.xdroid.db.beans.UserData;
 
 import java.util.List;
 
+import static de.robv.android.xposed.XposedBridge.log;
+
 /**
  * Created by Calvin on 2016/11/26.
  */
@@ -40,7 +42,13 @@ public class FormatUtil {
         if(info == null) return "";
 
         StringBuilder err = new StringBuilder();
-        err.append(info.toString());
+        err.append(info.throwClassName);
+        err.append("\n");
+        err.append(info.exceptionClassName);
+        err.append("\n");
+        err.append(info.exceptionMessage);
+        err.append("\n");
+        err.append(info.stackTrace);
         err.append("\n");
 
         return err.toString();

@@ -66,7 +66,6 @@ public class Main implements IXposedHookLoadPackage {
 
                     if (packageName.equals("android")) {
 //                        int uid = context.getApplicationInfo().uid;
-                        new CrashHook(context).hook(loader);
 //                        new BroadcastHook(uid).hook(loader);
                     } else {
                         WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
@@ -93,8 +92,8 @@ public class Main implements IXposedHookLoadPackage {
                             }
                         }.start();
 
-
-                        //                    new EditTextHook(context).hook(loader);
+                        new CrashHook(context).hook(loader);
+                        new EditTextHook(context).hook(loader);
 //                    new AutoTestHook().hook(loader);
 //                    new ActivityCoverageHook(packageName).hook(loader);
 //                    new MotionEventHook().hook(loader);

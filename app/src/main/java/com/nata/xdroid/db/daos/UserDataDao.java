@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.table.TableUtils;
 import com.nata.xdroid.db.DatabaseHelper;
 import com.nata.xdroid.db.beans.UserData;
 
@@ -84,6 +85,16 @@ public class UserDataDao implements Serializable{
             e.printStackTrace();
         }
         return -1;
+    }
+
+
+    public int deleteAll() {
+        try {
+            return TableUtils.clearTable(dao.getConnectionSource(), UserData.class);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public int delete(UserData userData) {

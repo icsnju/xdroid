@@ -21,7 +21,7 @@
             android:focusableInTouchMode="true"
             android:ellipsize="marquee"
             android:layout_width="180dp"
-            android:textColor="#11CD6E"
+            android:textColor="#ffffff"
             android:singleLine="true"
             android:focusable="true"
             tools:text="@string/test_mode"

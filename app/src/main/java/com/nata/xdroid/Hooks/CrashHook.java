@@ -28,14 +28,24 @@ public class CrashHook implements Hook {
     @Override
     public void hook(final ClassLoader loader) {
 
-        findAndHookMethod("com.android.server.am.ActivityManagerService", loader, "handleApplicationCrash", IBinder.class, ApplicationErrorReport.CrashInfo.class, new XC_MethodHook() {
-            @Override
-            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                ApplicationErrorReport.CrashInfo info = (ApplicationErrorReport.CrashInfo) param.args[1];
-                log("Crash: " + info.throwClassName + "->" + info.exceptionClassName + " -> " + info.exceptionMessage + " -> " + info.stackTrace);
-                Intent intent = CrashReportReceiver.getCrashBroadCastIntent(info, context.getPackageName());
-                context.sendBroadcast(intent);
-            }
-        });
+//        findAndHookMethod("com.android.server.am.ActivityManagerService", loader, "handleApplicationCrash", IBinder.class, ApplicationErrorReport.CrashInfo.class, new XC_MethodHook() {
+//            @Override
+//            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//                ApplicationErrorReport.CrashInfo info = (ApplicationErrorReport.CrashInfo) param.args[1];
+//                log("Crash: " + info.throwClassName + "->" + info.exceptionClassName + " -> " + info.exceptionMessage + " -> " + info.stackTrace);
+//                Intent intent = CrashReportReceiver.getCrashBroadCastIntent(info, context.getPackageName());
+//                context.sendBroadcast(intent);
+//            }
+//        });
+
+        Class<?> classHandler = Thread.getDefaultUncaughtExceptionHandler().getClass();
+        findAndHookMethod(classHandler, "uncaughtException", Thread.class, Throwable.class,
+            new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    Intent intent = CrashReportReceiver.getCrashBroadCastIntent((Throwable) param.args[1], context.getPackageName());
+                    context.sendBroadcast(intent);
+                }
+            });
     }
 }

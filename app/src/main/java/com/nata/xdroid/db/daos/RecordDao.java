@@ -4,8 +4,10 @@ package com.nata.xdroid.db.daos;
 import android.content.Context;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.table.TableUtils;
 import com.nata.xdroid.db.DatabaseHelper;
 import com.nata.xdroid.db.beans.CrashInfo;
+import com.nata.xdroid.db.beans.UserData;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -47,6 +49,15 @@ public class RecordDao {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    public int deleteAll() {
+        try {
+            return TableUtils.clearTable(dao.getConnectionSource(), CrashInfo.class);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public int delete(CrashInfo crashInfo) {

@@ -48,13 +48,11 @@ public class EditTextHook {
         findAndHookMethod("android.app.Activity", loader, "onPause", new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                if (inMonitorMode()) {
-                    Activity rootActivity = (Activity) param.thisObject;
-                    List<View> views = getAllChildViews(rootActivity.getWindow().getDecorView(), EditText.class);
-                    String activityName = rootActivity.getLocalClassName();
-                    persistUserData(views,activityName);
-
-                }
+            if (inMonitorMode()) {
+                Activity rootActivity = (Activity) param.thisObject;
+                List<View> views = getAllChildViews(rootActivity.getWindow().getDecorView(), EditText.class);
+                persistUserData(views, rootActivity.getLocalClassName());
+            }
             }
         });
 
@@ -62,19 +60,12 @@ public class EditTextHook {
 
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                if (inTestMode()) {
+                if (inMonitorMode()) {
                     final Activity rootActivity = (Activity) param.thisObject;
-                    new Thread() {
-                        public void run() {
-                            Instrumentation instrumentation = new Instrumentation();
-                            Display display = rootActivity.getWindowManager().getDefaultDisplay();
-                            Monkey monkey = new Monkey(display, packageName, instrumentation, pm);
-                            for (int i = 0; i < 100; i++) {
-                                String event = monkey.nextRandomEvent();
-                                log(event);
-                            }
-                        }
-                    }.start();
+                    List<View> views = getAllChildViews(rootActivity.getWindow().getDecorView(), EditText.class);
+                    fillUserData(views,rootActivity.getLocalClassName());
+
+
                 }
             }
         });
@@ -87,8 +78,20 @@ public class EditTextHook {
                     Activity rootActivity = dialog.getOwnerActivity();
                     if (rootActivity == null) return;
                     List<View> views = getAllChildViews(dialog.getWindow().getDecorView(), EditText.class);
-                    String activityName = rootActivity.getLocalClassName();
-                    persistUserData(views,activityName);
+                    persistUserData(views, rootActivity.getLocalClassName());
+                }
+            }
+        });
+
+        findAndHookMethod("android.app.Dialog", loader, "show", new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                if (!inMonitorMode()) {
+                    Dialog dialog = (Dialog) param.thisObject;
+                    Activity rootActivity = dialog.getOwnerActivity();
+                    if (rootActivity == null) return;
+                    List<View> views = getAllChildViews(dialog.getWindow().getDecorView(), EditText.class);
+                    fillUserData(views,rootActivity.getLocalClassName());
                 }
             }
         });
@@ -117,25 +120,26 @@ public class EditTextHook {
 
         }
     }
+
+
+    private void fillUserData(List<View> views, String activityName) {
+        for (int i = 0; i < views.size(); i++) {
+            EditText et = (EditText) views.get(i);
+            int id = et.getId();
+            UserData data = userDataDao.getUserDataByQuery(packageName, activityName, id);
+            if (data != null) {
+                String text = data.getContent();
+                if (text != null && !text.trim().equals("")) {
+                    et.setText(text);
+                    log("onStart put text: " + id + " " + text);
+                }
+            } else {
+                log("没有数据");
+            }
+        }
+    }
 }
 
 
-
-
 // 填写数据
-//                rootActivity.getComponentName();
-//                List<View> views = getAllChildViews(rootActivity.getWindow().getDecorView(), EditText.class);
-//                for (int i = 0; i < views.size(); i++) {
-//                    EditText et = (EditText) views.get(i);
-//                    int id = et.getId();
-//                    UserData data = userDataDao.getUserDataByQuery(rootActivity.getPackageName(),rootActivity.getLocalClassName(),id);
-//                    if(data != null) {
-//                        String text = data.getContent();
-//                        if(text != null && !text.trim().equals("")){
-//                            et.setText(text);
-//                            log("onStart put text: " + id + " " + text);
-//                        }
-//                    } else {
-//                        log("没有数据");
-//                    }
-//                }
+
