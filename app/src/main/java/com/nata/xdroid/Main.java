@@ -1,26 +1,21 @@
 package com.nata.xdroid;
 
 import android.app.Application;
-import android.app.Instrumentation;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.view.Display;
-import android.view.WindowManager;
 
-import com.nata.xdroid.hooks.AutoTestHook;
-import com.nata.xdroid.hooks.BroadcastHook;
+import com.nata.xdroid.hooks.ActivityHook;
 import com.nata.xdroid.hooks.CrashHook;
-import com.nata.xdroid.hooks.EditTextHook;
-import com.nata.xdroid.monkey.Monkey;
+
+import junit.framework.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
-import static com.nata.xdroid.utils.PreferencesUtils.inTestMode;
-import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 /**
@@ -53,6 +48,7 @@ public class Main implements IXposedHookLoadPackage {
             };
 
     List<String> list = Arrays.asList(sut);
+    Map<String, TestRunner> runners = new HashMap<>();
 
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable {
         final ClassLoader loader = loadPackageParam.classLoader;
@@ -68,32 +64,16 @@ public class Main implements IXposedHookLoadPackage {
 //                        int uid = context.getApplicationInfo().uid;
 //                        new BroadcastHook(uid).hook(loader);
                     } else {
-                        WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
-                        Display display = wm.getDefaultDisplay();
-                        Instrumentation instrumentation = new Instrumentation();
-                        PackageManager pm = context.getPackageManager();
-                        final Monkey monkey = new Monkey(display, packageName, instrumentation, pm);
-
-                        new Thread() {
-                            public void run() {
-                                while(true) {
-                                    if(inTestMode()) {
-                                        String event = monkey.nextRandomEvent();
-                                        log(event);
-                                    } else {
-                                        try {
-                                            Thread.sleep(100);
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-
-                                }
-                            }
-                        }.start();
+                        if( runners.get(packageName) == null) {
+                            TestRunner testRunner = new TestRunner(context);
+                            runners.put(packageName, testRunner);
+                        }
+                        TestRunner runner = runners.get(packageName);
 
                         new CrashHook(context).hook(loader);
-                        new EditTextHook(context).hook(loader);
+                        new ActivityHook(runner, context).hook(loader);
+
+
 //                    new AutoTestHook().hook(loader);
 //                    new ActivityCoverageHook(packageName).hook(loader);
 //                    new MotionEventHook().hook(loader);

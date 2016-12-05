@@ -133,6 +133,7 @@ public class SettinigsActivity extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newVal) {
                     final boolean value = (Boolean) newVal;
+                    System.out.println("changed");
                     test_mode.setChecked(value);
                     return true;
                 }
