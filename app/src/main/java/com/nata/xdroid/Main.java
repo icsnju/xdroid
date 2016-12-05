@@ -66,6 +66,7 @@ public class Main implements IXposedHookLoadPackage {
                     } else {
                         if( runners.get(packageName) == null) {
                             TestRunner testRunner = new TestRunner(context);
+                            testRunner.start();
                             runners.put(packageName, testRunner);
                         }
                         TestRunner runner = runners.get(packageName);

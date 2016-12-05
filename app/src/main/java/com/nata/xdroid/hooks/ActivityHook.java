@@ -51,10 +51,7 @@ public class ActivityHook {
                     List<View> views = getAllChildViews(rootActivity.getWindow().getDecorView(), EditText.class);
                     ViewUtil.persistUserData(context, views, rootActivity.getLocalClassName());
                 }
-
-                if (inTestMode()) {
-                    testRunner.setActive(false);
-                }
+                testRunner.setActive(false);
             }
         });
 
@@ -67,9 +64,7 @@ public class ActivityHook {
                     ViewUtil.fillUserData(context, views, rootActivity.getLocalClassName());
                 }
 
-                if (inTestMode()) {
-                    testRunner.setActive(true);
-                }
+                testRunner.setActive(true);
             }
         });
     }

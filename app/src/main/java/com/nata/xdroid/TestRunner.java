@@ -23,15 +23,16 @@ public class TestRunner  extends Thread{
     private Context context;
     private Monkey monkey;
     private boolean active = false;
+    private String packageName;
 
     public TestRunner(Context context) {
         this.context = context;
-        String packageName = context.getPackageName();
+        this.packageName = context.getPackageName();
         WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         Instrumentation instrumentation = new Instrumentation();
         PackageManager pm = context.getPackageManager();
-        this.monkey = new Monkey(display, packageName, instrumentation, pm);
+        this.monkey = new Monkey(display, this.packageName, instrumentation, pm);
 
     }
 
@@ -39,7 +40,7 @@ public class TestRunner  extends Thread{
         while(true) {
             if(inTestMode() && active) {
                 String event = monkey.nextRandomEvent();
-                log(event);
+                System.out.println(this.packageName + "-> " + event);
             } else {
                 try {
                     Thread.sleep(500);
