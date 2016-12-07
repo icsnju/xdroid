@@ -4,12 +4,10 @@ package com.nata.xdroid.services;
  * Created by Calvin on 2016/12/7.
  */
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,13 +20,13 @@ import java.util.TimerTask;
 public class CountDownTimerService extends Service {
 
     private static final long timer_unit =1000;
-    private static long mDistination_total;
     private Timer timer;
     private MyTimerTask timerTask;
-    private SharedPreferences preferences;
+    private static SharedPreferences preferences;
 
     private static long timer_couting = 0;
     private static long manual_timer = 0;
+    private static long test_timer = 0;
 
 
     private int timerStatus = CountDownTimerUtil.PREPARE;
@@ -37,16 +35,14 @@ public class CountDownTimerService extends Service {
 
     private static CountDownTimerListener mCountDownTimerListener;
 
+
     public static CountDownTimerService getInstance(CountDownTimerListener countDownTimerListener
-            ,long distination_total){
+            ,SharedPreferences sPreferences){
         if(countDownTimerService==null){
             countDownTimerService = new CountDownTimerService();
+            preferences = sPreferences;
         }
         setCountDownTimerListener(countDownTimerListener);
-        mDistination_total = distination_total;
-        if(timer_couting==0) {
-            timer_couting = mDistination_total;
-        }
         return  countDownTimerService;
     }
 
@@ -60,13 +56,16 @@ public class CountDownTimerService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        preferences = getSharedPreferences("pref_mine", Context.MODE_WORLD_READABLE);
     }
 
     private boolean inTestMode() {
+
         return preferences.getBoolean("test_mode", false);
     }
 
+    public long getTest_timer() {
+        return test_timer;
+    }
 
     public long getManual_timer() {
         return manual_timer;
@@ -127,15 +126,13 @@ public class CountDownTimerService extends Service {
 
         @Override
         public void run() {
-            timer_couting -=timer_unit;
-            if(inTestMode()) {
+            timer_couting += timer_unit;
+            if(!inTestMode()) {
                 manual_timer += timer_unit;
+            } else {
+                test_timer += timer_unit;
             }
             mCountDownTimerListener.onChange();
-            if(timer_couting==0){
-                cancel();
-                initTimerStatus();
-            }
         }
     }
 
@@ -143,7 +140,9 @@ public class CountDownTimerService extends Service {
      * init timer status
      */
     private void initTimerStatus(){
-        timer_couting = mDistination_total;
+        timer_couting = 0;
+        manual_timer = 0;
+        test_timer = 0;
         timerStatus = CountDownTimerUtil.PREPARE;
     }
 

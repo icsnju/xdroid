@@ -51,6 +51,7 @@
         <activity android:name=".ui.StatisticsActivity" />
 
         <service android:name=".services.TestService" />
+        <service android:name=".services.CountDownTimerService" />
 
         <activity android:name=".ui.TimeCountActivity"></activity>
     </application>

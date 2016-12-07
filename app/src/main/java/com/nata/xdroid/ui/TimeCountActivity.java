@@ -1,7 +1,6 @@
 package com.nata.xdroid.ui;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -16,18 +15,14 @@ import com.nata.xdroid.services.CountDownTimerService;
 import com.nata.xdroid.services.CountDownTimerUtil;
 
 public class TimeCountActivity extends AppCompatActivity implements View.OnClickListener{
-    private int manualTime = 0;
-    private int testTime = 0;
-
     //service countdown
     private Button btnServiceStart;
     private Button btnServiceStop;
     private TextView tvServiceTime;
     private TextView tvManual;
+    private TextView tvTest;
 
     private CountDownTimerService countDownTimerService;
-    private long timer_unit = 1000;
-    private long service_distination_total = timer_unit*30*60;
 
 
     @Override
@@ -65,9 +60,7 @@ public class TimeCountActivity extends AppCompatActivity implements View.OnClick
                 case 2:
                     tvServiceTime.setText(formateTimer(countDownTimerService.getCountingTime()));
                     tvManual.setText(formateTimer(countDownTimerService.getManual_timer()));
-                    if(countDownTimerService.getTimerStatus()==CountDownTimerUtil.PREPARE){
-                        btnServiceStart.setText("START");
-                    }
+                    tvTest.setText(formateTimer(countDownTimerService.getTest_timer()));
                     break;
             }
         }
@@ -81,7 +74,7 @@ public class TimeCountActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_time_count);
 
         tvManual = (TextView) findViewById(R.id.textView_manual);
-        final TextView textViewTest= (TextView) findViewById(R.id.textView_test);
+        tvTest= (TextView) findViewById(R.id.textView_test);
 
         btnServiceStart = (Button) findViewById(R.id.btn_start);
         btnServiceStop = (Button) findViewById(R.id.btn_stop);
@@ -91,7 +84,8 @@ public class TimeCountActivity extends AppCompatActivity implements View.OnClick
         btnServiceStop.setOnClickListener(this);
 
         countDownTimerService = CountDownTimerService.getInstance(new MyCountDownLisener()
-                ,service_distination_total);
+                ,getSharedPreferences("pref_mine", Context.MODE_WORLD_READABLE));
+
         initServiceCountDownTimerStatus();
 
     }
@@ -105,11 +99,6 @@ public class TimeCountActivity extends AppCompatActivity implements View.OnClick
             mHandler.sendEmptyMessage(2);
         }
     }
-
-
-
-
-
 
     /**
      * formate timer shown in textview
@@ -159,6 +148,7 @@ public class TimeCountActivity extends AppCompatActivity implements View.OnClick
         }
         tvServiceTime.setText(formateTimer(countDownTimerService.getCountingTime()));
         tvManual.setText(formateTimer(countDownTimerService.getManual_timer()));
+        tvTest.setText(formateTimer(countDownTimerService.getTest_timer()));
     }
 
 }
