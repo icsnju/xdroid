@@ -1,5 +1,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/setting">
+    <PreferenceCategory android:title="@string/setting"
+        android:key="category_setting">
 
         <SwitchPreference
             android:defaultValue="false"

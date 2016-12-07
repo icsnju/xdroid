@@ -13,6 +13,40 @@ import static de.robv.android.xposed.XposedBridge.log;
  */
 
 public class FormatUtil {
+
+    /**
+     * formate timer shown in textview
+     * @param time
+     * @return
+     */
+    public static String formateTimer(long time){
+        String str = "00:00:00";
+        int hour = 0;
+        if(time>=1000*3600){
+            hour = (int)(time/(1000*3600));
+            time -= hour*1000*3600;
+        }
+        int minute = 0;
+        if(time>=1000*60){
+            minute = (int)(time/(1000*60));
+            time -= minute*1000*60;
+        }
+        int sec = (int)(time/1000);
+        str = formateNumber(hour)+":"+formateNumber(minute)+":"+formateNumber(sec);
+        return str;
+    }
+
+    /**
+     * formate time number with two numbers auto add 0
+     * @param time
+     * @return
+     */
+    public static String formateNumber(int time){
+        return String.format("%02d", time);
+    }
+
+
+
     public static String getExceptionDetail(Throwable t) {
         if (t == null) return "";
 

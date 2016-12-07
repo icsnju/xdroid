@@ -12,11 +12,7 @@ import android.support.annotation.Nullable;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * CountDownTimer Service
- * Created by Eminem Lu on 18/8/15.
- * Email arjinmc@hotmail.com
- */
+
 public class CountDownTimerService extends Service {
 
     private static final long timer_unit =1000;

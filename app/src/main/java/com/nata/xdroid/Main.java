@@ -5,8 +5,6 @@ import android.app.Application;
 import com.nata.xdroid.hooks.ActivityHook;
 import com.nata.xdroid.hooks.CrashHook;
 
-import junit.framework.Test;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -67,7 +65,6 @@ public class Main implements IXposedHookLoadPackage {
                         TestRunner runner = runners.get(packageName);
                         if (runner == null) {
                             runner = new TestRunner(context);
-                            runner.start();
                             runners.put(packageName, runner);
                         }
 

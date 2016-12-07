@@ -4,24 +4,22 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.Preference;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
 
 import com.nata.xdroid.R;
 import com.nata.xdroid.db.beans.UserData;
 import com.nata.xdroid.db.daos.UserDataDao;
 import com.nata.xdroid.services.TestService;
 import com.nata.xdroid.utils.FormatUtil;
-
-import java.util.Arrays;
 import java.util.List;
 
 public class SettinigsActivity extends AppCompatActivity {
@@ -117,6 +115,7 @@ public class SettinigsActivity extends AppCompatActivity {
 
             addPreferencesFromResource(R.xml.pref_setting);
 
+
             Preference crash = findPreference("crash");
             crash.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
@@ -138,6 +137,9 @@ public class SettinigsActivity extends AppCompatActivity {
                     return true;
                 }
             });
+//
+//            PreferenceCategory pc = (PreferenceCategory)findPreference("category_setting");
+////            pc.removeAll();
 
             final SwitchPreference test_mode = (SwitchPreference)findPreference("test_mode");
             test_mode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {

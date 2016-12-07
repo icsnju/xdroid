@@ -14,6 +14,8 @@ import com.nata.xdroid.services.CountDownTimerListener;
 import com.nata.xdroid.services.CountDownTimerService;
 import com.nata.xdroid.services.CountDownTimerUtil;
 
+import static com.nata.xdroid.utils.FormatUtil.formateTimer;
+
 public class TimeCountActivity extends AppCompatActivity implements View.OnClickListener{
     //service countdown
     private Button btnServiceStart;
@@ -100,36 +102,9 @@ public class TimeCountActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    /**
-     * formate timer shown in textview
-     * @param time
-     * @return
-     */
-    private String formateTimer(long time){
-        String str = "00:00:00";
-        int hour = 0;
-        if(time>=1000*3600){
-            hour = (int)(time/(1000*3600));
-            time -= hour*1000*3600;
-        }
-        int minute = 0;
-        if(time>=1000*60){
-            minute = (int)(time/(1000*60));
-            time -= minute*1000*60;
-        }
-        int sec = (int)(time/1000);
-        str = formateNumber(hour)+":"+formateNumber(minute)+":"+formateNumber(sec);
-        return str;
-    }
 
-    /**
-     * formate time number with two numbers auto add 0
-     * @param time
-     * @return
-     */
-    private String formateNumber(int time){
-        return String.format("%02d", time);
-    }
+
+
 
     /**
      * init countdowntimer buttons status for servce
