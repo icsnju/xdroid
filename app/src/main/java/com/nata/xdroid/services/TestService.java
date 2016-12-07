@@ -27,6 +27,7 @@ public class TestService extends Service implements TestInterface, View.OnClickL
     private FloatWindow floatWindow;
     private View menuView, floatView;
     private ImageButton btnPla;
+    private SharedPreferences preferences;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -41,17 +42,14 @@ public class TestService extends Service implements TestInterface, View.OnClickL
     }
 
     private boolean inTestMode() {
-        SharedPreferences preferences = getSharedPreferences("pref_mine", Context.MODE_WORLD_READABLE);
         return preferences.getBoolean("test_mode", false);
     }
 
     private void startTest() {
-        SharedPreferences preferences = getSharedPreferences("pref_mine", Context.MODE_WORLD_READABLE);
         preferences.edit().putBoolean("test_mode", true).apply();
     }
 
     private void stopTest() {
-        SharedPreferences preferences = getSharedPreferences("pref_mine", Context.MODE_WORLD_READABLE);
         preferences.edit().putBoolean("test_mode", false).apply();
     }
 
@@ -62,6 +60,8 @@ public class TestService extends Service implements TestInterface, View.OnClickL
     public void onCreate() {
         super.onCreate();
         initFloatWindow();
+
+        preferences = getSharedPreferences("pref_mine", Context.MODE_WORLD_READABLE);
 
 
         if(inTestMode()) {

@@ -128,6 +128,17 @@ public class SettinigsActivity extends AppCompatActivity {
                 }
             });
 
+            Preference time = findPreference("time");
+            time.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference pref) {
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity(), TimeCountActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+            });
+
             final SwitchPreference test_mode = (SwitchPreference)findPreference("test_mode");
             test_mode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override

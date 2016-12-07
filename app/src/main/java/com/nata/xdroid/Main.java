@@ -64,12 +64,12 @@ public class Main implements IXposedHookLoadPackage {
 //                        int uid = context.getApplicationInfo().uid;
 //                        new BroadcastHook(uid).hook(loader);
                     } else {
-                        if( runners.get(packageName) == null) {
-                            TestRunner testRunner = new TestRunner(context);
-                            testRunner.start();
-                            runners.put(packageName, testRunner);
-                        }
                         TestRunner runner = runners.get(packageName);
+                        if (runner == null) {
+                            runner = new TestRunner(context);
+                            runner.start();
+                            runners.put(packageName, runner);
+                        }
 
                         new CrashHook(context).hook(loader);
                         new ActivityHook(runner, context).hook(loader);

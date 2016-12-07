@@ -1,29 +1,18 @@
 package com.nata.xdroid.hooks;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.Instrumentation;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.view.Display;
 import android.view.View;
 import android.widget.EditText;
 
-import com.nata.xdroid.StartTestReceiver;
 import com.nata.xdroid.TestRunner;
-import com.nata.xdroid.UserDataReceiver;
-import com.nata.xdroid.db.beans.UserData;
-import com.nata.xdroid.db.daos.UserDataDao;
-import com.nata.xdroid.monkey.Monkey;
 import com.nata.xdroid.utils.ViewUtil;
 
 import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
 
-import static com.nata.xdroid.utils.PreferencesUtils.inMonitorMode;
-import static com.nata.xdroid.utils.PreferencesUtils.inTestMode;
+import static com.nata.xdroid.utils.XPreferencesUtils.inMonitorMode;
 import static com.nata.xdroid.utils.ViewUtil.getAllChildViews;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;

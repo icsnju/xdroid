@@ -1,8 +1,6 @@
 package com.nata.xdroid;
 
 import android.app.Instrumentation;
-import android.app.usage.UsageStats;
-import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.view.Display;
@@ -10,9 +8,7 @@ import android.view.WindowManager;
 
 import com.nata.xdroid.monkey.Monkey;
 
-import java.util.List;
-
-import static com.nata.xdroid.utils.PreferencesUtils.inTestMode;
+import static com.nata.xdroid.utils.XPreferencesUtils.inTestMode;
 import static de.robv.android.xposed.XposedBridge.log;
 
 /**

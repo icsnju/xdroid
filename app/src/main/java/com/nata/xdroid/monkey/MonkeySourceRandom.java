@@ -59,7 +59,9 @@ public class MonkeySourceRandom implements MonkeyEventSource {
         }
         // Only examine SYS_KEYS
         for (int i = 0; i < SYS_KEYS.length; ++i) {
-            PHYSICAL_KEY_EXISTS[SYS_KEYS[i]] = KeyCharacterMap.deviceHasKey(SYS_KEYS[i]);
+            PHYSICAL_KEY_EXISTS[SYS_KEYS[i]] = true;
+            System.out.println(SYS_KEYS[i] + "=>" + KeyCharacterMap.deviceHasKey(SYS_KEYS[i]));
+
         }
     }
 
@@ -119,11 +121,11 @@ public class MonkeySourceRandom implements MonkeyEventSource {
         mFactors[FACTOR_TRACKBALL] = 15.0f;
         mFactors[FACTOR_NAV] = 25.0f;
         mFactors[FACTOR_MAJORNAV] = 15.0f;
-        mFactors[FACTOR_SYSOPS] = 2.0f;
+        mFactors[FACTOR_SYSOPS] = 4.0f;
         mFactors[FACTOR_APPSWITCH] = 0.0f;
-        // prevent  app switch event 2.0f ,add to anything
+        // prevent  app switch event 2.0f ,add to
         mFactors[FACTOR_FLIP] = 1.0f;
-        mFactors[FACTOR_ANYTHING] = 15.0f;
+        mFactors[FACTOR_ANYTHING] = 13.0f;
         mFactors[FACTOR_PINCHZOOM] = 2.0f;
 
         mRandom = random;

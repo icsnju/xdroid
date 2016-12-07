@@ -3,8 +3,8 @@
     package="com.nata.xdroid">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <!--<uses-permission android:name="android.permission.INJECT_EVENTS"></uses-permission>-->
 
+    <!-- <uses-permission android:name="android.permission.INJECT_EVENTS"></uses-permission> -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -37,7 +37,6 @@
                 <action android:name="com.nata.xdroid.action.REPORT_CRASH" />
             </intent-filter>
         </receiver>
-
         <receiver android:name=".UserDataReceiver">
             <intent-filter>
                 <action android:name="com.nata.xdroid.action.LOG_DATA" />
@@ -49,8 +48,11 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.StatisticsActivity"></activity>
+        <activity android:name=".ui.StatisticsActivity" />
+
         <service android:name=".services.TestService" />
+
+        <activity android:name=".ui.TimeCountActivity"></activity>
     </application>
 
 </manifest>

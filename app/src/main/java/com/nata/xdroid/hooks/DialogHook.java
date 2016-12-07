@@ -12,7 +12,7 @@ import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
 
-import static com.nata.xdroid.utils.PreferencesUtils.inMonitorMode;
+import static com.nata.xdroid.utils.XPreferencesUtils.inMonitorMode;
 import static com.nata.xdroid.utils.ViewUtil.getAllChildViews;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 

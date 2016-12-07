@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
-import static com.nata.xdroid.utils.PreferencesUtils.inTestMode;
+import static com.nata.xdroid.utils.XPreferencesUtils.inTestMode;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 

@@ -8,4 +8,5 @@
     <string name="userdata">用户数据</string>
     <string name="test">系统测试</string>
     <string name="broadcast">系统广播</string>
+    <string name="time">计时</string>
 </resources>

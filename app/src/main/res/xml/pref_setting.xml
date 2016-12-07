@@ -20,11 +20,15 @@
 
     <PreferenceCategory android:title="@string/statistics">
         <Preference
-        android:key="crash"
-        android:title="@string/crash" />
+            android:key="crash"
+            android:title="@string/crash" />
         <Preference
             android:key="userdata"
             android:title="@string/userdata" />
+        <Preference
+            android:key="time"
+            android:title="@string/time" />
+
 
     </PreferenceCategory>
 

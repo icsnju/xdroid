@@ -9,7 +9,7 @@ import de.robv.android.xposed.XSharedPreferences;
  */
 
 
-public class PreferencesUtils {
+public class XPreferencesUtils {
 
     private static XSharedPreferences instance = null;
 
