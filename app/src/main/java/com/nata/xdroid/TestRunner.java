@@ -52,7 +52,6 @@ public class TestRunner  extends Thread{
         while(true) {
             if(inTestMode() && active) {
                 String event = monkey.nextRandomEvent();
-//              System.out.println(this.packageName + "-> " + event);
             } else {
                 try {
                     Thread.sleep(500);
@@ -76,10 +75,15 @@ public class TestRunner  extends Thread{
             } else {
                 manual_timer += timer_unit;
             }
-           Log.i(LOG_RUNNER,packageName +"=> " + "测试总时长:" + formateTimer(timer_couting) +
-                            "人工测试:" + formateTimer(manual_timer) +
-                            "自动测试:" + formateTimer(test_timer)
-           );
+
+            // 每10秒进行一次统计
+            if((timer_couting / timer_unit) % 10 == 0) {
+                Log.i(LOG_RUNNER,packageName +"=> " + "测试总时长:" + formateTimer(timer_couting) +
+                        "人工测试:" + formateTimer(manual_timer) +
+                        "自动测试:" + formateTimer(test_timer)
+                );
+            }
+
         }
     }
 

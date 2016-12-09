@@ -27,7 +27,7 @@ public class Monkey {
 	/** Applications we can switch to. */
 	private ArrayList<ComponentName> mMainApps = new ArrayList<ComponentName>();
 
-	private long mThrottle = 0;
+	private long mThrottle = 200;
 	private boolean mRandomizeThrottle = false;
 	private int mVerbose = 1;
 

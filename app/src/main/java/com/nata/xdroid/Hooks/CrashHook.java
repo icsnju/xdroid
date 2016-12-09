@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import com.nata.xdroid.CrashReportReceiver;
+import com.nata.xdroid.utils.FormatUtil;
 
 import de.robv.android.xposed.XC_MethodHook;
 
@@ -43,6 +44,8 @@ public class CrashHook implements Hook {
             new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    Throwable th = (Throwable) param.args[1];
+                    log(FormatUtil.getExceptionDetail(th));
                     Intent intent = CrashReportReceiver.getCrashBroadCastIntent((Throwable) param.args[1], context.getPackageName());
                     context.sendBroadcast(intent);
                 }

@@ -3,6 +3,7 @@ package com.nata.xdroid;
 import android.app.Application;
 
 import com.nata.xdroid.hooks.ActivityHook;
+import com.nata.xdroid.hooks.ContentHook;
 import com.nata.xdroid.hooks.CrashHook;
 
 import java.util.Arrays;
@@ -70,6 +71,7 @@ public class Main implements IXposedHookLoadPackage {
 
                         new CrashHook(context).hook(loader);
                         new ActivityHook(runner, context).hook(loader);
+                        new ContentHook(context).hook(loader);
 
 
 //                    new AutoTestHook().hook(loader);
@@ -77,7 +79,7 @@ public class Main implements IXposedHookLoadPackage {
 //                    new MotionEventHook().hook(loader);
 //                    new GPSLocationHook().hook(loader);
 //                    new ActionHook().hook(loader);
-//                    new ContentHook().hook(loader);
+
 //                    new ExceptionHook().hook(loader);
                     }
                 }
