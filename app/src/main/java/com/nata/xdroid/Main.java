@@ -70,12 +70,10 @@ public class Main implements IXposedHookLoadPackage {
                         }
 
                         new CrashHook(context).hook(loader);
-                        new ActivityHook(runner, context).hook(loader);
+                        new ActivityHook(runner, context, packageName).hook(loader);
                         new ContentHook(context).hook(loader);
 
-
 //                    new AutoTestHook().hook(loader);
-//                    new ActivityCoverageHook(packageName).hook(loader);
 //                    new MotionEventHook().hook(loader);
 //                    new GPSLocationHook().hook(loader);
 //                    new ActionHook().hook(loader);

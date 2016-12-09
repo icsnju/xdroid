@@ -10,9 +10,11 @@ import android.widget.Toast;
 
 import com.nata.xdroid.R;
 import com.nata.xdroid.TestRunner;
+import com.nata.xdroid.utils.ActivityUtil;
 import com.nata.xdroid.utils.ToastUtil;
 import com.nata.xdroid.utils.ViewUtil;
 
+import java.util.HashSet;
 import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -21,6 +23,7 @@ import de.robv.android.xposed.XposedBridge;
 import static com.nata.xdroid.utils.ToastUtil.makeToast;
 import static com.nata.xdroid.utils.XPreferencesUtils.inMonitorMode;
 import static com.nata.xdroid.utils.ViewUtil.getAllChildViews;
+import static com.nata.xdroid.utils.XPreferencesUtils.inTestMode;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
@@ -32,13 +35,37 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class ActivityHook {
     private Context context;
     private TestRunner testRunner = null;
+    List<String> actList = null;
+    HashSet<String> activitySet;
+    String packageName;
 
-    public ActivityHook(TestRunner runner, Context context) {
+    public ActivityHook(TestRunner runner, Context context, String packageName) {
         this.context = context;
         this.testRunner = runner;
+        this.packageName = packageName;
+        activitySet = new HashSet<>();
     }
 
-    public void hook(ClassLoader loader) {
+    public void hook(final ClassLoader loader) {
+
+        findAndHookMethod("android.app.Activity", loader, "onCreate", Bundle.class, new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                if (actList == null) {
+                    actList = ActivityUtil.getActivities(context, packageName);
+                    log("AllActivities size: " + actList.size());
+                }
+                Context activity = (Activity) param.thisObject;
+                String activityName = activity.getClass().getName();
+                activitySet.add(activityName);
+                float coverage = (float) activitySet.size() / actList.size();
+
+                log(packageName + "=> " + activityName + " => ActivityCoverage: " + coverage);
+
+            }
+        });
+
+
         findAndHookMethod("android.app.Activity", loader, "onPause", new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -84,10 +111,10 @@ public class ActivityHook {
         log(intent.toString());
 
         String action = intent.getAction();
-        if (action != null){
-            if(action.equals(Intent.ACTION_OPEN_DOCUMENT))
+        if (action != null) {
+            if (action.equals(Intent.ACTION_OPEN_DOCUMENT))
                 makeToast(context, "应用打开了文档管理器，请选择合适的文件" + intent.getType());
-            if(action.equals(Intent.ACTION_CHOOSER))
+            if (action.equals(Intent.ACTION_CHOOSER))
                 makeToast(context, "应用打开了应用选择器,请选择合适的程序");
         }
     }
