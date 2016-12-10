@@ -6,6 +6,7 @@ import com.nata.xdroid.hooks.ActivityHook;
 import com.nata.xdroid.hooks.ContentHook;
 import com.nata.xdroid.hooks.CrashHook;
 import com.nata.xdroid.hooks.GPSLocationHook;
+import com.nata.xdroid.hooks.NetworkHook;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -76,6 +77,7 @@ public class Main implements IXposedHookLoadPackage {
                         new ActivityHook(runner, context, packageName).hook(loader);
                         new ContentHook(context).hook(loader);
                         new GPSLocationHook(context).hook(loader);
+                        new NetworkHook(context).hook(loader);
 
 //                    new AutoTestHook().hook(loader);
 //                    new MotionEventHook().hook(loader);

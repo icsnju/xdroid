@@ -57,6 +57,11 @@
                 <action android:name="com.nata.xdroid.action.MOCK_CONTACTS" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".receivers.NetworkChangeReceiver">
+            <intent-filter >
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
 
         <activity android:name=".ui.StatisticsActivity" />
 

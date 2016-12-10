@@ -17,7 +17,6 @@
 package com.nata.xdroid.monkey;
 
 import android.app.Instrumentation;
-import android.app.admin.SystemUpdatePolicy;
 import android.view.KeyEvent;
 
 /**

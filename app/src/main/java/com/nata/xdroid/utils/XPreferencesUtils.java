@@ -40,9 +40,9 @@ public class XPreferencesUtils {
     }
 
 
-//    public static boolean notSelf() {
-//        return getInstance().getBoolean("not_self", false);
-//    }
+    public static boolean isNetWorkConnected() {
+        return getInstance().getBoolean("network", false);
+    }
 //
 //    public static boolean notWhisper() {
 //        return getInstance().getBoolean("not_whisper", false);

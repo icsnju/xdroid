@@ -20,6 +20,8 @@ import com.nata.xdroid.db.beans.UserData;
 import com.nata.xdroid.db.daos.UserDataDao;
 import com.nata.xdroid.services.TestService;
 import com.nata.xdroid.utils.FormatUtil;
+import com.nata.xdroid.utils.NetWorkUtils;
+
 import java.util.List;
 
 public class SettinigsActivity extends AppCompatActivity {
@@ -111,10 +113,13 @@ public class SettinigsActivity extends AppCompatActivity {
             PreferenceManager prefMgr = getPreferenceManager();
             prefMgr.setSharedPreferencesName("pref_mine");
             prefMgr.setSharedPreferencesMode(MODE_WORLD_READABLE);
+
             final Context context = getActivity().getApplicationContext();
 
             addPreferencesFromResource(R.xml.pref_setting);
 
+            boolean isNetWork = NetWorkUtils.isNetworkConnected(context);
+            prefMgr.getSharedPreferences().edit().putBoolean("network",isNetWork).apply();
 
             Preference crash = findPreference("crash");
             crash.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -137,9 +142,6 @@ public class SettinigsActivity extends AppCompatActivity {
                     return true;
                 }
             });
-//
-//            PreferenceCategory pc = (PreferenceCategory)findPreference("category_setting");
-////            pc.removeAll();
 
             final SwitchPreference test_mode = (SwitchPreference)findPreference("test_mode");
             test_mode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
