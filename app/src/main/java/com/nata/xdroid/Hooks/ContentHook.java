@@ -2,11 +2,17 @@ package com.nata.xdroid.hooks;
 
 import android.content.ContentProvider;
 import android.content.Context;
+import android.content.Intent;
+import android.content.OperationApplicationException;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.CancellationSignal;
+import android.os.RemoteException;
 import android.provider.CalendarContract;
 import android.provider.ContactsContract;
+
+import com.nata.xdroid.receivers.ContactMockReceiver;
+import com.nata.xdroid.utils.ContactUtil;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -63,6 +69,9 @@ public class ContentHook implements Hook {
 
         if (isContact && cursor.getCount() == 0) {
             makeToast(context, "应用请求联系人数据, 但手机中没有联系人信息,请添加或使用xdroid提供的工具");
+
+            Intent intent = ContactMockReceiver.getUserDataIntent();
+            context.sendBroadcast(intent);
         }
 
         if (isCalendar && cursor.getCount() == 0) {

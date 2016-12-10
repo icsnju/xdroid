@@ -10,6 +10,6 @@ import android.widget.Toast;
 public class ToastUtil {
     private static final String X_DROID = "xdroid:";
     public static void makeToast(Context context, String toast){
-        Toast.makeText(context,X_DROID + toast,Toast.LENGTH_LONG).show();
+        Toast.makeText(context,X_DROID + context.getPackageName() + " => " + toast,Toast.LENGTH_LONG).show();
     }
 }

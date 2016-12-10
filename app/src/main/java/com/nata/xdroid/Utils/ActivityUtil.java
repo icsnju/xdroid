@@ -1,19 +1,11 @@
 package com.nata.xdroid.utils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.view.View;
-import android.widget.EditText;
-
-import com.nata.xdroid.UserDataReceiver;
-import com.nata.xdroid.db.beans.UserData;
-import com.nata.xdroid.db.daos.UserDataDao;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static de.robv.android.xposed.XposedBridge.log;
 

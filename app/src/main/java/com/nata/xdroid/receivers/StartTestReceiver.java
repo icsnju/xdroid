@@ -1,4 +1,4 @@
-package com.nata.xdroid;
+package com.nata.xdroid.receivers;
 
 /**
  * Created by Calvin on 2016/11/26.

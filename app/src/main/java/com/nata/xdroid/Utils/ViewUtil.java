@@ -4,10 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 
-import com.nata.xdroid.UserDataReceiver;
+import com.nata.xdroid.receivers.UserDataReceiver;
 import com.nata.xdroid.db.beans.UserData;
 import com.nata.xdroid.db.daos.UserDataDao;
 

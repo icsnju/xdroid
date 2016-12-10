@@ -3,6 +3,11 @@
     package="com.nata.xdroid">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
 
     <!-- <uses-permission android:name="android.permission.INJECT_EVENTS"></uses-permission> -->
     <application
@@ -32,19 +37,24 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".CrashReportReceiver">
+        <receiver android:name=".receivers.CrashReportReceiver">
             <intent-filter>
                 <action android:name="com.nata.xdroid.action.REPORT_CRASH" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".UserDataReceiver">
+        <receiver android:name=".receivers.UserDataReceiver">
             <intent-filter>
                 <action android:name="com.nata.xdroid.action.LOG_DATA" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".StartTestReceiver">
+        <receiver android:name=".receivers.StartTestReceiver">
             <intent-filter>
                 <action android:name="com.nata.xdroid.action.START_TEST" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receivers.ContactMockReceiver">
+            <intent-filter>
+                <action android:name="com.nata.xdroid.action.MOCK_CONTACTS" />
             </intent-filter>
         </receiver>
 
@@ -53,7 +63,7 @@
         <service android:name=".services.TestService" />
         <service android:name=".services.CountDownTimerService" />
 
-        <activity android:name=".ui.TimeCountActivity"></activity>
+        <activity android:name=".ui.TimeCountActivity"/>
     </application>
 
 </manifest>

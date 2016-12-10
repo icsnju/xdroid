@@ -5,6 +5,7 @@ import android.app.Application;
 import com.nata.xdroid.hooks.ActivityHook;
 import com.nata.xdroid.hooks.ContentHook;
 import com.nata.xdroid.hooks.CrashHook;
+import com.nata.xdroid.hooks.GPSLocationHook;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -43,7 +44,9 @@ public class Main implements IXposedHookLoadPackage {
                     "com.hectorone.multismssender",
                     "com.kvance.Nectroid",
                     "com.fsck.k9",
-                    "com.android.keepass"
+                    "com.android.keepass",
+                    "com.tencent.mobileqq",
+                    "com.borneq.heregpslocation"
             };
 
     List<String> list = Arrays.asList(sut);
@@ -72,10 +75,11 @@ public class Main implements IXposedHookLoadPackage {
                         new CrashHook(context).hook(loader);
                         new ActivityHook(runner, context, packageName).hook(loader);
                         new ContentHook(context).hook(loader);
+                        new GPSLocationHook(context).hook(loader);
 
 //                    new AutoTestHook().hook(loader);
 //                    new MotionEventHook().hook(loader);
-//                    new GPSLocationHook().hook(loader);
+
 //                    new ActionHook().hook(loader);
 
 //                    new ExceptionHook().hook(loader);

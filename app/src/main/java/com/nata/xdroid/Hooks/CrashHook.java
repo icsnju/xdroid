@@ -1,12 +1,9 @@
 package com.nata.xdroid.hooks;
 
-import android.app.Application;
-import android.app.ApplicationErrorReport;
 import android.content.Context;
 import android.content.Intent;
-import android.os.IBinder;
 
-import com.nata.xdroid.CrashReportReceiver;
+import com.nata.xdroid.receivers.CrashReportReceiver;
 import com.nata.xdroid.utils.FormatUtil;
 
 import de.robv.android.xposed.XC_MethodHook;
