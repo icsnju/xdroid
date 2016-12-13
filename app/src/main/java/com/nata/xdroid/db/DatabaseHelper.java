@@ -35,7 +35,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.createTable(connectionSource, CrashInfo.class);
             TableUtils.createTable(connectionSource, UserData.class);
-            TableUtils.createTable(connectionSource, TestRecord.class);
+//            TableUtils.createTable(connectionSource, TestRecord.class);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,7 +47,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.dropTable(connectionSource, CrashInfo.class, true);
             TableUtils.dropTable(connectionSource, UserData.class, true);
-            TableUtils.dropTable(connectionSource, TestRecord.class, true);
+//            TableUtils.dropTable(connectionSource, TestRecord.class, true);
         } catch (SQLException e) {
             e.printStackTrace();
         }
