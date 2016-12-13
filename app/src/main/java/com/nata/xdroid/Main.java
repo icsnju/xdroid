@@ -7,6 +7,7 @@ import com.nata.xdroid.hooks.ContentHook;
 import com.nata.xdroid.hooks.CrashHook;
 import com.nata.xdroid.hooks.GPSLocationHook;
 import com.nata.xdroid.hooks.NetworkHook;
+import com.nata.xdroid.utils.ToastUtil;
 
 import java.util.Arrays;
 import java.util.HashMap;

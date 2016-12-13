@@ -11,6 +11,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.nata.xdroid.db.beans.CrashInfo;
+import com.nata.xdroid.db.beans.TestRecord;
 import com.nata.xdroid.db.beans.UserData;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -34,6 +35,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.createTable(connectionSource, CrashInfo.class);
             TableUtils.createTable(connectionSource, UserData.class);
+            TableUtils.createTable(connectionSource, TestRecord.class);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -44,6 +47,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             TableUtils.dropTable(connectionSource, CrashInfo.class, true);
             TableUtils.dropTable(connectionSource, UserData.class, true);
+            TableUtils.dropTable(connectionSource, TestRecord.class, true);
         } catch (SQLException e) {
             e.printStackTrace();
         }

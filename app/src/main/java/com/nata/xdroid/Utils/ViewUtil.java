@@ -100,6 +100,23 @@ public class ViewUtil {
         }
     }
 
+//    public static void persistTestRecord(Context context, List<String> actList) {
+//        String packageName = context.getPackageName();
+//
+//                UserData data = new UserData();
+//                data.setPackageName(packageName);
+//                String resourceName = context.getResources().getResourceName(id);
+//                data.setResourceName(resourceName);
+//
+//                data.setStampTime((int) (System.currentTimeMillis() / 1000));
+//                Intent intent = UserDataReceiver.getUserDataIntent(data);
+//                context.sendBroadcast(intent);
+//                log("dismiss: " + id + " " + text);
+//            }
+//
+//        }
+//    }
+
 
     public static void fillUserData(Context context, List<View> views, String activityName) {
         UserDataDao userDataDao = new UserDataDao(context);

@@ -6,14 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import com.nata.xdroid.R;
 import com.nata.xdroid.TestRunner;
 import com.nata.xdroid.utils.ActivityUtil;
 import com.nata.xdroid.utils.ToastUtil;
 import com.nata.xdroid.utils.ViewUtil;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
@@ -53,22 +52,23 @@ public class ActivityHook {
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 if (actList == null) {
                     actList = ActivityUtil.getActivities(context, packageName);
-                    log("AllActivities size: " + actList.size());
+                    log(packageName + "=>" + "AllActivitiesSize:" + actList.size());
+                    log(packageName + "=>" + "AllActivities:" + Arrays.toString(actList.toArray()));
                 }
+
                 Context activity = (Activity) param.thisObject;
                 String activityName = activity.getClass().getName();
                 activitySet.add(activityName);
                 float coverage = (float) activitySet.size() / actList.size();
-
-                log(packageName + "=> " + activityName + " => ActivityCoverage: " + coverage);
-
+                log(packageName + "=>" + "NewActivity:" + activityName);
+                log(packageName + "=>" + "ActivityCoverage:" + coverage + " 总共" + actList.size() + "个");
             }
         });
 
 
         findAndHookMethod("android.app.Activity", loader, "onPause", new XC_MethodHook() {
             @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 if (inMonitorMode()) {
                     Activity rootActivity = (Activity) param.thisObject;
                     List<View> views = getAllChildViews(rootActivity.getWindow().getDecorView(), EditText.class);
