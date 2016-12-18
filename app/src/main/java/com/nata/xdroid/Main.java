@@ -2,6 +2,7 @@ package com.nata.xdroid;
 
 import android.app.Application;
 
+import com.nata.xdroid.hooks.ANRHook;
 import com.nata.xdroid.hooks.ActivityHook;
 import com.nata.xdroid.hooks.ContentHook;
 import com.nata.xdroid.hooks.CrashHook;
@@ -48,7 +49,10 @@ public class Main implements IXposedHookLoadPackage {
                     "com.fsck.k9",
                     "com.android.keepass",
                     "com.tencent.mobileqq",
-                    "com.borneq.heregpslocation"
+                    "com.borneq.heregpslocation",
+
+
+                    "com.nata.crashapplication"
             };
 
     List<String> list = Arrays.asList(sut);
@@ -67,6 +71,7 @@ public class Main implements IXposedHookLoadPackage {
                     if (packageName.equals("android")) {
 //                        int uid = context.getApplicationInfo().uid;
 //                        new BroadcastHook(uid).hook(loader);
+                        new ANRHook().hook(loader);
                     } else {
                         TestRunner runner = runners.get(packageName);
                         if (runner == null) {

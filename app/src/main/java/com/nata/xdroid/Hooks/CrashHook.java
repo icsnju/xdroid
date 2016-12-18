@@ -26,6 +26,7 @@ public class CrashHook implements Hook {
     @Override
     public void hook(final ClassLoader loader) {
 
+        // Handle Crash
 //        findAndHookMethod("com.android.server.am.ActivityManagerService", loader, "handleApplicationCrash", IBinder.class, ApplicationErrorReport.CrashInfo.class, new XC_MethodHook() {
 //            @Override
 //            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

@@ -88,11 +88,13 @@ public class ActivityHook {
                     ViewUtil.fillUserData(context, views, rootActivity.getLocalClassName());
                 }
 
+                testRunner.setActive(true);
+
                 if (!testRunner.isAlive()) {
                     testRunner.start();
                 }
 
-                testRunner.setActive(true);
+
             }
         });
 
