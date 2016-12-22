@@ -1,18 +1,18 @@
-package com.nata.xdroid.utils;
+package com.nata.xdroid.mocks;
 
 /**
  * Created by Calvin on 2016/12/10.
  */
 
-public class Tb_contacts {
+public class ContactBean {
     private String name;
     private String number;
 
-    public Tb_contacts() {
+    public ContactBean() {
         super();
     }
 
-    public Tb_contacts(String name, String number) {
+    public ContactBean(String name, String number) {
         super();
         this.name = name;
         this.number = number;
@@ -36,7 +36,7 @@ public class Tb_contacts {
 
     @Override
     public String toString() {
-        return "Tb_contacts [name=" + name + ", number=" + number + "]";
+        return "ContactBean [name=" + name + ", number=" + number + "]";
     }
 
 }

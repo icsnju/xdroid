@@ -117,7 +117,6 @@ public class Main implements IXposedHookLoadPackage {
                             XposedBridge.log("检测到位置权限, hook 网络相关权限");
                         }
 
-
                         new CrashHook(context).hook(loader);
                         new ActivityHook(runner, context, packageName).hook(loader);
 
