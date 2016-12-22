@@ -89,34 +89,37 @@ public class Main implements IXposedHookLoadPackage {
                         // 联系人相关Hook
                         if(permissions.contains(Manifest.permission.READ_CONTACTS)){
                             new ContactHook(context).hook(loader);
-                            XposedBridge.log("检测到读取联系人的权限,hook联系人");
+                            XposedBridge.log("检测到读取联系人的权限, hook联系人");
                         }
 
                         // 蓝牙相关Hook
                         if(permissions.contains(Manifest.permission.BLUETOOTH)){
                             new BluetoothHook(context).hook(loader);
-                            XposedBridge.log("检测到蓝牙权限,hook蓝牙");
+                            XposedBridge.log("检测到蓝牙权限, hook蓝牙");
                         }
 
                         // 日历相关Hook
                         if(permissions.contains(Manifest.permission.READ_CALENDAR)){
                             new CalendarHook(context).hook(loader);
-                            XposedBridge.log("检测到蓝牙权限,hook蓝牙");
+                            XposedBridge.log("检测到日历权限, hook蓝牙");
                         }
+
+                        // 位置相关Hook
+                        if(permissions.contains(Manifest.permission.ACCESS_FINE_LOCATION) ||
+                                permissions.contains(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                            new GPSLocationHook(context).hook(loader);
+                            XposedBridge.log("检测到位置权限, hook GPS");
+                        }
+
+                        // 网络相关权限
+                        if(permissions.contains(Manifest.permission.INTERNET)) {
+                            new NetworkHook(context).hook(loader);
+                            XposedBridge.log("检测到位置权限, hook 网络相关权限");
+                        }
+
 
                         new CrashHook(context).hook(loader);
                         new ActivityHook(runner, context, packageName).hook(loader);
-                        new CalendarHook(context).hook(loader);
-                        new GPSLocationHook(context).hook(loader);
-                        new NetworkHook(context).hook(loader);
-
-
-//                    new AutoTestHook().hook(loader);
-//                    new MotionEventHook().hook(loader);
-
-//                    new ActionHook().hook(loader);
-
-//                    new ExceptionHook().hook(loader);
 
                     }
                 }
