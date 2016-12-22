@@ -1,14 +1,17 @@
 package com.nata.xdroid;
 
+import android.Manifest;
 import android.app.Application;
 
 import com.nata.xdroid.hooks.ANRHook;
 import com.nata.xdroid.hooks.ActivityHook;
-import com.nata.xdroid.hooks.ContentHook;
+import com.nata.xdroid.hooks.BluetoothHook;
+import com.nata.xdroid.hooks.ContactHook;
+import com.nata.xdroid.hooks.CalendarHook;
 import com.nata.xdroid.hooks.CrashHook;
 import com.nata.xdroid.hooks.GPSLocationHook;
 import com.nata.xdroid.hooks.NetworkHook;
-import com.nata.xdroid.utils.ToastUtil;
+import com.nata.xdroid.utils.PermissionUtil;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,6 +20,7 @@ import java.util.Map;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
@@ -50,9 +54,8 @@ public class Main implements IXposedHookLoadPackage {
                     "com.android.keepass",
                     "com.tencent.mobileqq",
                     "com.borneq.heregpslocation",
-
-
-                    "com.nata.crashapplication"
+                    "com.nata.crashapplication",
+                    "tw.qtlin.mac.airunlocker"
             };
 
     List<String> list = Arrays.asList(sut);
@@ -73,17 +76,40 @@ public class Main implements IXposedHookLoadPackage {
 //                        new BroadcastHook(uid).hook(loader);
                         new ANRHook().hook(loader);
                     } else {
+                        // 启动TestRunner
                         TestRunner runner = runners.get(packageName);
                         if (runner == null) {
                             runner = new TestRunner(context);
                             runners.put(packageName, runner);
                         }
 
+                        // 获取被赋予权限的Permission
+                        List<String> permissions = PermissionUtil.getGrantedPermissions(context,packageName);
+
+                        // 联系人相关Hook
+                        if(permissions.contains(Manifest.permission.READ_CONTACTS)){
+                            new ContactHook(context).hook(loader);
+                            XposedBridge.log("检测到读取联系人的权限,hook联系人");
+                        }
+
+                        // 蓝牙相关Hook
+                        if(permissions.contains(Manifest.permission.BLUETOOTH)){
+                            new BluetoothHook(context).hook(loader);
+                            XposedBridge.log("检测到蓝牙权限,hook蓝牙");
+                        }
+
+                        // 日历相关Hook
+                        if(permissions.contains(Manifest.permission.READ_CALENDAR)){
+                            new CalendarHook(context).hook(loader);
+                            XposedBridge.log("检测到蓝牙权限,hook蓝牙");
+                        }
+
                         new CrashHook(context).hook(loader);
                         new ActivityHook(runner, context, packageName).hook(loader);
-                        new ContentHook(context).hook(loader);
+                        new CalendarHook(context).hook(loader);
                         new GPSLocationHook(context).hook(loader);
                         new NetworkHook(context).hook(loader);
+
 
 //                    new AutoTestHook().hook(loader);
 //                    new MotionEventHook().hook(loader);
@@ -91,6 +117,7 @@ public class Main implements IXposedHookLoadPackage {
 //                    new ActionHook().hook(loader);
 
 //                    new ExceptionHook().hook(loader);
+
                     }
                 }
             });

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PermissionInfo;
 
 import java.util.ArrayList;
 
@@ -24,9 +25,16 @@ public class ActivityUtil {
         }
         ActivityInfo[] list = info.activities;
         ArrayList<String>acts = new ArrayList<>();
-        for (ActivityInfo act: list) {
-           acts.add(act.name);
+        if(list!= null) {
+            for (ActivityInfo act: list) {
+                acts.add(act.name);
+            }
         }
+
         return acts;
     }
+
+
+
+
 }

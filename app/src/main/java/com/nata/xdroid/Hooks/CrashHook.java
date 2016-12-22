@@ -1,7 +1,9 @@
 package com.nata.xdroid.hooks;
 
+import android.app.ApplicationErrorReport;
 import android.content.Context;
 import android.content.Intent;
+import android.os.IBinder;
 
 import com.nata.xdroid.receivers.CrashReportReceiver;
 import com.nata.xdroid.utils.FormatUtil;
@@ -32,11 +34,10 @@ public class CrashHook implements Hook {
 //            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
 //                ApplicationErrorReport.CrashInfo info = (ApplicationErrorReport.CrashInfo) param.args[1];
 //                log("Crash: " + info.throwClassName + "->" + info.exceptionClassName + " -> " + info.exceptionMessage + " -> " + info.stackTrace);
-//                Intent intent = CrashReportReceiver.getCrashBroadCastIntent(info, context.getPackageName());
-//                context.sendBroadcast(intent);
 //            }
 //        });
 
+        // Handle uncaughtException
         Class<?> classHandler = Thread.getDefaultUncaughtExceptionHandler().getClass();
         findAndHookMethod(classHandler, "uncaughtException", Thread.class, Throwable.class,
             new XC_MethodHook() {
