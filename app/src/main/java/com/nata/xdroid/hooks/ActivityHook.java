@@ -8,21 +8,17 @@ import android.view.View;
 import android.widget.EditText;
 import com.nata.xdroid.TestRunner;
 import com.nata.xdroid.utils.ActivityUtil;
-import com.nata.xdroid.utils.ToastUtil;
 import com.nata.xdroid.utils.ViewUtil;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
-import de.robv.android.xposed.XposedBridge;
 
-import static com.nata.xdroid.utils.ToastUtil.makeToast;
+import static com.nata.xdroid.notices.ToastNotifier.makeToast;
 import static com.nata.xdroid.utils.XPreferencesUtils.inMonitorMode;
 import static com.nata.xdroid.utils.ViewUtil.getAllChildViews;
-import static com.nata.xdroid.utils.XPreferencesUtils.inTestMode;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 

@@ -3,9 +3,11 @@ package com.nata.xdroid.hooks;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 
+import com.nata.xdroid.notices.CommonNotice;
+
 import de.robv.android.xposed.XC_MethodHook;
 
-import static com.nata.xdroid.utils.ToastUtil.makeToast;
+import static com.nata.xdroid.notices.ToastNotifier.makeToast;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
@@ -29,7 +31,7 @@ public class BluetoothHook implements Hook{
                 log("afterHookedMethod getDefaultAdapter");
                 BluetoothAdapter bluetoothAdapter = (BluetoothAdapter)param.getResult();
                 if(bluetoothAdapter == null) {
-                    makeToast(context, "应用请求蓝牙信息, 但手机不支持蓝牙");
+                    makeToast(context, CommonNotice.BLUETOOTH);
                     return;
                 }
 

@@ -4,10 +4,9 @@ import android.content.Context;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.nata.xdroid.utils.ToastUtil;
+import com.nata.xdroid.notices.ToastNotifier;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
 import org.apache.http.client.methods.HttpUriRequest;
 
 import java.net.HttpURLConnection;
@@ -40,7 +39,7 @@ public class NetworkHook implements Hook{
                 String url = (String) param.args[0];
                 log("URL construct " + url);
                 if(!isNetWorkConnected()) {
-                    ToastUtil.makeToast(context, "应用访问" + url + ",但没有网络连接");
+                    ToastNotifier.makeToast(context, "应用访问" + url + ",但没有网络连接");
                 }
             }
         });
@@ -52,7 +51,7 @@ public class NetworkHook implements Hook{
                 HttpURLConnection urlConn = (HttpURLConnection)param.thisObject;
                 int code = (int) param.getResult();
                 if(code == HTTP_400) {
-                    ToastUtil.makeToast(context, "应用向" + urlConn.getURL() + "发送了请求但失败了");
+                    ToastNotifier.makeToast(context, "应用向" + urlConn.getURL() + "发送了请求但失败了");
                 }
             }
         });
@@ -65,7 +64,7 @@ public class NetworkHook implements Hook{
                 HttpUriRequest request = (HttpUriRequest) param.args[0];
 
                 if(httpResponse.getStatusLine().getStatusCode() == HTTP_400) {
-                    ToastUtil.makeToast(context, "应用向" + request.getURI() + "发送了请求但失败了");
+                    ToastNotifier.makeToast(context, "应用向" + request.getURI() + "发送了请求但失败了");
                 }
             }
         });
@@ -81,7 +80,7 @@ public class NetworkHook implements Hook{
                                                 String description, String failingUrl) {
 // TODO Auto-generated method stub
                         super.onReceivedError(view, errorCode, description, failingUrl);
-                        ToastUtil.makeToast(context, "应用为" + view.getUrl() + "打开了Web页面但失败了");
+                        ToastNotifier.makeToast(context, "应用为" + view.getUrl() + "打开了Web页面但失败了");
                     }
                 });
             }

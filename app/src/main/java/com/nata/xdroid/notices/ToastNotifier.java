@@ -1,4 +1,4 @@
-package com.nata.xdroid.utils;
+package com.nata.xdroid.notices;
 
 import android.content.Context;
 import android.widget.Toast;
@@ -7,7 +7,7 @@ import android.widget.Toast;
  * Created by Calvin on 2016/12/9.
  */
 
-public class ToastUtil {
+public class ToastNotifier {
     private static final String X_DROID = "xdroid:";
     public static void makeToast(Context context, String toast){
         Toast.makeText(context,X_DROID + context.getPackageName() + " => " + toast,Toast.LENGTH_LONG).show();

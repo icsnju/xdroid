@@ -1,21 +1,15 @@
 package com.nata.xdroid.hooks;
 
-import android.app.ActivityManager;
-import android.app.PendingIntent;
-import android.content.ContentProvider;
 import android.content.Context;
-import android.content.Intent;
 import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.net.wifi.ScanResult;
-import android.os.Looper;
 import android.telephony.CellLocation;
 import android.telephony.NeighboringCellInfo;
 
-import com.nata.xdroid.utils.ToastUtil;
+import com.nata.xdroid.notices.ToastNotifier;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -45,7 +39,7 @@ public class GPSLocationHook implements Hook {
                 XposedBridge.log("afterHookedMethod: " + "getScanResults");
                 List<ScanResult> scanResults = (List<ScanResult>)param.getResult();
                 if(scanResults.size() == 0) {
-                    ToastUtil.makeToast(context,"应用通过Wifi获取您的位置,但失败了,请检查WIFI网络情况");
+                    ToastNotifier.makeToast(context,"应用通过Wifi获取您的位置,但失败了,请检查WIFI网络情况");
                 }
 //                param.setResult(null);
             }
@@ -57,7 +51,7 @@ public class GPSLocationHook implements Hook {
                 XposedBridge.log("afterHookedMethod: " + "getCellLocation");
                 CellLocation cl = (CellLocation) param.getResult();
                 if(cl == null) {
-                    ToastUtil.makeToast(context,"应用通过LTE获取您的位置,但失败了,请检查LTE网络情况");
+                    ToastNotifier.makeToast(context,"应用通过LTE获取您的位置,但失败了,请检查LTE网络情况");
                 }
 //                param.setResult(null);
             }
@@ -69,7 +63,7 @@ public class GPSLocationHook implements Hook {
                 XposedBridge.log("afterHookedMethod: " + "getNeighboringCellInfo");
                 List<NeighboringCellInfo> list = (List<NeighboringCellInfo>)param.getResult();
                 if(list.size() == 0) {
-                    ToastUtil.makeToast(context,"应用通过蜂窝连接获取您的位置,但失败了,请检查蜂窝网络情况");
+                    ToastNotifier.makeToast(context,"应用通过蜂窝连接获取您的位置,但失败了,请检查蜂窝网络情况");
                 }
 //                param.setResult(null);
             }
@@ -89,10 +83,10 @@ public class GPSLocationHook implements Hook {
                         LocationManager lm = (LocationManager) param.thisObject;
                         String provider = (String)param.args[0];
                         if(provider.equals(LocationManager.GPS_PROVIDER) &&  !lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                            ToastUtil.makeToast(context,"应用通过GPS连接获取您的位置,但GPS没有打开");
+                            ToastNotifier.makeToast(context,"应用通过GPS连接获取您的位置,但GPS没有打开");
                         }
                         else if(provider.equals(LocationManager.NETWORK_PROVIDER) &&  !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-                            ToastUtil.makeToast(context,"应用通过WLAN或移动网络(3G/2G)确定位置,但WLAN或移动网络(3G/2G)没有打开");
+                            ToastNotifier.makeToast(context,"应用通过WLAN或移动网络(3G/2G)确定位置,但WLAN或移动网络(3G/2G)没有打开");
                         }
                         //位置监听器,当位置改变时会触发onLocationChanged方法
                         LocationListener ll = (LocationListener) param.args[3];

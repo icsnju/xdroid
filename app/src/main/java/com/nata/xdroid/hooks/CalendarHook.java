@@ -7,7 +7,7 @@ import android.provider.CalendarContract;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 
-import static com.nata.xdroid.utils.ToastUtil.makeToast;
+import static com.nata.xdroid.notices.ToastNotifier.makeToast;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
