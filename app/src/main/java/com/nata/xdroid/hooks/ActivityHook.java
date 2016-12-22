@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import com.nata.xdroid.TestRunner;
+import com.nata.xdroid.notices.CommonNotice;
+import com.nata.xdroid.notices.Notifier;
 import com.nata.xdroid.utils.ActivityUtil;
 import com.nata.xdroid.utils.ViewUtil;
 
@@ -111,9 +113,9 @@ public class ActivityHook {
         String action = intent.getAction();
         if (action != null) {
             if (action.equals(Intent.ACTION_OPEN_DOCUMENT))
-                makeToast(context, "应用打开了文档管理器，请选择合适的文件" + intent.getType());
+                Notifier.notice(context, CommonNotice.ACTION_OPEN_DOCUMENT);
             if (action.equals(Intent.ACTION_CHOOSER))
-                makeToast(context, "应用打开了应用选择器,请选择合适的程序");
+                Notifier.notice(context, CommonNotice.ACTION_CHOOSER);
         }
     }
 }

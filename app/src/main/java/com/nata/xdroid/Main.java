@@ -74,7 +74,7 @@ public class Main implements IXposedHookLoadPackage {
                     if (packageName.equals("android")) {
 //                        int uid = context.getApplicationInfo().uid;
 //                        new BroadcastHook(uid).hook(loader);
-                        new ANRHook().hook(loader);
+                        new ANRHook(context).hook(loader);
                     } else {
                         // 启动TestRunner
                         TestRunner runner = runners.get(packageName);

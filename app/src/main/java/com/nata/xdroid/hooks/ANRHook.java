@@ -2,6 +2,9 @@ package com.nata.xdroid.hooks;
 
 import android.content.Context;
 
+import com.nata.xdroid.notices.CommonNotice;
+import com.nata.xdroid.notices.Notifier;
+
 import de.robv.android.xposed.XC_MethodHook;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookConstructor;
@@ -12,6 +15,11 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
  */
 
 public class ANRHook implements Hook {
+    Context context;
+    public ANRHook(Context context) {
+        this.context = context;
+    }
+
     @Override
     public void hook(final ClassLoader loader) {
 
@@ -20,24 +28,9 @@ public class ANRHook implements Hook {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 String annotation = (String) param.args[4];
-                log("Hook ANR: " + annotation);
+                Notifier.notice(context, CommonNotice.ANR+annotation);
             }
         });
-
-//        findAndHookConstructor("com.android.server.am.AppNotRespondingDialog", loader,
-//                "com.android.server.am.ActivityManagerService",
-//                Context.class,
-//                "com.android.server.am.ProcessRecord",
-//                "com.android.server.am.ActivityRecord",
-//                boolean.class,
-//                new XC_MethodHook() {
-//
-//                    @Override
-//                    protected void beforeHookedMethod(MethodHookParam methodHookParam) throws Throwable {
-//                        Context context = (Context) methodHookParam.args[1];
-//                         log("Hook ANR" + ": " + context.getPackageName());
-//                    }
-//                });
 
     }
 }

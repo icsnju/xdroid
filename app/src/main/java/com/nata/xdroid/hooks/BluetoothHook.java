@@ -31,12 +31,12 @@ public class BluetoothHook implements Hook{
                 log("afterHookedMethod getDefaultAdapter");
                 BluetoothAdapter bluetoothAdapter = (BluetoothAdapter)param.getResult();
                 if(bluetoothAdapter == null) {
-                    makeToast(context, CommonNotice.BLUETOOTH);
+                    makeToast(context, CommonNotice.NO_BLUETOOTH);
                     return;
                 }
 
                 if(!bluetoothAdapter.isEnabled()){
-                    makeToast(context, "应用请求蓝牙信息, 但手机没有开启蓝牙");
+                    makeToast(context, CommonNotice.BLUETOOTH_NOT_ENABLED);
                 }
             }
         });

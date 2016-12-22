@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
+import com.nata.xdroid.notices.CommonNotice;
+import com.nata.xdroid.notices.Notifier;
 import com.nata.xdroid.receivers.CrashReportReceiver;
 import com.nata.xdroid.utils.FormatUtil;
 
@@ -44,7 +46,7 @@ public class CrashHook implements Hook {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     Throwable th = (Throwable) param.args[1];
-                    log(FormatUtil.getExceptionDetail(th));
+                    Notifier.notice(context, CommonNotice.CRASH);
                     Intent intent = CrashReportReceiver.getCrashBroadCastIntent((Throwable) param.args[1], context.getPackageName());
                     context.sendBroadcast(intent);
                 }

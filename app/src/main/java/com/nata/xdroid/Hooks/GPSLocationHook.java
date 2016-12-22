@@ -9,6 +9,8 @@ import android.net.wifi.ScanResult;
 import android.telephony.CellLocation;
 import android.telephony.NeighboringCellInfo;
 
+import com.nata.xdroid.notices.CommonNotice;
+import com.nata.xdroid.notices.Notifier;
 import com.nata.xdroid.notices.ToastNotifier;
 
 import java.lang.reflect.Method;
@@ -39,7 +41,7 @@ public class GPSLocationHook implements Hook {
                 XposedBridge.log("afterHookedMethod: " + "getScanResults");
                 List<ScanResult> scanResults = (List<ScanResult>)param.getResult();
                 if(scanResults.size() == 0) {
-                    ToastNotifier.makeToast(context,"应用通过Wifi获取您的位置,但失败了,请检查WIFI网络情况");
+                    Notifier.notice(context, CommonNotice.WIFI_LOCATION);
                 }
 //                param.setResult(null);
             }
@@ -51,7 +53,7 @@ public class GPSLocationHook implements Hook {
                 XposedBridge.log("afterHookedMethod: " + "getCellLocation");
                 CellLocation cl = (CellLocation) param.getResult();
                 if(cl == null) {
-                    ToastNotifier.makeToast(context,"应用通过LTE获取您的位置,但失败了,请检查LTE网络情况");
+                    ToastNotifier.makeToast(context,CommonNotice.LTE_LOCATION);
                 }
 //                param.setResult(null);
             }
@@ -63,7 +65,7 @@ public class GPSLocationHook implements Hook {
                 XposedBridge.log("afterHookedMethod: " + "getNeighboringCellInfo");
                 List<NeighboringCellInfo> list = (List<NeighboringCellInfo>)param.getResult();
                 if(list.size() == 0) {
-                    ToastNotifier.makeToast(context,"应用通过蜂窝连接获取您的位置,但失败了,请检查蜂窝网络情况");
+                    ToastNotifier.makeToast(context,CommonNotice.CELL_LOCATION);
                 }
 //                param.setResult(null);
             }
@@ -83,10 +85,10 @@ public class GPSLocationHook implements Hook {
                         LocationManager lm = (LocationManager) param.thisObject;
                         String provider = (String)param.args[0];
                         if(provider.equals(LocationManager.GPS_PROVIDER) &&  !lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                            ToastNotifier.makeToast(context,"应用通过GPS连接获取您的位置,但GPS没有打开");
+                            Notifier.notice(context,CommonNotice.NO_GPS_PROVIDER);
                         }
                         else if(provider.equals(LocationManager.NETWORK_PROVIDER) &&  !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-                            ToastNotifier.makeToast(context,"应用通过WLAN或移动网络(3G/2G)确定位置,但WLAN或移动网络(3G/2G)没有打开");
+                            Notifier.notice(context,CommonNotice.NO_NETWORK_PROVIDER);
                         }
                         //位置监听器,当位置改变时会触发onLocationChanged方法
                         LocationListener ll = (LocationListener) param.args[3];

@@ -4,6 +4,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
+
+import com.nata.xdroid.notices.CommonNotice;
+import com.nata.xdroid.notices.Notifier;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 
@@ -50,7 +54,7 @@ public class CalendarHook implements Hook {
         boolean isCalendar = isCalendarEventURI || isCalendarRemindersURI || isCalendarCalendarsURI || isCalendarInstancesURI || isCalendarAttendeesURI;
 
         if (isCalendar && cursor.getCount() == 0) {
-            makeToast(context, "应用请求日历信息, 但日历中中没有相关信息,请添加或使用xdroid提供的工具");
+            Notifier.notice(context, CommonNotice.CALENDAR);
         }
     }
 }

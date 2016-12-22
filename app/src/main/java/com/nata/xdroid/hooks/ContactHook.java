@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 
+import com.nata.xdroid.notices.CommonNotice;
+import com.nata.xdroid.notices.Notifier;
 import com.nata.xdroid.receivers.ContactMockReceiver;
 
 import de.robv.android.xposed.XC_MethodHook;
@@ -42,7 +44,7 @@ public class ContactHook implements Hook{
                         boolean isContact = isContactRawContactsURI || isContactContactsURI || isContactDataURI;
 
                         if (isContact && cursor.getCount() == 0) {
-                            makeToast(context, "应用请求联系人数据, 但手机中没有联系人信息,请添加或使用xdroid提供的工具");
+                            Notifier.notice(context, CommonNotice.CONTACT);
 
                             Intent intent = ContactMockReceiver.getUserDataIntent();
                             context.sendBroadcast(intent);
