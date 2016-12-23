@@ -12,11 +12,11 @@ public class Notifier {
     }
 
     public static void beem(Context context) {
-        BeemNotifier.makeBeem(context);
+        BeepNotifier.makeBeem(context);
     }
 
     public static void notice(Context context, String content) {
-        BeemNotifier.makeBeem(context);
+        BeepNotifier.makeBeem(context);
         ToastNotifier.makeToast(context,content);
     }
 }

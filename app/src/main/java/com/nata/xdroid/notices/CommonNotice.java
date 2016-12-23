@@ -19,6 +19,4 @@ public class CommonNotice {
     public static String NO_GPS_PROVIDER = "应用通过蜂窝连接获取您的位置,但失败了,请检查蜂窝网络情况";
     public static String NO_NETWORK_PROVIDER = "应用通过WLAN或移动网络(3G/2G)确定位置,但WLAN或移动网络(3G/2G)没有打开";
 
-
-
 }

@@ -9,7 +9,7 @@ import android.net.Uri;
  * Created by Calvin on 2016/12/22.
  */
 
-public class BeemNotifier {
+public class BeepNotifier {
     public static void makeBeem(Context context) {
         Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         Ringtone r = RingtoneManager.getRingtone(context, notification);

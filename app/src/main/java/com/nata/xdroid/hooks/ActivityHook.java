@@ -114,7 +114,7 @@ public class ActivityHook {
         if (action != null) {
             if (action.equals(Intent.ACTION_OPEN_DOCUMENT))
                 Notifier.notice(context, CommonNotice.ACTION_OPEN_DOCUMENT);
-            if (action.equals(Intent.ACTION_CHOOSER))
+            else if (action.equals(Intent.ACTION_CHOOSER))
                 Notifier.notice(context, CommonNotice.ACTION_CHOOSER);
         }
     }

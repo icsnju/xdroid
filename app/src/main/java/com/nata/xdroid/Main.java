@@ -84,7 +84,7 @@ public class Main implements IXposedHookLoadPackage {
                         }
 
                         // 获取被赋予权限的Permission
-                        List<String> permissions = PermissionUtil.getGrantedPermissions(context,packageName);
+                        List<String> permissions = PermissionUtil.getGrantedPermissions(context, packageName);
 
                         // 联系人相关Hook
                         if(permissions.contains(Manifest.permission.READ_CONTACTS)){
