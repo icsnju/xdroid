@@ -29,27 +29,14 @@ public class CrashHook implements Hook {
 
     @Override
     public void hook(final ClassLoader loader) {
-
         // Handle Crash
-//        findAndHookMethod("com.android.server.am.ActivityManagerService", loader, "handleApplicationCrash", IBinder.class, ApplicationErrorReport.CrashInfo.class, new XC_MethodHook() {
-//            @Override
-//            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-//                ApplicationErrorReport.CrashInfo info = (ApplicationErrorReport.CrashInfo) param.args[1];
-//                log("Crash: " + info.throwClassName + "->" + info.exceptionClassName + " -> " + info.exceptionMessage + " -> " + info.stackTrace);
-//            }
-//        });
+        findAndHookMethod("com.android.server.am.ActivityManagerService", loader, "handleApplicationCrash", IBinder.class, ApplicationErrorReport.CrashInfo.class, new XC_MethodHook() {
+            @Override
+            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                ApplicationErrorReport.CrashInfo info = (ApplicationErrorReport.CrashInfo) param.args[1];
+                Notifier.notice(context, CommonNotice.CRASH + info.throwClassName + "->" + info.exceptionClassName + " -> " + info.exceptionMessage + " -> " + info.stackTrace);
+            }
+        });
 
-        // Handle uncaughtException
-        Class<?> classHandler = Thread.getDefaultUncaughtExceptionHandler().getClass();
-        findAndHookMethod(classHandler, "uncaughtException", Thread.class, Throwable.class,
-            new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    Throwable th = (Throwable) param.args[1];
-                    Notifier.notice(context, CommonNotice.CRASH);
-                    Intent intent = CrashReportReceiver.getCrashBroadCastIntent((Throwable) param.args[1], context.getPackageName());
-                    context.sendBroadcast(intent);
-                }
-            });
     }
 }

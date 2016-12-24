@@ -11,6 +11,7 @@ import com.nata.xdroid.hooks.CalendarHook;
 import com.nata.xdroid.hooks.CrashHook;
 import com.nata.xdroid.hooks.GPSLocationHook;
 import com.nata.xdroid.hooks.NetworkHook;
+import com.nata.xdroid.hooks.UncaughtExceptionHook;
 import com.nata.xdroid.utils.PermissionUtil;
 
 import java.util.Arrays;
@@ -75,6 +76,7 @@ public class Main implements IXposedHookLoadPackage {
 //                        int uid = context.getApplicationInfo().uid;
 //                        new BroadcastHook(uid).hook(loader);
                         new ANRHook(context).hook(loader);
+                        new CrashHook(context).hook(loader);
                     } else {
                         // 启动TestRunner
                         TestRunner runner = runners.get(packageName);
@@ -117,7 +119,7 @@ public class Main implements IXposedHookLoadPackage {
                             XposedBridge.log("检测到位置权限, hook 网络相关权限");
                         }
 
-                        new CrashHook(context).hook(loader);
+                        new UncaughtExceptionHook(context).hook(loader);
                         new ActivityHook(runner, context, packageName).hook(loader);
 
                     }
