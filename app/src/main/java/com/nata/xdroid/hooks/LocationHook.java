@@ -25,9 +25,9 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
  * Created by Calvin on 2016/11/21.
  */
 
-public class GPSLocationHook implements Hook {
+public class LocationHook implements Hook {
     Context context;
-    public GPSLocationHook(Context context) {
+    public LocationHook(Context context) {
         this.context = context;
     }
     public void hook(ClassLoader loader) {
@@ -84,15 +84,25 @@ public class GPSLocationHook implements Hook {
                         XposedBridge.log("beforeHookedMethod: " + "requestLocationUpdates");
                         LocationManager lm = (LocationManager) param.thisObject;
                         String provider = (String)param.args[0];
+
+
                         if(provider.equals(LocationManager.GPS_PROVIDER) &&  !lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                             Notifier.notice(context,CommonNotice.NO_GPS_PROVIDER);
                         }
                         else if(provider.equals(LocationManager.NETWORK_PROVIDER) &&  !lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
                             Notifier.notice(context,CommonNotice.NO_NETWORK_PROVIDER);
+                        } else if(provider.equals(LocationManager.PASSIVE_PROVIDER) &&  !lm.isProviderEnabled(LocationManager.PASSIVE_PROVIDER)) {
+                            Notifier.notice(context,CommonNotice.NO_PASSIVE_PROVIDER);
+                        } else {
+                            // 如果没有配置模拟位置
+                            // 使用真实的数据
+                            // 如果配置了模拟位置
+                            //位置监听器,当位置改变时会触发onLocationChanged方法
+                            LocationListener ll = (LocationListener) param.args[3];
+                            fackGPSLocation(ll);
                         }
-                        //位置监听器,当位置改变时会触发onLocationChanged方法
-                        LocationListener ll = (LocationListener) param.args[3];
-                        fackGPSLocation(ll);
+
+
                     }
                 });
 

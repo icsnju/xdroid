@@ -57,18 +57,21 @@ public class NetworkHook implements Hook{
             }
         });
 
-        findAndHookMethod("android.net.http.AndroidHttpClient", loader, "execute",HttpUriRequest.class, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                log("afterHookedMethod execute");
-                HttpResponse httpResponse =(HttpResponse) param.getResult();
-                HttpUriRequest request = (HttpUriRequest) param.args[0];
+        // API23后被废弃
+        if(android.os.Build.VERSION.SDK_INT <23 ) {
+            findAndHookMethod("android.net.http.AndroidHttpClient", loader, "execute",HttpUriRequest.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    log("afterHookedMethod execute");
+                    HttpResponse httpResponse =(HttpResponse) param.getResult();
+                    HttpUriRequest request = (HttpUriRequest) param.args[0];
 
-                if(httpResponse.getStatusLine().getStatusCode() == HTTP_400) {
-                    Notifier.notice(context, "应用向" + request.getURI() + "发送了请求但失败了");
+                    if(httpResponse.getStatusLine().getStatusCode() == HTTP_400) {
+                        Notifier.notice(context, "应用向" + request.getURI() + "发送了请求但失败了");
+                    }
                 }
-            }
-        });
+            });
+        }
 
         findAndHookMethod("android.webkit.WebView", loader, "loadUrl",String.class, new XC_MethodHook() {
             @Override

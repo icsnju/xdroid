@@ -9,7 +9,7 @@ import com.nata.xdroid.hooks.BluetoothHook;
 import com.nata.xdroid.hooks.ContactHook;
 import com.nata.xdroid.hooks.CalendarHook;
 import com.nata.xdroid.hooks.CrashHook;
-import com.nata.xdroid.hooks.GPSLocationHook;
+import com.nata.xdroid.hooks.LocationHook;
 import com.nata.xdroid.hooks.NetworkHook;
 import com.nata.xdroid.hooks.UncaughtExceptionHook;
 import com.nata.xdroid.utils.PermissionUtil;
@@ -109,7 +109,7 @@ public class Main implements IXposedHookLoadPackage {
                         // 位置相关Hook
                         if(permissions.contains(Manifest.permission.ACCESS_FINE_LOCATION) ||
                                 permissions.contains(Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                            new GPSLocationHook(context).hook(loader);
+                            new LocationHook(context).hook(loader);
                             XposedBridge.log("检测到位置权限, hook GPS");
                         }
 

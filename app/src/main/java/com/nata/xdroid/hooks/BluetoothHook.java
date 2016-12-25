@@ -4,6 +4,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 
 import com.nata.xdroid.notices.CommonNotice;
+import com.nata.xdroid.notices.Notifier;
 
 import de.robv.android.xposed.XC_MethodHook;
 
@@ -28,15 +29,14 @@ public class BluetoothHook implements Hook{
         findAndHookMethod("android.bluetooth.BluetoothAdapter", loader, "getDefaultAdapter", new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                log("afterHookedMethod getDefaultAdapter");
                 BluetoothAdapter bluetoothAdapter = (BluetoothAdapter)param.getResult();
                 if(bluetoothAdapter == null) {
-                    makeToast(context, CommonNotice.NO_BLUETOOTH);
+                    Notifier.notice(context, CommonNotice.NO_BLUETOOTH);
                     return;
                 }
 
                 if(!bluetoothAdapter.isEnabled()){
-                    makeToast(context, CommonNotice.BLUETOOTH_NOT_ENABLED);
+                    Notifier.notice(context, CommonNotice.BLUETOOTH_NOT_ENABLED);
                 }
             }
         });
