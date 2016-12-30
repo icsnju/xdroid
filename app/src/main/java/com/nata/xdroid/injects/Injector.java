@@ -1,4 +1,4 @@
-package com.nata.xdroid.mocks;
+package com.nata.xdroid.injects;
 
 import android.content.Context;
 
@@ -6,8 +6,8 @@ import android.content.Context;
  * Created by Calvin on 2016/12/22.
  */
 
-public class Mocker {
+public class Injector {
     public static void mockContact(Context context) {
-        ContactMocker.mockContacts(context);
+        ContactInjector.mockContacts(context);
     }
 }

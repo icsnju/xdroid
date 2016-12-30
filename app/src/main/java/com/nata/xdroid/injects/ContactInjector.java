@@ -1,4 +1,4 @@
-package com.nata.xdroid.mocks;
+package com.nata.xdroid.injects;
 
 import android.content.ContentProviderOperation;
 import android.content.ContentProviderResult;
@@ -16,7 +16,7 @@ import java.util.List;
  * Created by Calvin on 2016/12/10.
  */
 
-public class ContactMocker {
+public class ContactInjector {
     /**
      * 批量添加通讯录
      *

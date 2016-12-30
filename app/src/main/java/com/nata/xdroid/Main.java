@@ -69,7 +69,7 @@ public class Main implements IXposedHookLoadPackage {
         if (list.contains(packageName)) {
             findAndHookMethod(Application.class, "onCreate", new XC_MethodHook() {
                 @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     Application context = (Application) param.thisObject;
 
                     if (packageName.equals("android")) {

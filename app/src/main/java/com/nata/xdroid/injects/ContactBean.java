@@ -1,4 +1,4 @@
-package com.nata.xdroid.mocks;
+package com.nata.xdroid.injects;
 
 /**
  * Created by Calvin on 2016/12/10.
