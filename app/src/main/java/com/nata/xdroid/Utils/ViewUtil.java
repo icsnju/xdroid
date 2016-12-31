@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.nata.xdroid.receivers.UserDataReceiver;
-import com.nata.xdroid.db.beans.UserData;
-import com.nata.xdroid.db.daos.UserDataDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,61 +75,29 @@ public class ViewUtil {
         }
     }
 
-    public static void persistUserData(Context context, List<View> views, String activityName) {
-        String packageName = context.getPackageName();
+    public static void persistUserData(Context context, List<View> views) {
         for (int i = 0; i < views.size(); i++) {
             EditText et = (EditText) views.get(i);
             String text = et.getText().toString();
             int id = et.getId();
             if (!text.trim().equals("")) {
-                UserData data = new UserData();
-                data.setPackageName(packageName);
-                data.setActivityName(activityName);
-                data.setResourceId(id);
-                data.setContent(text);
                 String resourceName = context.getResources().getResourceName(id);
-                data.setResourceName(resourceName);
-                data.setStampTime((int) (System.currentTimeMillis() / 1000));
-                Intent intent = UserDataReceiver.getUserDataIntent(data);
+                Intent intent = UserDataReceiver.getUserDataIntent(resourceName,text);
                 context.sendBroadcast(intent);
-                log("dismiss: " + id + " " + text);
             }
 
         }
     }
 
-//    public static void persistTestRecord(Context context, List<String> actList) {
-//        String packageName = context.getPackageName();
-//
-//                UserData data = new UserData();
-//                data.setPackageName(packageName);
-//                String resourceName = context.getResources().getResourceName(id);
-//                data.setResourceName(resourceName);
-//
-//                data.setStampTime((int) (System.currentTimeMillis() / 1000));
-//                Intent intent = UserDataReceiver.getUserDataIntent(data);
-//                context.sendBroadcast(intent);
-//                log("dismiss: " + id + " " + text);
-//            }
-//
-//        }
-//    }
-
-
-    public static void fillUserData(Context context, List<View> views, String activityName) {
-        UserDataDao userDataDao = new UserDataDao(context);
-        String packageName = context.getPackageName();
-
+    public static void fillUserData(Context context, List<View> views) {
         for (int i = 0; i < views.size(); i++) {
             EditText et = (EditText) views.get(i);
             int id = et.getId();
-            UserData data = userDataDao.getUserDataByQuery(packageName, activityName, id);
-            if (data != null) {
-                String text = data.getContent();
-                if (text != null && !text.trim().equals("")) {
-                    et.setText(text);
-                    log("onStart put text: " + id + " " + text);
-                }
+            String resourceName = context.getResources().getResourceName(id);
+            String text = XDataUtils.query(resourceName);
+            if (!text.trim().equals("")) {
+                et.setText(text);
+                log("onResume put text: " + id + " " + text);
             }
         }
     }

@@ -9,9 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.nata.xdroid.db.beans.UserData;
-import com.nata.xdroid.db.daos.UserDataDao;
-
 import java.util.HashSet;
 import java.util.Set;
 

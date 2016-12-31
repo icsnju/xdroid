@@ -23,9 +23,9 @@
         <Preference
             android:key="crash"
             android:title="@string/crash" />
-        <Preference
-            android:key="userdata"
-            android:title="@string/userdata" />
+        <!--<Preference-->
+            <!--android:key="userdata"-->
+            <!--android:title="@string/userdata" />-->
         <Preference
             android:key="test"
             android:title="@string/test" />

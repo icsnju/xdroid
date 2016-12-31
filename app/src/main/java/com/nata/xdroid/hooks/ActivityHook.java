@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.nata.xdroid.TestRunner;
 import com.nata.xdroid.notices.CommonNotice;
 import com.nata.xdroid.notices.Notifier;
@@ -42,15 +44,13 @@ public class ActivityHook {
         this.packageName = packageName;
     }
 
-    public void hook(final ClassLoader loader,final  List<String> actList) {
+    public void hook(final ClassLoader loader, final List<String> actList) {
 
         findAndHookMethod("android.app.Activity", loader, "onCreate", Bundle.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 Context activity = (Activity) param.thisObject;
                 String activityName = activity.getClass().getName();
-//                activitySet.add(activityName);
-                log(packageName + "=>" + "NewActivity:" + activityName);
                 Intent intent = NewActivityReceiver.getNewActivityIntent(activityName);
                 context.sendBroadcast(intent);
             }
@@ -62,9 +62,8 @@ public class ActivityHook {
                 if (inMonitorMode()) {
                     Activity rootActivity = (Activity) param.thisObject;
                     List<View> views = getAllChildViews(rootActivity.getWindow().getDecorView(), EditText.class);
-                    ViewUtil.persistUserData(context, views, rootActivity.getLocalClassName());
+                    ViewUtil.persistUserData(context, views);
                 }
-
                 testRunner.setActive(false);
             }
         });
@@ -72,17 +71,10 @@ public class ActivityHook {
         findAndHookMethod("android.app.Activity", loader, "onResume", new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                if (inMonitorMode()) {
-                    final Activity rootActivity = (Activity) param.thisObject;
-                    List<View> views = getAllChildViews(rootActivity.getWindow().getDecorView(), EditText.class);
-                    ViewUtil.fillUserData(context, views, rootActivity.getLocalClassName());
-                }
-
+                final Activity rootActivity = (Activity) param.thisObject;
+                List<View> views = getAllChildViews(rootActivity.getWindow().getDecorView(), EditText.class);
+                ViewUtil.fillUserData(context, views);
                 testRunner.setActive(true);
-
-                if (!testRunner.isAlive()) {
-                    testRunner.start();
-                }
             }
         });
 

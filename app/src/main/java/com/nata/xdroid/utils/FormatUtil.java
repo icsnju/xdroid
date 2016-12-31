@@ -2,8 +2,6 @@ package com.nata.xdroid.utils;
 
 import android.app.ApplicationErrorReport;
 
-import com.nata.xdroid.db.beans.UserData;
-
 import java.util.List;
 
 import static de.robv.android.xposed.XposedBridge.log;
@@ -92,7 +90,7 @@ public class FormatUtil {
         StringBuilder sb =new StringBuilder();
         for(int i = 0 ; i < userDatas.size(); i++) {
             UserData userData = userDatas.get(i);
-            sb.append(userData.getResourceName() + " " + userData.getContent() + "\n");
+            sb.append(userData.getPackageName() + " " + userData.getActivityName() + " " + userData.getResourceName() + " " + userData.getContent() + "\n");
         }
         return sb.toString();
     }

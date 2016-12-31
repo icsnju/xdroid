@@ -37,7 +37,7 @@ public class DialogHook implements Hook {
                     Activity rootActivity = dialog.getOwnerActivity();
                     if (rootActivity == null) return;
                     List<View> views = getAllChildViews(dialog.getWindow().getDecorView(), EditText.class);
-                    ViewUtil.persistUserData(context, views, rootActivity.getLocalClassName());
+                    ViewUtil.persistUserData(context, views);
                 }
             }
         });
@@ -45,13 +45,11 @@ public class DialogHook implements Hook {
         findAndHookMethod("android.app.Dialog", loader, "show", new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                if (inMonitorMode()) {
-                    Dialog dialog = (Dialog) param.thisObject;
-                    Activity rootActivity = dialog.getOwnerActivity();
-                    if (rootActivity == null) return;
-                    List<View> views = getAllChildViews(dialog.getWindow().getDecorView(), EditText.class);
-                    ViewUtil.fillUserData(context, views, rootActivity.getLocalClassName());
-                }
+                Dialog dialog = (Dialog) param.thisObject;
+                Activity rootActivity = dialog.getOwnerActivity();
+                if (rootActivity == null) return;
+                List<View> views = getAllChildViews(dialog.getWindow().getDecorView(), EditText.class);
+                ViewUtil.fillUserData(context, views);
             }
         });
     }

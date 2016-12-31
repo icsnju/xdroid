@@ -167,8 +167,7 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
         btnServiceStart.setOnClickListener(this);
         btnServiceStop.setOnClickListener(this);
 
-        countDownTimerService = CountDownTimerService.getInstance(new MyCountDownLisener()
-                , getSharedPreferences("pref_mine", Context.MODE_WORLD_READABLE));
+        countDownTimerService = CountDownTimerService.getInstance(new MyCountDownLisener(), sp);
 
         initServiceCountDownTimerStatus();
 
@@ -208,6 +207,7 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
         tvAct.setText("0");
         tvCovAct.setText("0");
         tvCov.setText("0");
+        sp.edit().remove("cov_acts").apply();
     }
 
     private void collectActivityCoverage() {
@@ -218,7 +218,6 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
         tvCovAct.setText(covAct.size() +"");
         float coverage = (float)covAct.size() /actLists.size();
         tvCov.setText(coverage + "");
-
     }
 
 }

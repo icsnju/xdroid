@@ -9,18 +9,13 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.nata.xdroid.R;
-import com.nata.xdroid.db.beans.UserData;
-import com.nata.xdroid.db.daos.UserDataDao;
 import com.nata.xdroid.services.TestService;
-import com.nata.xdroid.utils.FormatUtil;
 import com.nata.xdroid.utils.NetWorkUtils;
 
 import java.util.HashSet;
-import java.util.List;
 
 public class SettinigsActivity extends AppCompatActivity {
     private ServiceConnection serviceConnection;
@@ -108,16 +103,16 @@ public class SettinigsActivity extends AppCompatActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            PreferenceManager prefMgr = getPreferenceManager();
-            prefMgr.setSharedPreferencesName("pref_mine");
-            prefMgr.setSharedPreferencesMode(MODE_WORLD_READABLE);
+//            PreferenceManager prefMgr = getPreferenceManager();
+//            prefMgr.setSharedPreferencesName("pref_mine");
+//            prefMgr.setSharedPreferencesMode(MODE_WORLD_READABLE);
 
             final Context context = getActivity().getApplicationContext();
 
             addPreferencesFromResource(R.xml.pref_setting);
 
             boolean isNetWork = NetWorkUtils.isNetworkConnected(context);
-            SharedPreferences sp = prefMgr.getSharedPreferences();
+            SharedPreferences sp = context.getSharedPreferences("pref_mine",MODE_WORLD_READABLE);
             sp.edit().putBoolean("network",isNetWork)
                      .putBoolean("test_mode", true)
                      .putStringSet("cov_acts",new HashSet<String>())
@@ -135,18 +130,18 @@ public class SettinigsActivity extends AppCompatActivity {
                 }
             });
 
-            Preference userdata = findPreference("userdata");
-            userdata.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference pref) {
-
-                    List<UserData> userDatas = new UserDataDao(context).getAll();
-                    String userData = FormatUtil.getUserDataInfo(userDatas);
-
-                    UserDataDialog.show(context, userData);
-                    return true;
-                }
-            });
+//            Preference userdata = findPreference("userdata");
+//            userdata.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+//                @Override
+//                public boolean onPreferenceClick(Preference pref) {
+//
+//                    List<UserData> userDatas = new UserDataDao(context).getAll();
+//                    String userData = FormatUtil.getUserDataInfo(userDatas);
+//
+//                    UserDataDialog.show(context, userData);
+//                    return true;
+//                }
+//            });
 
             Preference time = findPreference("test");
             time.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {

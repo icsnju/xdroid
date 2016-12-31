@@ -6,13 +6,13 @@ package com.nata.xdroid.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.nata.xdroid.db.beans.CrashInfo;
-import com.nata.xdroid.db.beans.TestRecord;
-import com.nata.xdroid.db.beans.UserData;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,8 +34,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
             TableUtils.createTable(connectionSource, CrashInfo.class);
-            TableUtils.createTable(connectionSource, UserData.class);
-//            TableUtils.createTable(connectionSource, TestRecord.class);
+//            TableUtils.createTable(connectionSource, UserData.class);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -46,8 +45,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
             TableUtils.dropTable(connectionSource, CrashInfo.class, true);
-            TableUtils.dropTable(connectionSource, UserData.class, true);
-//            TableUtils.dropTable(connectionSource, TestRecord.class, true);
+//            TableUtils.dropTable(connectionSource, UserData.class, true);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -57,6 +57,8 @@ public class Main implements IXposedHookLoadPackage {
                     } else {
                         // 启动TestRunner
                         TestRunner runner = new TestRunner(context);
+                        runner.start();
+
 
                         // 统计该package总的Activity的数量
                         List<String> actList = ActivityUtil.getActivities(context, packageName);
