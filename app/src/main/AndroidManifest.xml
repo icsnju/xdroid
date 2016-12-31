@@ -54,6 +54,11 @@
                 <action android:name="com.nata.xdroid.action.MOCK_CONTACTS" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".receivers.NewActivityReceiver">
+            <intent-filter>
+                <action android:name="com.nata.xdroid.action.COLLECT_ACTIVITY" />
+            </intent-filter>
+        </receiver>
         <receiver android:name=".receivers.NetworkChangeReceiver">
             <intent-filter >
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
@@ -67,8 +72,5 @@
 
         <activity android:name=".ui.XMonkeyActivity"/>
     </application>
-    <instrumentation
-        android:name="android.test.InstrumentationTestRunner"
-        android:targetPackage="com.nata.xdroid" />
 
 </manifest>

@@ -9,6 +9,7 @@ import android.widget.EditText;
 import com.nata.xdroid.TestRunner;
 import com.nata.xdroid.notices.CommonNotice;
 import com.nata.xdroid.notices.Notifier;
+import com.nata.xdroid.receivers.NewActivityReceiver;
 import com.nata.xdroid.utils.ActivityUtil;
 import com.nata.xdroid.utils.ViewUtil;
 
@@ -50,8 +51,8 @@ public class ActivityHook {
                 String activityName = activity.getClass().getName();
 //                activitySet.add(activityName);
                 log(packageName + "=>" + "NewActivity:" + activityName);
-//                float coverage = (float) activitySet.size()/ actList.size();
-//                log(packageName + "=>" + "Coverage: " + coverage);
+                Intent intent = NewActivityReceiver.getNewActivityIntent(activityName);
+                context.sendBroadcast(intent);
             }
         });
 

@@ -108,6 +108,7 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
                 countDownTimerService.stopCountDown();
                 spPackage.setEnabled(true);
                 btnServiceStop.setEnabled(false);
+                btnServiceStart.setEnabled(true);
                 collectActivityCoverage();
                 break;
         }
