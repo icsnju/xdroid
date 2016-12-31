@@ -1,25 +1,25 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/setting"
-        android:key="category_setting">
+    <!--<PreferenceCategory android:title="@string/setting"-->
+        <!--android:key="category_setting">-->
 
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="test_mode"
-            android:title="@string/test_mode" />
-
-
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="@string/test">
-
-        <Preference
-            android:key="broadcast"
-            android:title="@string/broadcast" />
+        <!--<SwitchPreference-->
+            <!--android:defaultValue="false"-->
+            <!--android:key="test_mode"-->
+            <!--android:title="@string/test_mode" />-->
 
 
-    </PreferenceCategory>
+    <!--</PreferenceCategory>-->
 
-    <PreferenceCategory android:title="@string/statistics">
+    <!--<PreferenceCategory android:title="@string/test">-->
+
+        <!--<Preference-->
+            <!--android:key="broadcast"-->
+            <!--android:title="@string/broadcast" />-->
+
+
+    <!--</PreferenceCategory>-->
+
+    <PreferenceCategory android:title="@string/menu">
         <Preference
             android:key="crash"
             android:title="@string/crash" />
@@ -27,8 +27,8 @@
             android:key="userdata"
             android:title="@string/userdata" />
         <Preference
-            android:key="time"
-            android:title="@string/time" />
+            android:key="test"
+            android:title="@string/test" />
 
 
     </PreferenceCategory>

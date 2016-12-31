@@ -12,18 +12,23 @@ import com.nata.xdroid.hooks.CrashHook;
 import com.nata.xdroid.hooks.LocationHook;
 import com.nata.xdroid.hooks.NetworkHook;
 import com.nata.xdroid.hooks.UncaughtExceptionHook;
+import com.nata.xdroid.utils.ActivityUtil;
 import com.nata.xdroid.utils.PermissionUtil;
+import com.nata.xdroid.utils.XPreferencesUtils;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
+import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 /**
@@ -32,41 +37,17 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 public class Main implements IXposedHookLoadPackage {
 
-    public static final String ZHNT_PACKAGE_NAME = "com.cvicse.zhnt";
-    public static final String LOGCAT_PACKAGE_NAME = "org.jtb.alogcat";
-    public static final String MM_PACKAGE_NAME = "com.tencent.mm";
-    public static final String MULTISMS_PACKAGE_NAME = "com.hectorone.multismssender";
-    public static final String CRASH_PACKAGE_NAME = "com.nata.crashapplication";
 
-    public static final String[] sut =
-            {
-                    "android",
-                    "com.fsck.k9",
-                    "com.eleybourn.bookcatalogue",
-                    "org.totschnig.myexpenses",
-                    "com.nloko.android.syncmypix",
-                    "org.wordpress.android",
-                    "aarddict.android",
-                    "org.liberty.android.fantastischmemo",
-                    "com.evancharlton.mileage",
-                    "com.hectorone.multismssender",
-                    "com.kvance.Nectroid",
-                    "com.fsck.k9",
-                    "com.android.keepass",
-                    "com.tencent.mobileqq",
-                    "com.borneq.heregpslocation",
-                    "com.nata.crashapplication",
-                    "tw.qtlin.mac.airunlocker"
-            };
 
-    List<String> list = Arrays.asList(sut);
-    Map<String, TestRunner> runners = new HashMap<>();
+
 
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable {
         final ClassLoader loader = loadPackageParam.classLoader;
         final String packageName = loadPackageParam.packageName;
 
-        if (list.contains(packageName)) {
+        String targetPackage= XPreferencesUtils.getTestPackage();
+
+        if (targetPackage.equals(packageName) || packageName.equals("android")) {
             findAndHookMethod(Application.class, "onCreate", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -79,11 +60,13 @@ public class Main implements IXposedHookLoadPackage {
                         new CrashHook(context).hook(loader);
                     } else {
                         // 启动TestRunner
-                        TestRunner runner = runners.get(packageName);
-                        if (runner == null) {
-                            runner = new TestRunner(context);
-                            runners.put(packageName, runner);
-                        }
+                        TestRunner runner = new TestRunner(context);
+
+                        // 统计该package总的Activity的数量
+                        List<String> actList= ActivityUtil.getActivities(context, packageName);
+
+                        // Activity相关Hook
+                        new ActivityHook(runner, context, packageName).hook(loader,actList);
 
                         // 获取被赋予权限的Permission
                         List<String> permissions = PermissionUtil.getGrantedPermissions(context, packageName);
@@ -120,7 +103,12 @@ public class Main implements IXposedHookLoadPackage {
                         }
 
                         new UncaughtExceptionHook(context).hook(loader);
-                        new ActivityHook(runner, context, packageName).hook(loader);
+
+
+
+
+//                        log(packageName + "=>" + "AllActivitiesSize:" + actList.size());
+//                        log(packageName + "=>" + "AllActivities:" + Arrays.toString(actList.toArray()));
 
                     }
                 }

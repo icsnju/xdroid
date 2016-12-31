@@ -49,11 +49,6 @@
                 <action android:name="com.nata.xdroid.action.LOG_DATA" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".receivers.StartTestReceiver">
-            <intent-filter>
-                <action android:name="com.nata.xdroid.action.START_TEST" />
-            </intent-filter>
-        </receiver>
         <receiver android:name=".receivers.ContactMockReceiver">
             <intent-filter>
                 <action android:name="com.nata.xdroid.action.MOCK_CONTACTS" />
@@ -70,7 +65,10 @@
         <service android:name=".services.TestService" />
         <service android:name=".services.CountDownTimerService" />
 
-        <activity android:name=".ui.TimeCountActivity"/>
+        <activity android:name=".ui.XMonkeyActivity"/>
     </application>
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="com.nata.xdroid" />
 
 </manifest>

@@ -43,6 +43,12 @@ public class XPreferencesUtils {
     public static boolean isNetWorkConnected() {
         return getInstance().getBoolean("network", false);
     }
+
+    public static String getTestPackage() {
+        return getInstance().getString("package", "com.tencent.mm");
+    }
+
+
 //
 //    public static boolean notWhisper() {
 //        return getInstance().getBoolean("not_whisper", false);

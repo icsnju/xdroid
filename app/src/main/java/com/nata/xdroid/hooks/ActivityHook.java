@@ -32,37 +32,28 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class ActivityHook {
     private Context context;
     private TestRunner testRunner = null;
-    List<String> actList = null;
-    HashSet<String> activitySet;
+
     String packageName;
 
     public ActivityHook(TestRunner runner, Context context, String packageName) {
         this.context = context;
         this.testRunner = runner;
         this.packageName = packageName;
-        activitySet = new HashSet<>();
     }
 
-    public void hook(final ClassLoader loader) {
+    public void hook(final ClassLoader loader,final  List<String> actList) {
 
         findAndHookMethod("android.app.Activity", loader, "onCreate", Bundle.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                if (actList == null) {
-                    actList = ActivityUtil.getActivities(context, packageName);
-                    log(packageName + "=>" + "AllActivitiesSize:" + actList.size());
-                    log(packageName + "=>" + "AllActivities:" + Arrays.toString(actList.toArray()));
-                }
-
                 Context activity = (Activity) param.thisObject;
                 String activityName = activity.getClass().getName();
-                activitySet.add(activityName);
-                float coverage = (float) activitySet.size() / actList.size();
+//                activitySet.add(activityName);
                 log(packageName + "=>" + "NewActivity:" + activityName);
-                log(packageName + "=>" + "ActivityCoverage:" + coverage + " 总共" + actList.size() + "个");
+//                float coverage = (float) activitySet.size()/ actList.size();
+//                log(packageName + "=>" + "Coverage: " + coverage);
             }
         });
-
 
         findAndHookMethod("android.app.Activity", loader, "onPause", new XC_MethodHook() {
             @Override
@@ -91,8 +82,6 @@ public class ActivityHook {
                 if (!testRunner.isAlive()) {
                     testRunner.start();
                 }
-
-
             }
         });
 

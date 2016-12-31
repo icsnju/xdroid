@@ -5,12 +5,8 @@ import android.content.Context;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.table.TableUtils;
-import com.nata.xdroid.TestRunner;
 import com.nata.xdroid.db.DatabaseHelper;
-import com.nata.xdroid.db.beans.CrashInfo;
 import com.nata.xdroid.db.beans.TestRecord;
-
-import junit.framework.Test;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

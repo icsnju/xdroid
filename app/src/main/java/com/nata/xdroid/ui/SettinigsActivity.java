@@ -8,11 +8,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.SwitchPreference;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.nata.xdroid.R;
@@ -119,7 +116,11 @@ public class SettinigsActivity extends AppCompatActivity {
             addPreferencesFromResource(R.xml.pref_setting);
 
             boolean isNetWork = NetWorkUtils.isNetworkConnected(context);
-            prefMgr.getSharedPreferences().edit().putBoolean("network",isNetWork).apply();
+            SharedPreferences sp = prefMgr.getSharedPreferences();
+            sp.edit().putBoolean("network",isNetWork)
+                     .putBoolean("test_mode", false)
+                     .apply();
+
 
             Preference crash = findPreference("crash");
             crash.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -128,39 +129,6 @@ public class SettinigsActivity extends AppCompatActivity {
                     Intent intent = new Intent();
                     intent.setClass(getActivity(), StatisticsActivity.class);
                     startActivity(intent);
-                    return true;
-                }
-            });
-
-            Preference time = findPreference("time");
-            time.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference pref) {
-                    Intent intent = new Intent();
-                    intent.setClass(getActivity(), TimeCountActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-            });
-
-            final SwitchPreference test_mode = (SwitchPreference)findPreference("test_mode");
-            test_mode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newVal) {
-                    final boolean value = (Boolean) newVal;
-                    System.out.println("changed");
-                    test_mode.setChecked(value);
-                    return true;
-                }
-
-            });
-
-            Preference broadcast = findPreference("broadcast");
-            broadcast.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference pref) {
-                    Intent intent = new Intent("com.fsck.k9.service.CoreReceiver.wakeLockRelease");
-                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                     return true;
                 }
             });
@@ -177,6 +145,41 @@ public class SettinigsActivity extends AppCompatActivity {
                     return true;
                 }
             });
+
+            Preference time = findPreference("test");
+            time.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference pref) {
+                    Intent intent = new Intent();
+                    intent.setClass(getActivity(), XMonkeyActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+            });
+
+//            final SwitchPreference test_mode = (SwitchPreference)findPreference("test_mode");
+//            test_mode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+//                @Override
+//                public boolean onPreferenceChange(Preference preference, Object newVal) {
+//                    final boolean value = (Boolean) newVal;
+//                    System.out.println("changed");
+//                    test_mode.setChecked(value);
+//                    return true;
+//                }
+//
+//            });
+
+//            Preference broadcast = findPreference("broadcast");
+//            broadcast.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+//                @Override
+//                public boolean onPreferenceClick(Preference pref) {
+//                    Intent intent = new Intent("com.fsck.k9.service.CoreReceiver.wakeLockRelease");
+//                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+//                    return true;
+//                }
+//            });
+
+
         }
     }
 }
