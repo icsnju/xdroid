@@ -19,6 +19,7 @@ import com.nata.xdroid.services.TestService;
 import com.nata.xdroid.utils.FormatUtil;
 import com.nata.xdroid.utils.NetWorkUtils;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class SettinigsActivity extends AppCompatActivity {
@@ -118,7 +119,8 @@ public class SettinigsActivity extends AppCompatActivity {
             boolean isNetWork = NetWorkUtils.isNetworkConnected(context);
             SharedPreferences sp = prefMgr.getSharedPreferences();
             sp.edit().putBoolean("network",isNetWork)
-                     .putBoolean("test_mode", false)
+                     .putBoolean("test_mode", true)
+                     .putStringSet("cov_acts",new HashSet<String>())
                      .apply();
 
 

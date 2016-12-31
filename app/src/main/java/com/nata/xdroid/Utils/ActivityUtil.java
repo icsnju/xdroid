@@ -17,12 +17,14 @@ import static de.robv.android.xposed.XposedBridge.log;
 public class ActivityUtil {
     public static ArrayList<String> getActivities(Context ctx, String packageName) {
         PackageManager pm = ctx.getPackageManager();
-        PackageInfo info = null;
+        PackageInfo info;
         try {
             info = pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
+            return null;
         }
+
         ActivityInfo[] list = info.activities;
         ArrayList<String>acts = new ArrayList<>();
         if(list!= null) {

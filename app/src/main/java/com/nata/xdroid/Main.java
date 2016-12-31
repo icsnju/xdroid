@@ -37,15 +37,11 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 public class Main implements IXposedHookLoadPackage {
 
-
-
-
-
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable {
         final ClassLoader loader = loadPackageParam.classLoader;
         final String packageName = loadPackageParam.packageName;
 
-        String targetPackage= XPreferencesUtils.getTestPackage();
+        String targetPackage = XPreferencesUtils.getTestPackage();
 
         if (targetPackage.equals(packageName) || packageName.equals("android")) {
             findAndHookMethod(Application.class, "onCreate", new XC_MethodHook() {
@@ -63,48 +59,46 @@ public class Main implements IXposedHookLoadPackage {
                         TestRunner runner = new TestRunner(context);
 
                         // 统计该package总的Activity的数量
-                        List<String> actList= ActivityUtil.getActivities(context, packageName);
+                        List<String> actList = ActivityUtil.getActivities(context, packageName);
 
                         // Activity相关Hook
-                        new ActivityHook(runner, context, packageName).hook(loader,actList);
+                        new ActivityHook(runner, context, packageName).hook(loader, actList);
 
                         // 获取被赋予权限的Permission
                         List<String> permissions = PermissionUtil.getGrantedPermissions(context, packageName);
 
                         // 联系人相关Hook
-                        if(permissions.contains(Manifest.permission.READ_CONTACTS)){
+                        if (permissions.contains(Manifest.permission.READ_CONTACTS)) {
                             new ContactHook(context).hook(loader);
                             XposedBridge.log("检测到读取联系人的权限, hook联系人");
                         }
 
                         // 蓝牙相关Hook
-                        if(permissions.contains(Manifest.permission.BLUETOOTH)){
+                        if (permissions.contains(Manifest.permission.BLUETOOTH)) {
                             new BluetoothHook(context).hook(loader);
                             XposedBridge.log("检测到蓝牙权限, hook蓝牙");
                         }
 
                         // 日历相关Hook
-                        if(permissions.contains(Manifest.permission.READ_CALENDAR)){
+                        if (permissions.contains(Manifest.permission.READ_CALENDAR)) {
                             new CalendarHook(context).hook(loader);
                             XposedBridge.log("检测到日历权限, hook蓝牙");
                         }
 
                         // 位置相关Hook
-                        if(permissions.contains(Manifest.permission.ACCESS_FINE_LOCATION) ||
+                        if (permissions.contains(Manifest.permission.ACCESS_FINE_LOCATION) ||
                                 permissions.contains(Manifest.permission.ACCESS_COARSE_LOCATION)) {
                             new LocationHook(context).hook(loader);
                             XposedBridge.log("检测到位置权限, hook GPS");
                         }
 
                         // 网络相关权限
-                        if(permissions.contains(Manifest.permission.INTERNET)) {
+                        if (permissions.contains(Manifest.permission.INTERNET)) {
                             new NetworkHook(context).hook(loader);
                             XposedBridge.log("检测到位置权限, hook 网络相关权限");
                         }
 
                         new UncaughtExceptionHook(context).hook(loader);
-
-
 
 
 //                        log(packageName + "=>" + "AllActivitiesSize:" + actList.size());

@@ -35,6 +35,20 @@
         android:text="@string/stop" />
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ff0000"
+        android:textSize="16sp"
+        android:text="测试时间统计"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="测试总时长" />
+
+    <TextView
         android:id="@+id/tv_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,5 +83,57 @@
         android:textColor="#ff0000"
         android:gravity="center"
         android:text="TextView" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ff0000"
+        android:textSize="16sp"
+        android:text="测试结果统计"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="总Activity数量" />
+
+    <TextView
+        android:id="@+id/tv_act"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#ff0000"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="遍历到的Activity数量" />
+
+    <TextView
+        android:id="@+id/tv_cov_act"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#ff0000"
+        android:text="TextView" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="测试覆盖率" />
+
+    <TextView
+        android:id="@+id/tv_cov"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ff0000"
+        android:gravity="center"
+        android:text="TextView" />
+
+
 
 </LinearLayout>

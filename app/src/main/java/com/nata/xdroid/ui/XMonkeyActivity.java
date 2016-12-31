@@ -15,14 +15,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nata.xdroid.R;
+import com.nata.xdroid.notices.ToastNotifier;
 import com.nata.xdroid.services.CountDownTimerListener;
 import com.nata.xdroid.services.CountDownTimerService;
 import com.nata.xdroid.services.CountDownTimerUtil;
+import com.nata.xdroid.utils.ActivityUtil;
 import com.nata.xdroid.utils.AppUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.nata.xdroid.utils.FormatUtil.formateTimer;
 
@@ -33,6 +37,11 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
     private TextView tvServiceTime;
     private TextView tvManual;
     private TextView tvTest;
+
+    private TextView tvAct;
+    private TextView tvCovAct;
+    private TextView tvCov;
+
     private Spinner spPackage;
 
     private CountDownTimerService countDownTimerService;
@@ -77,6 +86,9 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
                             btnServiceStart.setText(R.string.start);
                             spPackage.setEnabled(false);
                             this.startActivity(this.getPackageManager().getLaunchIntentForPackage(targetPackage));
+                            initActivityCoverage();
+                            btnServiceStop.setEnabled(true);
+                            btnServiceStart.setEnabled(false);
                         } else {
                             Toast.makeText(this,"该应用还没有安装",Toast.LENGTH_SHORT).show();
                         }
@@ -95,9 +107,12 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
                 btnServiceStart.setText(R.string.start);
                 countDownTimerService.stopCountDown();
                 spPackage.setEnabled(true);
+                btnServiceStop.setEnabled(false);
+                collectActivityCoverage();
                 break;
         }
     }
+
 
     private Handler mHandler = new Handler() {
 
@@ -127,9 +142,12 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
         btnServiceStop = (Button) findViewById(R.id.btn_stop);
         tvServiceTime = (TextView) findViewById(R.id.tv_time);
         spPackage = (Spinner) findViewById(R.id.spPakcage);
+        tvAct = (TextView) findViewById(R.id.tv_act);
+        tvCovAct = (TextView) findViewById(R.id.tv_cov_act);
+        tvCov = (TextView)findViewById(R.id.tv_cov);
+        btnServiceStop.setEnabled(false);
+
         sp = this.getSharedPreferences("pref_mine", MODE_WORLD_READABLE);
-
-
         spPackage.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, sut));  //生成下拉列表
 
         /*添加列表选择监听器*/
@@ -171,18 +189,35 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
     private void initServiceCountDownTimerStatus() {
         switch (countDownTimerService.getTimerStatus()) {
             case CountDownTimerUtil.PREPARE:
-                btnServiceStart.setText("START");
+                btnServiceStart.setText(R.string.start);
                 break;
             case CountDownTimerUtil.START:
-                btnServiceStart.setText("PAUSE");
+                btnServiceStart.setText(R.string.pause);
                 break;
             case CountDownTimerUtil.PASUSE:
-                btnServiceStart.setText("RESUME");
+                btnServiceStart.setText(R.string.resume);
                 break;
         }
         tvServiceTime.setText(formateTimer(countDownTimerService.getCountingTime()));
         tvManual.setText(formateTimer(countDownTimerService.getManual_timer()));
         tvTest.setText(formateTimer(countDownTimerService.getTest_timer()));
+    }
+
+    private void initActivityCoverage() {
+        tvAct.setText("0");
+        tvCovAct.setText("0");
+        tvCov.setText("0");
+    }
+
+    private void collectActivityCoverage() {
+        String targetPackage = spPackage.getSelectedItem().toString();
+        List<String> actLists = ActivityUtil.getActivities(this, targetPackage);
+        tvAct.setText(actLists.size()+"");
+        Set<String> covAct = sp.getStringSet("cov_acts",new HashSet<String>());
+        tvCovAct.setText(covAct.size() +"");
+        float coverage = (float)covAct.size() /actLists.size();
+        tvCov.setText(coverage + "");
+
     }
 
 }
