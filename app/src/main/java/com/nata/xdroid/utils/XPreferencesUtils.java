@@ -2,6 +2,8 @@ package com.nata.xdroid.utils;
 
 import com.nata.xdroid.BuildConfig;
 
+import java.util.HashSet;
+
 import de.robv.android.xposed.XSharedPreferences;
 
 /**
@@ -46,6 +48,10 @@ public class XPreferencesUtils {
 
     public static String getTestPackage() {
         return getInstance().getString("package", "com.tencent.mm");
+    }
+
+    public static int getCovActivityCount() {
+        return getInstance().getStringSet("cov_acts",new HashSet<String>()).size();
     }
 
 

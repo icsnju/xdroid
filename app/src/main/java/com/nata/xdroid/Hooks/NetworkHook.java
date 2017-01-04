@@ -40,7 +40,7 @@ public class NetworkHook implements Hook{
                 String url = (String) param.args[0];
                 log("URL construct " + url);
                 if(!isNetWorkConnected()) {
-                    Notifier.notice(context, "应用访问" + url + ",但没有网络连接");
+                    Notifier.notice(context, "App visit" + url + ", but there is not network");
                 }
             }
         });
@@ -52,7 +52,7 @@ public class NetworkHook implements Hook{
                 HttpURLConnection urlConn = (HttpURLConnection)param.thisObject;
                 int code = (int) param.getResult();
                 if(code == HTTP_400) {
-                    Notifier.notice(context, "应用向" + urlConn.getURL() + "发送了请求但失败了");
+                    Notifier.notice(context, "App send a request for " + urlConn.getURL() + ", but failed");
                 }
             }
         });
@@ -67,7 +67,7 @@ public class NetworkHook implements Hook{
                     HttpUriRequest request = (HttpUriRequest) param.args[0];
 
                     if(httpResponse.getStatusLine().getStatusCode() == HTTP_400) {
-                        Notifier.notice(context, "应用向" + request.getURI() + "发送了请求但失败了");
+                        Notifier.notice(context, "App send a request for " + request.getURI() + ", but failed");
                     }
                 }
             });
@@ -84,7 +84,7 @@ public class NetworkHook implements Hook{
                                                 String description, String failingUrl) {
 // TODO Auto-generated method stub
                         super.onReceivedError(view, errorCode, description, failingUrl);
-                        Notifier.notice(context, "应用为" + view.getUrl() + "打开了Web页面但失败了");
+                        Notifier.notice(context, "App open a webpage for" + view.getUrl() + ", but failed");
                     }
                 });
             }

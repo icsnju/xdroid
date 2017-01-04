@@ -86,12 +86,12 @@ public class FormatUtil {
         return err.toString();
     }
 
-    public static String getUserDataInfo(List<UserData> userDatas) {
-        StringBuilder sb =new StringBuilder();
-        for(int i = 0 ; i < userDatas.size(); i++) {
-            UserData userData = userDatas.get(i);
-            sb.append(userData.getPackageName() + " " + userData.getActivityName() + " " + userData.getResourceName() + " " + userData.getContent() + "\n");
-        }
-        return sb.toString();
-    }
+//    public static String getUserDataInfo(List<UserData> userDatas) {
+//        StringBuilder sb =new StringBuilder();
+//        for(int i = 0 ; i < userDatas.size(); i++) {
+//            UserData userData = userDatas.get(i);
+//            sb.append(userData.getPackageName() + " " + userData.getActivityName() + " " + userData.getResourceName() + " " + userData.getContent() + "\n");
+//        }
+//        return sb.toString();
+//    }
 }

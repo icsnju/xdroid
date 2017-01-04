@@ -47,24 +47,26 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
     private CountDownTimerService countDownTimerService;
     SharedPreferences sp;
 
-    String[] sut = {
-            "com.fsck.k9",
-            "com.eleybourn.bookcatalogue",
-            "org.totschnig.myexpenses",
-            "com.nloko.android.syncmypix",
-            "org.wordpress.android",
-            "aarddict.android",
-            "org.liberty.android.fantastischmemo",
-            "com.evancharlton.mileage",
-            "com.hectorone.multismssender",
-            "com.kvance.Nectroid",
-            "com.fsck.k9",
-            "com.android.keepass",
-            "com.tencent.mobileqq",
-            "com.borneq.heregpslocation",
-            "com.nata.crashapplication",
-            "tw.qtlin.mac.airunlocker"
-    };
+
+//
+//    String[] sut = {
+//            "com.fsck.k9",
+//            "com.eleybourn.bookcatalogue",
+//            "org.totschnig.myexpenses",
+//            "com.nloko.android.syncmypix",
+//            "org.wordpress.android",
+//            "aarddict.android",
+//            "org.liberty.android.fantastischmemo",
+//            "com.evancharlton.mileage",
+//            "com.hectorone.multismssender",
+//            "com.kvance.Nectroid",
+//            "com.fsck.k9",
+//            "com.android.keepass",
+//            "com.tencent.mobileqq",
+//            "com.borneq.heregpslocation",
+//            "com.nata.crashapplication",
+//            "tw.qtlin.mac.airunlocker"
+//    };
 
 
 //    public static final String ZHNT_PACKAGE_NAME = "com.cvicse.zhnt";
@@ -148,6 +150,8 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
         tvCov = (TextView)findViewById(R.id.tv_cov);
         btnServiceStop.setEnabled(false);
 
+        final List<String> sut = AppUtil.getPackageList(this);
+
         sp = this.getSharedPreferences("pref_mine", MODE_WORLD_READABLE);
         spPackage.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, sut));  //生成下拉列表
 
@@ -155,7 +159,7 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
         spPackage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                sp.edit().putString("package", sut[position]).apply();
+                sp.edit().putString("package", sut.get(position)).apply();
             }
 
             @Override

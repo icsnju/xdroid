@@ -59,17 +59,17 @@ public class LocationHook implements Hook {
             }
         });
 
-        findAndHookMethod("android.telephony.TelephonyManager", loader, "getNeighboringCellInfo", new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                XposedBridge.log("afterHookedMethod: " + "getNeighboringCellInfo");
-                List<NeighboringCellInfo> list = (List<NeighboringCellInfo>)param.getResult();
-                if(list.size() == 0) {
-                    ToastNotifier.makeToast(context,CommonNotice.CELL_LOCATION);
-                }
-//                param.setResult(null);
-            }
-        });
+//        findAndHookMethod("android.telephony.TelephonyManager", loader, "getNeighboringCellInfo", new XC_MethodHook() {
+//            @Override
+//            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                XposedBridge.log("afterHookedMethod: " + "getNeighboringCellInfo");
+//                List<NeighboringCellInfo> list = (List<NeighboringCellInfo>)param.getResult();
+//                if(list.size() == 0) {
+//                    ToastNotifier.makeToast(context,CommonNotice.CELL_LOCATION);
+//                }
+////                param.setResult(null);
+//            }
+//        });
 
         findAndHookMethod("android.location.LocationManager", loader, "requestLocationUpdates", String.class, long.class, float.class, LocationListener.class,
                 new XC_MethodHook() {

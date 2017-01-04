@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -98,6 +99,9 @@ public class ActivityHook {
                 Notifier.notice(context, CommonNotice.ACTION_OPEN_DOCUMENT);
             else if (action.equals(Intent.ACTION_CHOOSER))
                 Notifier.notice(context, CommonNotice.ACTION_CHOOSER);
+            else if (action.equals(MediaStore.ACTION_IMAGE_CAPTURE)) {
+                Notifier.notice(context, CommonNotice.ACTION_CAMERA);
+            }
         }
     }
 }
