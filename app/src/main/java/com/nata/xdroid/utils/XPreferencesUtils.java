@@ -54,6 +54,10 @@ public class XPreferencesUtils {
         return getInstance().getStringSet("cov_acts",new HashSet<String>()).size();
     }
 
+    public static boolean isOpen() {
+        return getInstance().getBoolean("open", true);
+    }
+
 
 //
 //    public static boolean notWhisper() {

@@ -1,14 +1,13 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <!--<PreferenceCategory android:title="@string/setting"-->
-        <!--android:key="category_setting">-->
+    <PreferenceCategory android:title="@string/setting"
+        android:key="category_setting">
 
-        <!--<SwitchPreference-->
-            <!--android:defaultValue="false"-->
-            <!--android:key="test_mode"-->
-            <!--android:title="@string/test_mode" />-->
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="open"
+            android:title="@string/open" />
 
-
-    <!--</PreferenceCategory>-->
+    </PreferenceCategory>
 
     <!--<PreferenceCategory android:title="@string/test">-->
 

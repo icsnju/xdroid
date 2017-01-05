@@ -1,5 +1,6 @@
 package com.nata.xdroid.ui;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
@@ -85,12 +86,15 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
                         String targetPackage = spPackage.getSelectedItem().toString();
                         if(AppUtil.isAppInstalled(this,targetPackage)) {
                             countDownTimerService.startCountDown();
-                            btnServiceStart.setText(R.string.start);
+                            btnServiceStart.setText(R.string.pause);
                             spPackage.setEnabled(false);
+                            // 得关闭应用才能再次load package
+                            ActivityManager am = (ActivityManager)this.getSystemService(Context.ACTIVITY_SERVICE);
+                            am.killBackgroundProcesses(targetPackage);
                             this.startActivity(this.getPackageManager().getLaunchIntentForPackage(targetPackage));
                             initActivityCoverage();
                             btnServiceStop.setEnabled(true);
-                            btnServiceStart.setEnabled(false);
+//                            btnServiceStart.setEnabled(false);
                         } else {
                             Toast.makeText(this,"该应用还没有安装",Toast.LENGTH_SHORT).show();
                         }
@@ -101,7 +105,7 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
                         break;
                     case CountDownTimerUtil.PASUSE:
                         countDownTimerService.startCountDown();
-                        btnServiceStart.setText(R.string.pause);
+                        btnServiceStart.setText(R.string.start);
                         break;
                 }
                 break;
@@ -111,6 +115,9 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
                 spPackage.setEnabled(true);
                 btnServiceStop.setEnabled(false);
                 btnServiceStart.setEnabled(true);
+                String targetPackage = spPackage.getSelectedItem().toString();
+                ActivityManager am = (ActivityManager)this.getSystemService(Context.ACTIVITY_SERVICE);
+                am.killBackgroundProcesses(targetPackage);
                 collectActivityCoverage();
                 break;
         }

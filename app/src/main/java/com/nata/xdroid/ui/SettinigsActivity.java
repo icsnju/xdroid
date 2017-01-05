@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
 import android.support.v7.app.AppCompatActivity;
 
 import com.nata.xdroid.R;
@@ -103,16 +105,18 @@ public class SettinigsActivity extends AppCompatActivity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-//            PreferenceManager prefMgr = getPreferenceManager();
-//            prefMgr.setSharedPreferencesName("pref_mine");
-//            prefMgr.setSharedPreferencesMode(MODE_WORLD_READABLE);
+            PreferenceManager prefMgr = getPreferenceManager();
+            prefMgr.setSharedPreferencesName("pref_mine");
+            prefMgr.setSharedPreferencesMode(MODE_WORLD_READABLE);
 
+
+            SharedPreferences sp = prefMgr.getSharedPreferences();
             final Context context = getActivity().getApplicationContext();
 
             addPreferencesFromResource(R.xml.pref_setting);
 
             boolean isNetWork = NetWorkUtils.isNetworkConnected(context);
-            SharedPreferences sp = context.getSharedPreferences("pref_mine",MODE_WORLD_READABLE);
+//            SharedPreferences sp = context.getSharedPreferences("pref_mine",MODE_WORLD_READABLE);
             sp.edit().putBoolean("network",isNetWork)
                      .putBoolean("test_mode", true)
                      .putStringSet("cov_acts",new HashSet<String>())
@@ -154,16 +158,14 @@ public class SettinigsActivity extends AppCompatActivity {
                 }
             });
 
-//            final SwitchPreference test_mode = (SwitchPreference)findPreference("test_mode");
-//            test_mode.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+//            final SwitchPreference open = (SwitchPreference)findPreference("open");
+//            open.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 //                @Override
 //                public boolean onPreferenceChange(Preference preference, Object newVal) {
 //                    final boolean value = (Boolean) newVal;
-//                    System.out.println("changed");
-//                    test_mode.setChecked(value);
+//                    open.setChecked(value);
 //                    return true;
 //                }
-//
 //            });
 
 //            Preference broadcast = findPreference("broadcast");

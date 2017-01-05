@@ -3,6 +3,7 @@
     <string name="title_activity_main">Xdroid</string>
     <string name="test_mode">测试模式</string>
     <string name="setting">设置</string>
+    <string name="open">开启依赖注入与自动测试</string>
     <string name="menu">菜单</string>
     <string name="crash">崩溃报告</string>
     <string name="userdata">用户数据</string>

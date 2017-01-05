@@ -45,7 +45,7 @@ public class ActivityHook {
         this.packageName = packageName;
     }
 
-    public void hook(final ClassLoader loader, final List<String> actList) {
+    public void hook(final ClassLoader loader) {
 
         findAndHookMethod("android.app.Activity", loader, "onCreate", Bundle.class, new XC_MethodHook() {
             @Override
