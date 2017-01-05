@@ -13,4 +13,6 @@
     <string name="stop">结束测试</string>
     <string name="pause">暂停测试</string>
     <string name="resume">继续测试</string>
+    <string name="coverage">Activity覆盖率统计</string>
+    <string name="clear_coverage">清除覆盖率</string>
 </resources>

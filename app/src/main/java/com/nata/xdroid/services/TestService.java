@@ -42,7 +42,7 @@ public class TestService extends Service implements TestInterface, View.OnClickL
     }
 
     private boolean inTestMode() {
-        return preferences.getBoolean("test_mode", false);
+        return preferences.getBoolean("test_mode", true);
     }
 
     private void startTest() {

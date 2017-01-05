@@ -1,5 +1,6 @@
 package com.nata.xdroid.ui;
 
+import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -15,9 +16,15 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.nata.xdroid.R;
 import com.nata.xdroid.services.TestService;
+import com.nata.xdroid.utils.ActivityUtil;
 import com.nata.xdroid.utils.NetWorkUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class SettinigsActivity extends AppCompatActivity {
     private ServiceConnection serviceConnection;
@@ -118,7 +125,7 @@ public class SettinigsActivity extends AppCompatActivity {
             boolean isNetWork = NetWorkUtils.isNetworkConnected(context);
 //            SharedPreferences sp = context.getSharedPreferences("pref_mine",MODE_WORLD_READABLE);
             sp.edit().putBoolean("network",isNetWork)
-                     .putBoolean("test_mode", true)
+                     .putBoolean("test_mode", false)
                      .putStringSet("cov_acts",new HashSet<String>())
                      .apply();
 
@@ -147,13 +154,46 @@ public class SettinigsActivity extends AppCompatActivity {
 //                }
 //            });
 
-            Preference time = findPreference("test");
-            time.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            Preference test = findPreference("test");
+            test.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference pref) {
                     Intent intent = new Intent();
                     intent.setClass(getActivity(), XMonkeyActivity.class);
                     startActivity(intent);
+                    return true;
+                }
+            });
+
+            Preference coverage = findPreference("coverage");
+            coverage.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference pref) {
+                    SharedPreferences sp = context.getSharedPreferences("monkey_coverage",MODE_WORLD_READABLE);
+                    Map<String,Set<String>> map = (Map<String,Set<String>>)sp.getAll();
+                    String message = "";
+                    for(Map.Entry<String,Set<String>> entry: map.entrySet()) {
+                        String packageName = entry.getKey();
+                        Set<String> activities = entry.getValue();
+                        List<String> actLists = ActivityUtil.getActivities(context, packageName);
+                        float coverage = (float)activities.size() /actLists.size();
+                        message += packageName + " : " + "\n" ;
+                        message += coverage + " => " + activities.size() + "\\" + actLists.size() + "\n";
+                    }
+                    AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(getActivity());
+                    alertDialogBuilder.setMessage(message);
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();//将dialog显示出来
+                    return true;
+                }
+            });
+
+            Preference clearCoverage = findPreference("clear_coverage");
+            clearCoverage.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference pref) {
+                    SharedPreferences sp = context.getSharedPreferences("monkey_coverage",MODE_WORLD_READABLE);
+                    sp.edit().clear().apply();
                     return true;
                 }
             });

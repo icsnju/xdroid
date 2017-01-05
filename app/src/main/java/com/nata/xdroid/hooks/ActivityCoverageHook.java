@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.nata.xdroid.TestRunner;
 import com.nata.xdroid.notices.CommonNotice;
 import com.nata.xdroid.notices.Notifier;
+import com.nata.xdroid.receivers.MonkeyCoverageReceiver;
 import com.nata.xdroid.receivers.NewActivityReceiver;
 import com.nata.xdroid.utils.ViewUtil;
 
@@ -41,7 +42,9 @@ public class ActivityCoverageHook {
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 Context activity = (Activity) param.thisObject;
                 String activityName = activity.getClass().getName();
-                Intent intent = NewActivityReceiver.getNewActivityIntent(activityName);
+                String packageName = context.getPackageName();
+//                Intent intent = NewActivityReceiver.getNewActivityIntent(activityName);
+                Intent intent = MonkeyCoverageReceiver.getNewActivityIntent(packageName, activityName);
                 context.sendBroadcast(intent);
             }
         });

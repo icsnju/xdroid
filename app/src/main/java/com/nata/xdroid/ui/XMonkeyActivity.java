@@ -93,7 +93,7 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
                             am.killBackgroundProcesses(targetPackage);
                             this.startActivity(this.getPackageManager().getLaunchIntentForPackage(targetPackage));
                             initActivityCoverage();
-                            btnServiceStop.setEnabled(true);
+//                            btnServiceStop.setEnabled(true);
 //                            btnServiceStart.setEnabled(false);
                         } else {
                             Toast.makeText(this,"该应用还没有安装",Toast.LENGTH_SHORT).show();
@@ -113,8 +113,8 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
                 btnServiceStart.setText(R.string.start);
                 countDownTimerService.stopCountDown();
                 spPackage.setEnabled(true);
-                btnServiceStop.setEnabled(false);
-                btnServiceStart.setEnabled(true);
+//                btnServiceStop.setEnabled(false);
+//                btnServiceStart.setEnabled(true);
                 String targetPackage = spPackage.getSelectedItem().toString();
                 ActivityManager am = (ActivityManager)this.getSystemService(Context.ACTIVITY_SERVICE);
                 am.killBackgroundProcesses(targetPackage);
@@ -155,7 +155,7 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
         tvAct = (TextView) findViewById(R.id.tv_act);
         tvCovAct = (TextView) findViewById(R.id.tv_cov_act);
         tvCov = (TextView)findViewById(R.id.tv_cov);
-        btnServiceStop.setEnabled(false);
+//        btnServiceStop.setEnabled(false);
 
         final List<String> sut = AppUtil.getPackageList(this);
 
