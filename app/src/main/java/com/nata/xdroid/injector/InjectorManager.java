@@ -14,4 +14,8 @@ public class InjectorManager {
     public static String getValueByInputType(int inputType) {
         return TextInjector.mock(inputType);
     }
+
+    public static void injectImages(Context context) {
+        FileInjector.injectImages(context);
+    }
 }

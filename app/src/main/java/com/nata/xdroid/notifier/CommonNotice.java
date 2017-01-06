@@ -21,6 +21,7 @@ public class CommonNotice {
 //    public static String NO_NETWORK_PROVIDER = "应用通过WLAN或移动网络(3G/2G)确定位置,但WLAN或移动网络(3G/2G)没有打开";
 //    public static String NO_PASSIVE_PROVIDER = "应用通过被动方式确定位置,但失败了";
 //    public static String NO_NEW_ACTIVITY= "应用很久没有发现新的Activity";
+//    public static String IMAGES= "应用请求图片, 但设备中中没有图片";
 
 
     public static String NO_BLUETOOTH = "App requests for Bluetooth, but device does not support";
@@ -39,6 +40,8 @@ public class CommonNotice {
     public static String NO_NETWORK_PROVIDER = "App requests for your location through WLAN or mobile network(3G/2G), but they are not opened";
     public static String NO_PASSIVE_PROVIDER = "App requests for your location through Passive way, but failed";
     public static String NO_NEW_ACTIVITY= "No new activity for a long time";
+    public static String IMAGES= "App requests for images, but there is no data in the device";
+
 
 
 }

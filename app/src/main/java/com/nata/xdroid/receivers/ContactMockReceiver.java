@@ -13,7 +13,7 @@ import com.nata.xdroid.injector.InjectorManager;
 public class ContactMockReceiver extends BroadcastReceiver {
     public static final String ACTION_MOCK_CONTACTS = "com.nata.xdroid.action.MOCK_CONTACTS";
 
-    public static Intent getUserDataIntent() {
+    public static Intent getMockContactsIntent() {
         Intent intent = new Intent(ACTION_MOCK_CONTACTS);
         return intent;
     }

@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 
     <!-- <uses-permission android:name="android.permission.INJECT_EVENTS"></uses-permission> -->
@@ -53,6 +54,11 @@
         <receiver android:name=".receivers.ContactMockReceiver">
             <intent-filter>
                 <action android:name="com.nata.xdroid.action.MOCK_CONTACTS" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receivers.ImagesMockReceiver">
+            <intent-filter>
+                <action android:name="com.nata.xdroid.action.MOCK_IMAGES" />
             </intent-filter>
         </receiver>
         <receiver android:name=".receivers.NewActivityReceiver">

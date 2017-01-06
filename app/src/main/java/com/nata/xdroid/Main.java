@@ -7,8 +7,7 @@ import com.nata.xdroid.hooks.ANRHook;
 import com.nata.xdroid.hooks.ActivityCoverageHook;
 import com.nata.xdroid.hooks.ActivityHook;
 import com.nata.xdroid.hooks.BluetoothHook;
-import com.nata.xdroid.hooks.ContactHook;
-import com.nata.xdroid.hooks.CalendarHook;
+import com.nata.xdroid.hooks.ContentsHook;
 import com.nata.xdroid.hooks.CrashHook;
 import com.nata.xdroid.hooks.LocationHook;
 import com.nata.xdroid.hooks.NetworkHook;
@@ -88,7 +87,7 @@ public class Main implements IXposedHookLoadPackage {
 
                             // 联系人相关Hook
                             if (permissions.contains(Manifest.permission.READ_CONTACTS)) {
-                                new ContactHook(context).hook(loader);
+                                new ContentsHook(context).hook(loader);
                                 XposedBridge.log("检测到读取联系人的权限, hook联系人");
                             }
 

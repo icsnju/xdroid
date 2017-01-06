@@ -19,10 +19,10 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
  * Created by Calvin on 2016/12/22.
  */
 
-public class ContactHook implements Hook{
+public class ContentsHook implements Hook{
     private Context context;
 
-    public ContactHook(Context context) {
+    public ContentsHook(Context context) {
         this.context = context;
     }
     @Override
@@ -34,20 +34,7 @@ public class ContactHook implements Hook{
                         XposedBridge.log("afterHookedMethod: " + "query");
                         Uri uri = (Uri) param.args[0];
                         Cursor cursor = (Cursor) param.getResult();
-
-                        // 联系人相关
-                        boolean isContactRawContactsURI = uri.equals(ContactsContract.RawContacts.CONTENT_URI);
-                        boolean isContactContactsURI = uri.equals(ContactsContract.Contacts.CONTENT_URI);
-                        boolean isContactDataURI = uri.equals(ContactsContract.Data.CONTENT_URI);
-
-                        boolean isContact = isContactRawContactsURI || isContactContactsURI || isContactDataURI;
-
-                        if (isContact && cursor.getCount() == 0) {
-                            Notifier.notice(context, CommonNotice.CONTACT);
-
-                            Intent intent = ContactMockReceiver.getUserDataIntent();
-                            context.sendBroadcast(intent);
-                        }
+                        ContentsProcessor.solve(context, uri, cursor);
                     }
                 });
     }

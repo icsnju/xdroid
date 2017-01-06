@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.nata.xdroid.TestRunner;
+import com.nata.xdroid.injector.InjectorManager;
 import com.nata.xdroid.notifier.CommonNotice;
 import com.nata.xdroid.notifier.Notifier;
+import com.nata.xdroid.receivers.ImagesMockReceiver;
 import com.nata.xdroid.receivers.NewActivityReceiver;
 import com.nata.xdroid.utils.ViewUtil;
 
@@ -96,6 +98,12 @@ public class ActivityHook {
                 Notifier.notice(context, CommonNotice.ACTION_CHOOSER);
             else if (action.equals(MediaStore.ACTION_IMAGE_CAPTURE)) {
                 Notifier.notice(context, CommonNotice.ACTION_CAMERA);
+            }else if(action.equals(Intent.ACTION_PICK)) {
+                if(intent.getType().startsWith("image")) { // 图片
+
+                } else if(intent.getType().startsWith("videos")) {// 视频
+
+                }
             }
         }
     }
