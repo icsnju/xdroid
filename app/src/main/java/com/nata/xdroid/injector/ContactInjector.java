@@ -1,4 +1,4 @@
-package com.nata.xdroid.injects;
+package com.nata.xdroid.injector;
 
 import android.content.ContentProviderOperation;
 import android.content.ContentProviderResult;
@@ -59,7 +59,7 @@ public class ContactInjector {
                 .applyBatch(ContactsContract.AUTHORITY, ops);
     }
 
-    public static void mockContacts(Context context) {
+    public static void inject(Context context) {
         List<ContactBean> list = new ArrayList<>();
         list.add(new ContactBean("Lily","1234567890"));
         list.add(new ContactBean("Andy","1234567891"));

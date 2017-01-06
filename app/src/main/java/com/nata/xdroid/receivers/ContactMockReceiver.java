@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.nata.xdroid.injects.Injector;
+import com.nata.xdroid.injector.InjectorManager;
 
 /**
  * Created by Calvin on 2016/12/10.
@@ -21,7 +21,7 @@ public class ContactMockReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
         if (ACTION_MOCK_CONTACTS.equals(intent.getAction())) {
-            Injector.mockContact(context);
+            InjectorManager.mockContact(context);
         }
     }
 }

@@ -16,15 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nata.xdroid.R;
-import com.nata.xdroid.notices.ToastNotifier;
 import com.nata.xdroid.services.CountDownTimerListener;
 import com.nata.xdroid.services.CountDownTimerService;
 import com.nata.xdroid.services.CountDownTimerUtil;
 import com.nata.xdroid.utils.ActivityUtil;
 import com.nata.xdroid.utils.AppUtil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

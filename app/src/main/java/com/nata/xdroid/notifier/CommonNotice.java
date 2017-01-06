@@ -1,4 +1,4 @@
-package com.nata.xdroid.notices;
+package com.nata.xdroid.notifier;
 
 /**
  * Created by Calvin on 2016/12/22.

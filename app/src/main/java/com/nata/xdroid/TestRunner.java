@@ -3,21 +3,14 @@ package com.nata.xdroid;
 import android.app.Instrumentation;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
 import com.nata.xdroid.monkey.Monkey;
-import com.nata.xdroid.notices.CommonNotice;
-import com.nata.xdroid.notices.ToastNotifier;
-import com.nata.xdroid.services.CountDownTimerUtil;
+import com.nata.xdroid.notifier.CommonNotice;
+import com.nata.xdroid.notifier.ToastNotifier;
 import com.nata.xdroid.utils.XPreferencesUtils;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-import static com.nata.xdroid.notices.CommonNotice.NO_NEW_ACTIVITY;
-import static com.nata.xdroid.utils.FormatUtil.formateTimer;
 import static com.nata.xdroid.utils.XPreferencesUtils.inTestMode;
 
 /**
@@ -62,7 +55,7 @@ public class TestRunner  extends Thread{
                 count++;
 
                 // notice users if no activities are found after a long time
-                if(count %1000 == 0) {
+                if(count %500 == 0) {
                     int curActivityCount = XPreferencesUtils.getCovActivityCount();
                     if( curActivityCount == activityCount) {
                         ToastNotifier.makeToast(context, CommonNotice.NO_NEW_ACTIVITY);

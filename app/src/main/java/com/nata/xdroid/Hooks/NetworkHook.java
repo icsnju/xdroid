@@ -4,8 +4,7 @@ import android.content.Context;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.nata.xdroid.notices.Notifier;
-import com.nata.xdroid.notices.ToastNotifier;
+import com.nata.xdroid.notifier.Notifier;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.nata.xdroid.injector.InjectorManager;
 import com.nata.xdroid.receivers.UserDataReceiver;
 
 import java.util.ArrayList;
@@ -92,12 +93,16 @@ public class ViewUtil {
     public static void fillUserData(Context context, List<View> views) {
         for (int i = 0; i < views.size(); i++) {
             EditText et = (EditText) views.get(i);
+            et.getInputType();
             int id = et.getId();
             String resourceName = context.getResources().getResourceName(id);
             String text = XDataUtils.query(resourceName);
             if (!text.trim().equals("")) {
                 et.setText(text);
                 log("onResume put text: " + id + " " + text);
+            } else { // 注入生成的输入
+                String value = InjectorManager.getValueByInputType(et.getInputType());
+                et.setText(value);
             }
         }
     }

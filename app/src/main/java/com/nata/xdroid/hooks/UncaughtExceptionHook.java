@@ -3,8 +3,8 @@ package com.nata.xdroid.hooks;
 import android.content.Context;
 import android.content.Intent;
 
-import com.nata.xdroid.notices.CommonNotice;
-import com.nata.xdroid.notices.Notifier;
+import com.nata.xdroid.notifier.CommonNotice;
+import com.nata.xdroid.notifier.Notifier;
 import com.nata.xdroid.receivers.CrashReportReceiver;
 
 import de.robv.android.xposed.XC_MethodHook;

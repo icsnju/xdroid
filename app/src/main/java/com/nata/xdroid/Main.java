@@ -13,16 +13,11 @@ import com.nata.xdroid.hooks.CrashHook;
 import com.nata.xdroid.hooks.LocationHook;
 import com.nata.xdroid.hooks.NetworkHook;
 import com.nata.xdroid.hooks.UncaughtExceptionHook;
-import com.nata.xdroid.notices.ToastNotifier;
-import com.nata.xdroid.utils.ActivityUtil;
 import com.nata.xdroid.utils.PermissionUtil;
 import com.nata.xdroid.utils.XPreferencesUtils;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;

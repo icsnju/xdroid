@@ -2,8 +2,8 @@ package com.nata.xdroid.hooks;
 
 import android.content.Context;
 
-import com.nata.xdroid.notices.CommonNotice;
-import com.nata.xdroid.notices.Notifier;
+import com.nata.xdroid.notifier.CommonNotice;
+import com.nata.xdroid.notifier.Notifier;
 
 import de.robv.android.xposed.XC_MethodHook;
 import static de.robv.android.xposed.XposedBridge.log;

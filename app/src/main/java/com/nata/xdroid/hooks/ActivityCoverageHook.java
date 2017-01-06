@@ -4,23 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.view.View;
-import android.widget.EditText;
 
-import com.nata.xdroid.TestRunner;
-import com.nata.xdroid.notices.CommonNotice;
-import com.nata.xdroid.notices.Notifier;
 import com.nata.xdroid.receivers.MonkeyCoverageReceiver;
-import com.nata.xdroid.receivers.NewActivityReceiver;
-import com.nata.xdroid.utils.ViewUtil;
-
-import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
 
-import static com.nata.xdroid.utils.ViewUtil.getAllChildViews;
-import static com.nata.xdroid.utils.XPreferencesUtils.inMonitorMode;
 import static de.robv.android.xposed.XposedBridge.log;
 import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
@@ -44,8 +32,10 @@ public class ActivityCoverageHook {
                 String activityName = activity.getClass().getName();
                 String packageName = context.getPackageName();
 //                Intent intent = NewActivityReceiver.getNewActivityIntent(activityName);
-                Intent intent = MonkeyCoverageReceiver.getNewActivityIntent(packageName, activityName);
-                context.sendBroadcast(intent);
+//                context.sendBroadcast(intent);
+
+                Intent monkeyIntent = MonkeyCoverageReceiver.getNewActivityIntent(packageName, activityName);
+                context.sendBroadcast(monkeyIntent);
             }
         });
     }

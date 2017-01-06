@@ -1,4 +1,4 @@
-package com.nata.xdroid.notices;
+package com.nata.xdroid.notifier;
 
 import android.content.Context;
 

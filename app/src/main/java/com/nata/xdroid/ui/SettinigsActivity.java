@@ -41,9 +41,8 @@ public class SettinigsActivity extends AppCompatActivity {
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
 
-        bindService();
-        startService(serviceIntent);
-
+//            bindService();
+//            startService(serviceIntent);
     }
 
     private void bindService() {
@@ -74,31 +73,31 @@ public class SettinigsActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        unbindService();
+//        unbindService();
         super.onDestroy();
     }
 
     @Override
     protected void onPause() {
-        unbindService();
+//        unbindService();
         super.onPause();
     }
 
     @Override
     protected void onResume() {
-        bindService();
+//        bindService();
         super.onResume();
     }
 
     @Override
     protected void onRestart() {
-        bindService();
+//        bindService();
         super.onRestart();
     }
 
     @Override
     protected void onStop() {
-        unbindService();
+//        unbindService();
         super.onStop();
     }
 
@@ -203,7 +202,8 @@ public class SettinigsActivity extends AppCompatActivity {
 //                @Override
 //                public boolean onPreferenceChange(Preference preference, Object newVal) {
 //                    final boolean value = (Boolean) newVal;
-//                    open.setChecked(value);
+////                    open.setChecked(value);
+////                    if(value) getActivity().bindService();
 //                    return true;
 //                }
 //            });

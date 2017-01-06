@@ -7,11 +7,10 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.wifi.ScanResult;
 import android.telephony.CellLocation;
-import android.telephony.NeighboringCellInfo;
 
-import com.nata.xdroid.notices.CommonNotice;
-import com.nata.xdroid.notices.Notifier;
-import com.nata.xdroid.notices.ToastNotifier;
+import com.nata.xdroid.notifier.CommonNotice;
+import com.nata.xdroid.notifier.Notifier;
+import com.nata.xdroid.notifier.ToastNotifier;
 
 import java.lang.reflect.Method;
 import java.util.List;

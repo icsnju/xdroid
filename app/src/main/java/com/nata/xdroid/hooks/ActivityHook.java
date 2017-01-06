@@ -7,22 +7,17 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.nata.xdroid.TestRunner;
-import com.nata.xdroid.notices.CommonNotice;
-import com.nata.xdroid.notices.Notifier;
+import com.nata.xdroid.notifier.CommonNotice;
+import com.nata.xdroid.notifier.Notifier;
 import com.nata.xdroid.receivers.NewActivityReceiver;
-import com.nata.xdroid.utils.ActivityUtil;
 import com.nata.xdroid.utils.ViewUtil;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import de.robv.android.xposed.XC_MethodHook;
 
-import static com.nata.xdroid.notices.ToastNotifier.makeToast;
 import static com.nata.xdroid.utils.XPreferencesUtils.inMonitorMode;
 import static com.nata.xdroid.utils.ViewUtil.getAllChildViews;
 import static de.robv.android.xposed.XposedBridge.log;
