@@ -32,6 +32,7 @@ public class CrashHook implements Hook {
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 ApplicationErrorReport.CrashInfo info = (ApplicationErrorReport.CrashInfo) param.args[1];
                 Notifier.notice(context, CommonNotice.CRASH + info.throwClassName + "->" + info.exceptionClassName + " -> " + info.exceptionMessage + " -> " + info.stackTrace);
+                log(CommonNotice.CRASH + info.throwClassName + "->" + info.exceptionClassName + " -> " + info.exceptionMessage + " -> " + info.stackTrace);
             }
         });
 

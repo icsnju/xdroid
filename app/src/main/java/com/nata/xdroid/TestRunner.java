@@ -8,6 +8,7 @@ import android.view.WindowManager;
 
 import com.nata.xdroid.monkey.Monkey;
 import com.nata.xdroid.notifier.CommonNotice;
+import com.nata.xdroid.notifier.Notifier;
 import com.nata.xdroid.notifier.ToastNotifier;
 import com.nata.xdroid.utils.XPreferencesUtils;
 
@@ -52,13 +53,14 @@ public class TestRunner  extends Thread{
         while(true) {
             if(inTestMode() && active) {
                 String event = monkey.nextRandomEvent();
+                // 这里判断下如果event是back，而且当前界面出应用了则重启应用
                 count++;
 
                 // notice users if no activities are found after a long time
                 if(count %500 == 0) {
                     int curActivityCount = XPreferencesUtils.getCovActivityCount();
                     if( curActivityCount == activityCount) {
-                        ToastNotifier.makeToast(context, CommonNotice.NO_NEW_ACTIVITY);
+                        Notifier.notice(context, CommonNotice.NO_NEW_ACTIVITY);
                     }
                     activityCount = curActivityCount;
                 }

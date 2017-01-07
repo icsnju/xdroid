@@ -25,12 +25,12 @@
         <!--<Preference-->
             <!--android:key="userdata"-->
             <!--android:title="@string/userdata" />-->
-        <Preference
-        android:key="coverage"
-        android:title="@string/coverage"/>
-        <Preference
-            android:key="clear_coverage"
-            android:title="@string/clear_coverage"/>
+        <!--<Preference-->
+        <!--android:key="coverage"-->
+        <!--android:title="@string/coverage"/>-->
+        <!--<Preference-->
+            <!--android:key="clear_coverage"-->
+            <!--android:title="@string/clear_coverage"/>-->
         <Preference
             android:key="test"
             android:title="@string/test" />

@@ -28,7 +28,8 @@ public class ANRHook implements Hook {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 String annotation = (String) param.args[4];
-                Notifier.notice(context, CommonNotice.ANR+annotation);
+//                Notifier.notice(context, CommonNotice.ANR+annotation);
+                log("ANR: " + context.getPackageName() + annotation);
             }
         });
 

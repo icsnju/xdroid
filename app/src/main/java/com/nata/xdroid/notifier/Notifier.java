@@ -1,6 +1,11 @@
 package com.nata.xdroid.notifier;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Looper;
+import android.widget.Toast;
+
+import com.nata.xdroid.receivers.ToastReceiver;
 
 /**
  * Created by Calvin on 2016/12/22.
@@ -15,8 +20,22 @@ public class Notifier {
         BeepNotifier.makeBeem(context);
     }
 
-    public static void notice(Context context, String content) {
-        BeepNotifier.makeBeem(context);
-        ToastNotifier.makeToast(context,content);
+    public static void notice(final Context context, final String content) {
+        Intent toastIntent = ToastReceiver.getToastIntent(content);
+        context.sendBroadcast(toastIntent);
+
+
+//        final Thread toastThread= new Thread(new Runnable() {
+//
+//            @Override
+//            public void run()
+//            {
+//                Looper.prepare();
+//                BeepNotifier.makeBeem(context);
+//                ToastNotifier.makeToast(context.getApplicationContext(),content);
+//                Looper.loop();
+//            }
+//        });
+//        toastThread.start();
     }
 }

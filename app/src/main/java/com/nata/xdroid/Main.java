@@ -32,33 +32,33 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 public class Main implements IXposedHookLoadPackage {
 
-    String[] suts = {
-        "com.amazon.mShop.android.shopping",
-        "com.contextlogic.wish",
-        "com.facebook.orca",
-        "com.instagram.android",
-        "com.pinterest",
-        "com.snapchat.android",
-        "com.spotify.music",
-        "com.tencent.mm",
-        "com.twitter.android",
-        "com.whatsapp",
-        "com.facebook.katana",
-        "com.google.android.youtube"
-    };
-    List<String> appList = Arrays.asList(suts);
+//    String[] suts = {
+//        "com.amazon.mShop.android.shopping",
+//        "com.contextlogic.wish",
+//        "com.facebook.orca",
+//        "com.instagram.android",
+//        "com.pinterest",
+//        "com.snapchat.android",
+//        "com.spotify.music",
+//        "com.tencent.mm",
+//        "com.twitter.android",
+//        "com.whatsapp",
+//        "com.facebook.katana",
+//        "com.google.android.youtube"
+//    };
+//    List<String> appList = Arrays.asList(suts);
 
 
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable {
         final ClassLoader loader = loadPackageParam.classLoader;
         final String packageName = loadPackageParam.packageName;
 
-//        String targetPackage = XPreferencesUtils.getTestPackage();
+        String targetPackage = XPreferencesUtils.getTestPackage();
         final boolean isOpen = XPreferencesUtils.isOpen();
 
 
-//        if (targetPackage.equals(packageName) || packageName.equals("android")) {
-        if (appList.contains(packageName) || packageName.equals("android")) {
+        if (targetPackage.equals(packageName) || packageName.equals("android")) {
+//        if (appList.contains(packageName) || packageName.equals("android")) {
             findAndHookMethod(Application.class, "onCreate", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -98,10 +98,10 @@ public class Main implements IXposedHookLoadPackage {
                             }
 
                             // 日历相关Hook
-                            if (permissions.contains(Manifest.permission.READ_CALENDAR)) {
-                                new CalendarHook(context).hook(loader);
-                                XposedBridge.log("检测到日历权限, hook蓝牙");
-                            }
+//                            if (permissions.contains(Manifest.permission.READ_CALENDAR)) {
+//                                new CalendarHook(context).hook(loader);
+//                                XposedBridge.log("检测到日历权限, hook蓝牙");
+//                            }
 
                             // 位置相关Hook
                             if (permissions.contains(Manifest.permission.ACCESS_FINE_LOCATION) ||

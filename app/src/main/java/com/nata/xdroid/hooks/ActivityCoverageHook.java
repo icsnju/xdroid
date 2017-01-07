@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.nata.xdroid.receivers.MonkeyCoverageReceiver;
+import com.nata.xdroid.receivers.NewActivityReceiver;
 
 import de.robv.android.xposed.XC_MethodHook;
 
@@ -31,11 +32,11 @@ public class ActivityCoverageHook {
                 Context activity = (Activity) param.thisObject;
                 String activityName = activity.getClass().getName();
                 String packageName = context.getPackageName();
-//                Intent intent = NewActivityReceiver.getNewActivityIntent(activityName);
-//                context.sendBroadcast(intent);
+                Intent intent = NewActivityReceiver.getNewActivityIntent(activityName);
+                context.sendBroadcast(intent);
 
-                Intent monkeyIntent = MonkeyCoverageReceiver.getNewActivityIntent(packageName, activityName);
-                context.sendBroadcast(monkeyIntent);
+//                Intent monkeyIntent = MonkeyCoverageReceiver.getNewActivityIntent(packageName, activityName);
+//                context.sendBroadcast(monkeyIntent);
             }
         });
     }

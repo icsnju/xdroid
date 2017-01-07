@@ -1,6 +1,7 @@
 package com.nata.xdroid.notifier;
 
 import android.content.Context;
+import android.os.Looper;
 import android.widget.Toast;
 
 /**

@@ -39,7 +39,7 @@ public class NetworkHook implements Hook{
                 String url = (String) param.args[0];
                 log("URL construct " + url);
                 if(!isNetWorkConnected()) {
-                    Notifier.notice(context, "App visit" + url + ", but there is not network");
+                    Notifier.notice(context, "App visit" + url + ", but there is no network");
                 }
             }
         });

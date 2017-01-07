@@ -19,7 +19,7 @@ import com.nata.xdroid.receivers.ImagesMockReceiver;
 
 public class ContentsProcessor {
     public static void solve(Context context, Uri uri, Cursor cursor) {
-        if(cursor.getCount() != 0) return ;
+        if(cursor == null || cursor.getCount() != 0) return ;
 
         // 联系人相关
         if (isContacts(uri)) {

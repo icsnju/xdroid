@@ -41,8 +41,8 @@ public class SettinigsActivity extends AppCompatActivity {
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
 
-//            bindService();
-//            startService(serviceIntent);
+        bindService();
+        startService(serviceIntent);
     }
 
     private void bindService() {
@@ -73,31 +73,31 @@ public class SettinigsActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-//        unbindService();
+        unbindService();
         super.onDestroy();
     }
 
     @Override
     protected void onPause() {
-//        unbindService();
+        unbindService();
         super.onPause();
     }
 
     @Override
     protected void onResume() {
-//        bindService();
+        bindService();
         super.onResume();
     }
 
     @Override
     protected void onRestart() {
-//        bindService();
+        bindService();
         super.onRestart();
     }
 
     @Override
     protected void onStop() {
-//        unbindService();
+        unbindService();
         super.onStop();
     }
 
@@ -164,38 +164,38 @@ public class SettinigsActivity extends AppCompatActivity {
                 }
             });
 
-            Preference coverage = findPreference("coverage");
-            coverage.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference pref) {
-                    SharedPreferences sp = context.getSharedPreferences("monkey_coverage",MODE_WORLD_READABLE);
-                    Map<String,Set<String>> map = (Map<String,Set<String>>)sp.getAll();
-                    String message = "";
-                    for(Map.Entry<String,Set<String>> entry: map.entrySet()) {
-                        String packageName = entry.getKey();
-                        Set<String> activities = entry.getValue();
-                        List<String> actLists = ActivityUtil.getActivities(context, packageName);
-                        float coverage = (float)activities.size() /actLists.size();
-                        message += packageName + " : " + "\n" ;
-                        message += coverage + " => " + activities.size() + "\\" + actLists.size() + "\n";
-                    }
-                    AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(getActivity());
-                    alertDialogBuilder.setMessage(message);
-                    AlertDialog alertDialog = alertDialogBuilder.create();
-                    alertDialog.show();//将dialog显示出来
-                    return true;
-                }
-            });
+//            Preference coverage = findPreference("coverage");
+//            coverage.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+//                @Override
+//                public boolean onPreferenceClick(Preference pref) {
+//                    SharedPreferences sp = context.getSharedPreferences("monkey_coverage",MODE_WORLD_READABLE);
+//                    Map<String,Set<String>> map = (Map<String,Set<String>>)sp.getAll();
+//                    String message = "";
+//                    for(Map.Entry<String,Set<String>> entry: map.entrySet()) {
+//                        String packageName = entry.getKey();
+//                        Set<String> activities = entry.getValue();
+//                        List<String> actLists = ActivityUtil.getActivities(context, packageName);
+//                        float coverage = (float)activities.size() /actLists.size();
+//                        message += packageName + " : " + "\n" ;
+//                        message += coverage + " => " + activities.size() + "\\" + actLists.size() + "\n";
+//                    }
+//                    AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(getActivity());
+//                    alertDialogBuilder.setMessage(message);
+//                    AlertDialog alertDialog = alertDialogBuilder.create();
+//                    alertDialog.show();//将dialog显示出来
+//                    return true;
+//                }
+//            });
 
-            Preference clearCoverage = findPreference("clear_coverage");
-            clearCoverage.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference pref) {
-                    SharedPreferences sp = context.getSharedPreferences("monkey_coverage",MODE_WORLD_READABLE);
-                    sp.edit().clear().apply();
-                    return true;
-                }
-            });
+//            Preference clearCoverage = findPreference("clear_coverage");
+//            clearCoverage.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+//                @Override
+//                public boolean onPreferenceClick(Preference pref) {
+//                    SharedPreferences sp = context.getSharedPreferences("monkey_coverage",MODE_WORLD_READABLE);
+//                    sp.edit().clear().apply();
+//                    return true;
+//                }
+//            });
 
 //            final SwitchPreference open = (SwitchPreference)findPreference("open");
 //            open.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {

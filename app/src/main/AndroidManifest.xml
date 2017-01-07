@@ -66,6 +66,11 @@
                 <action android:name="com.nata.xdroid.action.COLLECT_ACTIVITY" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".receivers.ToastReceiver">
+            <intent-filter>
+                <action android:name="com.nata.xdroid.action.TOAST" />
+            </intent-filter>
+        </receiver>
         <receiver android:name=".receivers.MonkeyCoverageReceiver">
             <intent-filter>
                 <action android:name="com.nata.xdroid.action.MONKEY_COVERAGE" />
