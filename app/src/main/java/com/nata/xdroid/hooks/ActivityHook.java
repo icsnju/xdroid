@@ -100,7 +100,7 @@ public class ActivityHook {
                 Notifier.notice(context, CommonNotice.ACTION_CAMERA);
             }else if(action.equals(Intent.ACTION_PICK)) {
                 if(intent.getType().startsWith("image")) { // 图片
-
+                    Notifier.notice(context,"App opens image galley");
                 } else if(intent.getType().startsWith("videos")) {// 视频
 
                 }

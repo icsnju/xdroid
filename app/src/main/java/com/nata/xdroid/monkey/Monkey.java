@@ -45,7 +45,7 @@ public class Monkey {
 	/**
 	 * Fire next random event
 	 */
-	public String nextRandomEvent() {
+	public MonkeyEvent nextRandomEvent() {
 		MonkeyEvent ev = mEventSource.getNextEvent();
 //		System.out.println("Firing Monkey Event:" + ev.toString());
 
@@ -53,7 +53,7 @@ public class Monkey {
 			ev.fireEvent(inst);
 		}
 
-		return ev.toString();
+		return ev;
 
 	}
 	

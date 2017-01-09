@@ -49,8 +49,8 @@ public class MonkeySourceRandom implements MonkeyEventSource {
             KeyEvent.KEYCODE_BACK,
 //        KeyEvent.KEYCODE_CALL,
 //            KeyEvent.KEYCODE_ENDCALL,
-        KeyEvent.KEYCODE_VOLUME_UP, KeyEvent.KEYCODE_VOLUME_DOWN,
-        KeyEvent.KEYCODE_MUTE,
+//        KeyEvent.KEYCODE_VOLUME_UP, KeyEvent.KEYCODE_VOLUME_DOWN,
+//        KeyEvent.KEYCODE_MUTE,
     };
     //, KeyEvent.KEYCODE_VOLUME_MUTE,
     /** If a physical key exists? */
