@@ -7,6 +7,11 @@
             android:key="open"
             android:title="@string/open" />
 
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="input"
+            android:title="@string/input" />
+
     </PreferenceCategory>
 
     <!--<PreferenceCategory android:title="@string/test">-->

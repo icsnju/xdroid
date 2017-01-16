@@ -41,6 +41,7 @@ public class CommonNotice {
     public static String NO_PASSIVE_PROVIDER = "App requests for your location through Passive way, but failed";
     public static String NO_NEW_ACTIVITY= "No new activity for a long time";
     public static String IMAGES= "App requests for images, but there is no data in the device";
+    public static String AUDIOS= "App requests for musics, but there is no data in the device";
 
 
 

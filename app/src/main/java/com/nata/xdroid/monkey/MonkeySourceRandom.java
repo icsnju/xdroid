@@ -118,12 +118,12 @@ public class MonkeySourceRandom implements MonkeyEventSource {
         // default values for random distributions
         // note, these are straight percentages, to match user input (cmd line args)
         // but they will be converted to 0..1 values before the main loop runs.
-        mFactors[FACTOR_TOUCH] = 15.0f;
+        mFactors[FACTOR_TOUCH] = 20.0f;
         mFactors[FACTOR_MOTION] = 10.0f;
         mFactors[FACTOR_TRACKBALL] = 15.0f;
         mFactors[FACTOR_NAV] = 25.0f;
         mFactors[FACTOR_MAJORNAV] = 15.0f;
-        mFactors[FACTOR_SYSOPS] = 4.0f;
+        mFactors[FACTOR_SYSOPS] = 1.0f;
         mFactors[FACTOR_APPSWITCH] = 0.0f;
         // prevent  app switch event 2.0f ,add to
         mFactors[FACTOR_FLIP] = 1.0f;

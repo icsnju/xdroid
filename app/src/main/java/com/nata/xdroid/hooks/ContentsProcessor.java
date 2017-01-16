@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 
 import com.nata.xdroid.notifier.CommonNotice;
 import com.nata.xdroid.notifier.Notifier;
+import com.nata.xdroid.receivers.AudiosMockReceiver;
 import com.nata.xdroid.receivers.ContactMockReceiver;
 import com.nata.xdroid.receivers.ImagesMockReceiver;
 
@@ -49,6 +50,15 @@ public class ContentsProcessor {
             return;
         }
 
+        if(isAudios(uri)) {
+            Notifier.notice(context, CommonNotice.AUDIOS);
+
+            // inject
+            Intent audioIntent = AudiosMockReceiver.getMockAudiosIntent();
+            context.sendBroadcast(audioIntent);
+            return;
+        }
+
     }
 
     private static boolean isContacts(Uri uri) {
@@ -74,4 +84,9 @@ public class ContentsProcessor {
     private static boolean isImages(Uri uri) {
         return uri.equals(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
     }
+
+    private static boolean isAudios(Uri uri) {
+        return uri.equals(MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
+    }
+
 }

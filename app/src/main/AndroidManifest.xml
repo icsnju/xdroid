@@ -61,6 +61,11 @@
                 <action android:name="com.nata.xdroid.action.MOCK_IMAGES" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".receivers.AudiosMockReceiver">
+            <intent-filter>
+                <action android:name="com.nata.xdroid.action.MOCK_AUDIOS" />
+            </intent-filter>
+        </receiver>
         <receiver android:name=".receivers.NewActivityReceiver">
             <intent-filter>
                 <action android:name="com.nata.xdroid.action.COLLECT_ACTIVITY" />

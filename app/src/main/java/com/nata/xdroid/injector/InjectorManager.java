@@ -18,4 +18,8 @@ public class InjectorManager {
     public static void injectImages(Context context) {
         FileInjector.injectImages(context);
     }
+
+    public static void injectAudios(Context context) {
+        FileInjector.injectAudios(context);
+    }
 }

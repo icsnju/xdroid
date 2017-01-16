@@ -72,22 +72,22 @@ public class NetworkHook implements Hook{
             });
         }
 
-        findAndHookMethod("android.webkit.WebView", loader, "loadUrl",String.class, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                log("afterHookedMethod loadUrl");
-                final WebView webView = (WebView)param.thisObject;
-                webView.setWebViewClient(new WebViewClient(){
-                    @Override
-                    public void onReceivedError(WebView view, int errorCode,
-                                                String description, String failingUrl) {
-// TODO Auto-generated method stub
-                        super.onReceivedError(view, errorCode, description, failingUrl);
-                        Notifier.notice(context, "App open a webpage for" + view.getUrl() + ", but failed");
-                    }
-                });
-            }
-        });
+//        findAndHookMethod("android.webkit.WebView", loader, "loadUrl",String.class, new XC_MethodHook() {
+//            @Override
+//            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                log("afterHookedMethod loadUrl");
+//                final WebView webView = (WebView)param.thisObject;
+//                webView.setWebViewClient(new WebViewClient(){
+//                    @Override
+//                    public void onReceivedError(WebView view, int errorCode,
+//                                                String description, String failingUrl) {
+//// TODO Auto-generated method stub
+//                        super.onReceivedError(view, errorCode, description, failingUrl);
+//                        Notifier.notice(context, "App open a webpage for" + view.getUrl() + ", but failed");
+//                    }
+//                });
+//            }
+//        });
 
 
     }

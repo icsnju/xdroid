@@ -58,6 +58,11 @@ public class XPreferencesUtils {
         return getInstance().getBoolean("open", true);
     }
 
+    public static boolean isAutoInput() {
+        return getInstance().getBoolean("input", true);
+    }
+
+
 
 //
 //    public static boolean notWhisper() {

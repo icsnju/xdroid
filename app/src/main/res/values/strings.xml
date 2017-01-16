@@ -15,4 +15,5 @@
     <string name="resume">继续测试</string>
     <string name="coverage">Activity覆盖率统计</string>
     <string name="clear_coverage">清除覆盖率</string>
+    <string name="input">自动输入</string>
 </resources>

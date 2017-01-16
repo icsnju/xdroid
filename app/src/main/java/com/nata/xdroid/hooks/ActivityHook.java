@@ -15,6 +15,7 @@ import com.nata.xdroid.notifier.Notifier;
 import com.nata.xdroid.receivers.ImagesMockReceiver;
 import com.nata.xdroid.receivers.NewActivityReceiver;
 import com.nata.xdroid.utils.ViewUtil;
+import com.nata.xdroid.utils.XPreferencesUtils;
 
 import java.util.List;
 
@@ -71,7 +72,9 @@ public class ActivityHook {
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                 final Activity rootActivity = (Activity) param.thisObject;
                 List<View> views = getAllChildViews(rootActivity.getWindow().getDecorView(), EditText.class);
-                ViewUtil.fillUserData(context, views);
+                if(XPreferencesUtils.isAutoInput()) {
+                    ViewUtil.fillUserData(context, views);
+                }
                 testRunner.setActive(true);
             }
         });

@@ -7,6 +7,8 @@ import android.widget.Toast;
 
 import com.nata.xdroid.receivers.ToastReceiver;
 
+import static de.robv.android.xposed.XposedBridge.log;
+
 /**
  * Created by Calvin on 2016/12/22.
  */
@@ -21,6 +23,7 @@ public class Notifier {
     }
 
     public static void notice(final Context context, final String content) {
+        log("Notice => " + content);
         Intent toastIntent = ToastReceiver.getToastIntent(content);
         context.sendBroadcast(toastIntent);
 
