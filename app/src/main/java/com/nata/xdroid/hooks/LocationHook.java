@@ -97,8 +97,8 @@ public class LocationHook implements Hook {
                             // 使用真实的数据
                             // 如果配置了模拟位置
                             //位置监听器,当位置改变时会触发onLocationChanged方法
-                            LocationListener ll = (LocationListener) param.args[3];
-                            fackGPSLocation(ll);
+//                            LocationListener ll = (LocationListener) param.args[3];
+//                            fackGPSLocation(ll);
                         }
 
 
