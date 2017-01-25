@@ -54,9 +54,19 @@ public class XPreferencesUtils {
         return getInstance().getStringSet("cov_acts",new HashSet<String>()).size();
     }
 
-    public static boolean isOpen() {
-        return getInstance().getBoolean("open", true);
+    public static boolean isInjection() {
+        return getInstance().getBoolean("injection", true);
     }
+
+    public static boolean isFakeGps() {
+        return getInstance().getBoolean("gps", false);
+    }
+
+    public static boolean isXmonkey() {
+        return getInstance().getBoolean("xmonkey", true);
+    }
+
+
 
     public static boolean isAutoInput() {
         return getInstance().getBoolean("input", true);

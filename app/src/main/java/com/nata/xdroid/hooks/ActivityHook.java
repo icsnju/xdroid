@@ -8,11 +8,9 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 
-import com.nata.xdroid.TestRunner;
-import com.nata.xdroid.injector.InjectorManager;
+import com.nata.xdroid.XMonkey;
 import com.nata.xdroid.notifier.CommonNotice;
 import com.nata.xdroid.notifier.Notifier;
-import com.nata.xdroid.receivers.ImagesMockReceiver;
 import com.nata.xdroid.receivers.NewActivityReceiver;
 import com.nata.xdroid.utils.ViewUtil;
 import com.nata.xdroid.utils.XPreferencesUtils;
@@ -33,27 +31,15 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 
 public class ActivityHook {
     private Context context;
-    private TestRunner testRunner = null;
 
     String packageName;
 
-    public ActivityHook(TestRunner runner, Context context, String packageName) {
+    public ActivityHook(Context context, String packageName) {
         this.context = context;
-        this.testRunner = runner;
         this.packageName = packageName;
     }
 
     public void hook(final ClassLoader loader) {
-
-        findAndHookMethod("android.app.Activity", loader, "onCreate", Bundle.class, new XC_MethodHook() {
-            @Override
-            protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                Context activity = (Activity) param.thisObject;
-                String activityName = activity.getClass().getName();
-                Intent intent = NewActivityReceiver.getNewActivityIntent(activityName);
-                context.sendBroadcast(intent);
-            }
-        });
 
         findAndHookMethod("android.app.Activity", loader, "onPause", new XC_MethodHook() {
             @Override
@@ -63,7 +49,6 @@ public class ActivityHook {
                     List<View> views = getAllChildViews(rootActivity.getWindow().getDecorView(), EditText.class);
                     ViewUtil.persistUserData(context, views);
                 }
-                testRunner.setActive(false);
             }
         });
 
@@ -75,7 +60,6 @@ public class ActivityHook {
                 if(XPreferencesUtils.isAutoInput()) {
                     ViewUtil.fillUserData(context, views);
                 }
-                testRunner.setActive(true);
             }
         });
 

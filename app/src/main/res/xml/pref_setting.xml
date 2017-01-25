@@ -4,13 +4,23 @@
 
         <SwitchPreference
             android:defaultValue="true"
-            android:key="open"
-            android:title="@string/open" />
+            android:key="injection"
+            android:title="@string/injection" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="xmonkey"
+            android:title="@string/xmonkey" />
 
         <SwitchPreference
             android:defaultValue="true"
             android:key="input"
             android:title="@string/input" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="gps"
+            android:title="@string/gps" />
 
     </PreferenceCategory>
 

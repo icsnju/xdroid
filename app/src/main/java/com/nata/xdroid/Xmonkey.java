@@ -23,7 +23,7 @@ import static com.nata.xdroid.utils.XPreferencesUtils.inTestMode;
  * Created by Calvin on 2016/12/5.
  */
 
-public class TestRunner  extends Thread{
+public class XMonkey extends Thread{
 //    private String LOG_RUNNER = "xdroid";
     private Monkey monkey;
     private boolean active = false;
@@ -41,7 +41,7 @@ public class TestRunner  extends Thread{
 //    private static final long timer_unit =1000;
 //    private int timerStatus = CountDownTimerUtil.PREPARE;
 
-    public TestRunner(Context context) {
+    public XMonkey(Context context) {
         this.context = context;
         this.packageName = context.getPackageName();
         WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);

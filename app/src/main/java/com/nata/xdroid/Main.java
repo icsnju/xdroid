@@ -12,10 +12,10 @@ import com.nata.xdroid.hooks.CrashHook;
 import com.nata.xdroid.hooks.LocationHook;
 import com.nata.xdroid.hooks.NetworkHook;
 import com.nata.xdroid.hooks.UncaughtExceptionHook;
+import com.nata.xdroid.hooks.XMonkeyHook;
 import com.nata.xdroid.utils.PermissionUtil;
 import com.nata.xdroid.utils.XPreferencesUtils;
 
-import java.util.Arrays;
 import java.util.List;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
@@ -54,7 +54,8 @@ public class Main implements IXposedHookLoadPackage {
         final String packageName = loadPackageParam.packageName;
 
         String targetPackage = XPreferencesUtils.getTestPackage();
-        final boolean isOpen = XPreferencesUtils.isOpen();
+        final boolean isInjection = XPreferencesUtils.isInjection();
+        final boolean isXMonkey = XPreferencesUtils.isXmonkey();
 
 
         if (targetPackage.equals(packageName) || packageName.equals("android")) {
@@ -73,14 +74,20 @@ public class Main implements IXposedHookLoadPackage {
                         new UncaughtExceptionHook(context).hook(loader);
                         new ActivityCoverageHook(context).hook(loader);
 
-                        // 如果开启插入依赖的选项
-                        if (isOpen) {
-                            // 启动TestRunner
-                            TestRunner runner = new TestRunner(context);
+                        if(isXMonkey) {
+                            // 启动 TestRunner
+                            XMonkey runner = new XMonkey(context);
                             runner.start();
 
+                            // Hook 生命周期
+                            new XMonkeyHook(runner).hook(loader);
+                        }
+
+                        // 如果开启插入依赖的选项
+                        if (isInjection) {
+
                             // Activity相关Hook
-                            new ActivityHook(runner, context, packageName).hook(loader);
+                            new ActivityHook(context, packageName).hook(loader);
 
                             // 获取被赋予权限的Permission
                             List<String> permissions = PermissionUtil.getGrantedPermissions(context, packageName);

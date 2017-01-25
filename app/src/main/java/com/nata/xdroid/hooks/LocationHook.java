@@ -11,6 +11,7 @@ import android.telephony.CellLocation;
 import com.nata.xdroid.notifier.CommonNotice;
 import com.nata.xdroid.notifier.Notifier;
 import com.nata.xdroid.notifier.ToastNotifier;
+import com.nata.xdroid.utils.XPreferencesUtils;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -97,32 +98,37 @@ public class LocationHook implements Hook {
                             // 使用真实的数据
                             // 如果配置了模拟位置
                             //位置监听器,当位置改变时会触发onLocationChanged方法
-//                            LocationListener ll = (LocationListener) param.args[3];
-//                            fackGPSLocation(ll);
+                            if(XPreferencesUtils.isFakeGps()) {
+                                LocationListener ll = (LocationListener) param.args[3];
+                                fackGPSLocation(ll);
+                            }
                         }
 
 
                     }
                 });
 
-        //让APP相信GPS工作良好
-//        findAndHookMethod("android.location.LocationManager", loader, "getGpsStatus", GpsStatus.class,
-//                new XC_MethodHook() {
-//                    /**
-//                     * android.location.LocationManager类的getGpsStatus方法
-//                     * 其参数只有1个：GpsStatus status
-//                     * Retrieves information about the current status of the GPS engine.
-//                     * This should only be called from the {@link GpsStatus.Listener#onGpsStatusChanged}
-//                     * callback to ensure that the data is copied atomically.
-//                     *
-//                     */
-//                    @Override
-//                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-//                        XposedBridge.log("afterHookedMethod: " + "getGpsStatus");
-//                        GpsStatus gss = (GpsStatus) param.getResult();
-//                        setGPSStatus(gss,param);
-//                    }
-//                });
+//        让APP相信GPS工作良好
+        findAndHookMethod("android.location.LocationManager", loader, "getGpsStatus", GpsStatus.class,
+                new XC_MethodHook() {
+                    /**
+                     * android.location.LocationManager类的getGpsStatus方法
+                     * 其参数只有1个：GpsStatus status
+                     * Retrieves information about the current status of the GPS engine.
+                     * This should only be called from the {@link GpsStatus.Listener#onGpsStatusChanged}
+                     * callback to ensure that the data is copied atomically.
+                     *
+                     */
+                    @Override
+                    protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                        XposedBridge.log("afterHookedMethod: " + "getGpsStatus");
+
+                        if (XPreferencesUtils.isFakeGps()) {
+                            GpsStatus gss = (GpsStatus) param.getResult();
+                            setGPSStatus(gss,param);
+                        }
+                    }
+                });
 
     }
 

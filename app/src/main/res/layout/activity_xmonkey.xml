@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textColor="#ff0000"
         android:textSize="16sp"
-        android:text="请选择测试对象"
+        android:text="@string/select"
         />
 
     <Spinner
@@ -39,14 +39,14 @@
         android:layout_height="wrap_content"
         android:textColor="#ff0000"
         android:textSize="16sp"
-        android:text="测试时间统计"
+        android:text="@string/test_time"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="测试总时长" />
+        android:text="@string/test_time_total" />
 
     <TextView
         android:id="@+id/tv_time"
@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="测试时长" />
+        android:text="@string/test_time_test" />
 
     <TextView
         android:id="@+id/textView_test"
@@ -74,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="人工时长" />
+        android:text="@string/test_time_manual" />
 
     <TextView
         android:id="@+id/textView_manual"
@@ -89,14 +89,14 @@
         android:layout_height="wrap_content"
         android:textColor="#ff0000"
         android:textSize="16sp"
-        android:text="测试结果统计"
+        android:text="@string/test_coverage_statistics"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="总Activity数量" />
+        android:text="@string/all_activity" />
 
     <TextView
         android:id="@+id/tv_act"
@@ -112,7 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="遍历到的Activity数量" />
+        android:text="@string/covered_activity" />
 
     <TextView
         android:id="@+id/tv_cov_act"
@@ -126,7 +126,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="测试覆盖率" />
+        android:text="@string/activity_coverage" />
 
     <TextView
         android:id="@+id/tv_cov"
