@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ContactInjector {
     /**
-     * 批量添加通讯录
+     * batch inject contacts
      *
      * @throws OperationApplicationException
      * @throws RemoteException
@@ -28,14 +28,14 @@ public class ContactInjector {
         ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
         int rawContactInsertIndex = 0;
         for (ContactBean contact : list) {
-            rawContactInsertIndex = ops.size(); // 有了它才能给真正的实现批量添加
+            rawContactInsertIndex = ops.size();
 
             ops.add(ContentProviderOperation.newInsert(RawContacts.CONTENT_URI)
                     .withValue(RawContacts.ACCOUNT_TYPE, null)
                     .withValue(RawContacts.ACCOUNT_NAME, null)
                     .withYieldAllowed(true).build());
 
-            // 添加姓名
+            // Name
             ops.add(ContentProviderOperation
                     .newInsert(
                             android.provider.ContactsContract.Data.CONTENT_URI)
@@ -44,7 +44,7 @@ public class ContactInjector {
                     .withValue(RawContacts.Data.MIMETYPE, StructuredName.CONTENT_ITEM_TYPE)
                     .withValue(StructuredName.DISPLAY_NAME, contact.getName())
                     .withYieldAllowed(true).build());
-            // 添加号码
+            // Number
             ops.add(ContentProviderOperation
                     .newInsert(Data.CONTENT_URI)
                     .withValueBackReference(Data.RAW_CONTACT_ID,
@@ -54,7 +54,7 @@ public class ContactInjector {
                     .withValue(Phone.TYPE, Phone.TYPE_MOBILE)
                     .withValue(Phone.LABEL, "").withYieldAllowed(true).build());
         }
-        // 真正添加
+        // Excute
         ContentProviderResult[] results = context.getContentResolver()
                 .applyBatch(ContactsContract.AUTHORITY, ops);
     }

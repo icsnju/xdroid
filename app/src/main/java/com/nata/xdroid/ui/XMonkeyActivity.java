@@ -29,50 +29,17 @@ import java.util.Set;
 import static com.nata.xdroid.utils.FormatUtil.formateTimer;
 
 public class XMonkeyActivity extends AppCompatActivity implements View.OnClickListener {
-    //service countdown
     private Button btnServiceStart;
     private Button btnServiceStop;
     private TextView tvServiceTime;
     private TextView tvManual;
     private TextView tvTest;
-
     private TextView tvAct;
     private TextView tvCovAct;
     private TextView tvCov;
-
     private Spinner spPackage;
-
     private CountDownTimerService countDownTimerService;
     SharedPreferences sp;
-
-
-//
-//    String[] sut = {
-//            "com.fsck.k9",
-//            "com.eleybourn.bookcatalogue",
-//            "org.totschnig.myexpenses",
-//            "com.nloko.android.syncmypix",
-//            "org.wordpress.android",
-//            "aarddict.android",
-//            "org.liberty.android.fantastischmemo",
-//            "com.evancharlton.mileage",
-//            "com.hectorone.multismssender",
-//            "com.kvance.Nectroid",
-//            "com.fsck.k9",
-//            "com.android.keepass",
-//            "com.tencent.mobileqq",
-//            "com.borneq.heregpslocation",
-//            "com.nata.crashapplication",
-//            "tw.qtlin.mac.airunlocker"
-//    };
-
-
-//    public static final String ZHNT_PACKAGE_NAME = "com.cvicse.zhnt";
-//    public static final String LOGCAT_PACKAGE_NAME = "org.jtb.alogcat";
-//    public static final String MM_PACKAGE_NAME = "com.tencent.mm";
-//    public static final String MULTISMS_PACKAGE_NAME = "com.hectorone.multismssender";
-//    public static final String CRASH_PACKAGE_NAME = "com.nata.crashapplication";
-
 
     @Override
     public void onClick(View v) {
@@ -85,15 +52,12 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
                             countDownTimerService.startCountDown();
                             btnServiceStart.setText(R.string.pause);
                             spPackage.setEnabled(false);
-                            // 得关闭应用才能再次load package
                             ActivityManager am = (ActivityManager)this.getSystemService(Context.ACTIVITY_SERVICE);
                             am.killBackgroundProcesses(targetPackage);
                             this.startActivity(this.getPackageManager().getLaunchIntentForPackage(targetPackage));
                             initActivityCoverage();
-//                            btnServiceStop.setEnabled(true);
-//                            btnServiceStart.setEnabled(false);
                         } else {
-                            Toast.makeText(this,"该应用还没有安装",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this,"The application is not installed",Toast.LENGTH_SHORT).show();
                         }
                         break;
                     case CountDownTimerUtil.START:
@@ -110,8 +74,6 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
                 btnServiceStart.setText(R.string.start);
                 countDownTimerService.stopCountDown();
                 spPackage.setEnabled(true);
-//                btnServiceStop.setEnabled(false);
-//                btnServiceStart.setEnabled(true);
                 String targetPackage = spPackage.getSelectedItem().toString();
                 ActivityManager am = (ActivityManager)this.getSystemService(Context.ACTIVITY_SERVICE);
                 am.killBackgroundProcesses(targetPackage);
@@ -157,14 +119,12 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
         tvAct = (TextView) findViewById(R.id.tv_act);
         tvCovAct = (TextView) findViewById(R.id.tv_cov_act);
         tvCov = (TextView)findViewById(R.id.tv_cov);
-//        btnServiceStop.setEnabled(false);
 
         final List<String> sut = AppUtil.getPackageList(this);
 
         sp = this.getSharedPreferences("pref_mine", MODE_WORLD_READABLE);
-        spPackage.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, sut));  //生成下拉列表
+        spPackage.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, sut));
 
-        /*添加列表选择监听器*/
         spPackage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

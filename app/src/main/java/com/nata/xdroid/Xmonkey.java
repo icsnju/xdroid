@@ -24,22 +24,12 @@ import static com.nata.xdroid.utils.XPreferencesUtils.inTestMode;
  */
 
 public class XMonkey extends Thread{
-//    private String LOG_RUNNER = "xdroid";
     private Monkey monkey;
     private boolean active = false;
     private String packageName;
     private int count = 0;
     private int activityCount = 0;
     private Context context;
-
-//    // Timer
-//    private Timer timer;
-//    private MyTimerTask timerTask;
-//    private static long timer_couting = 0;
-//    private static long manual_timer = 0;
-//    private static long test_timer = 0;
-//    private static final long timer_unit =1000;
-//    private int timerStatus = CountDownTimerUtil.PREPARE;
 
     public XMonkey(Context context) {
         this.context = context;
@@ -53,8 +43,6 @@ public class XMonkey extends Thread{
     }
 
     public void run() {
-//        startCountDown();
-
         Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
         MonkeyEvent event = null;
 
@@ -72,7 +60,7 @@ public class XMonkey extends Thread{
                     activityCount = curActivityCount;
                 }
             } else {
-                // 这里判断下如果event是back，而且当前界面出应用了则重启应用
+                // if event is back event and is out of application, then restart
                 if(event instanceof MonkeyKeyEvent && ((MonkeyKeyEvent) event).getKeyCode() == KeyEvent.KEYCODE_BACK) {
                     if(!ActivityUtil.isRunningForeground(context,packageName)){
                         context.startActivity(launchIntent);
@@ -88,98 +76,9 @@ public class XMonkey extends Thread{
         }
     }
 
-    /**
-     * count down task
-     */
-//    private class MyTimerTask extends TimerTask {
-//
-//        @Override
-//        public void run() {
-//            timer_couting += timer_unit;
-//            if(inTestMode() && active) {
-//                test_timer += timer_unit;
-//            } else {
-//                manual_timer += timer_unit;
-//            }
-//
-//            // 每10秒进行一次统计
-//            if((timer_couting / timer_unit) % 10 == 0) {
-//                Log.i(LOG_RUNNER,packageName +"=> " + "测试总时长:" + formateTimer(timer_couting) +
-//                        "人工测试:" + formateTimer(manual_timer) +
-//                        "自动测试:" + formateTimer(test_timer)
-//                );
-//            }
-//
-//        }
-//    }
-
-
-//    public long getTest_timer() {
-//        return test_timer;
-//    }
-//
-//    public long getManual_timer() {
-//        return manual_timer;
-//    }
-//
-//    /**
-//     * get countdowan time
-//     * @return
-//     */
-//    public long getCountingTime(){
-//        return timer_couting;
-//    }
-//
-//    /**
-//     * get current timer status
-//     * @return
-//     */
-//    public int getTimerStatus(){
-//        return  timerStatus;
-//    }
-//
-//    /**
-//     * start
-//     */
-//    public void startCountDown(){
-//        startTimer();
-//        timerStatus = CountDownTimerUtil.START;
-//    }
-//
-//    /**
-//     * paust
-//     */
-//    public void pauseCountDown(){
-//        timer.cancel();
-//        timerStatus = CountDownTimerUtil.PASUSE;
-//    }
-//
-//    /**
-//     * init timer status
-//     */
-//    private void initTimerStatus(){
-//        timer_couting = 0;
-//        manual_timer = 0;
-//        test_timer = 0;
-//        timerStatus = CountDownTimerUtil.PREPARE;
-//    }
-//
-//    /**
-//     * start count down
-//     */
-//    private void startTimer(){
-//        timer = new Timer();
-//        timerTask = new MyTimerTask();
-//        timer.scheduleAtFixedRate(timerTask, 0, timer_unit);
-//    }
-
-
-
     public void setActive(boolean active) {
         this.active = active;
     }
-
-
 
 }
 

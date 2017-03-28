@@ -22,7 +22,7 @@ public class ContentsProcessor {
     public static void solve(Context context, Uri uri, Cursor cursor) {
         if(cursor == null || cursor.getCount() != 0) return ;
 
-        // 联系人相关
+        // Contacts related
         if (isContacts(uri)) {
             Notifier.notice(context, CommonNotice.CONTACT);
 
@@ -32,15 +32,15 @@ public class ContentsProcessor {
             return;
         }
 
-        // 日历相关
+        // Calendar related
         if (isCalendar(uri)) {
             Notifier.notice(context, CommonNotice.CALENDAR);
 
-            // 产生日历数据
+            // TODO generate calendar data
             return ;
         }
 
-        // 图片相关
+        // Image related
         if(isImages(uri)) {
             Notifier.notice(context, CommonNotice.IMAGES);
 
@@ -50,6 +50,7 @@ public class ContentsProcessor {
             return;
         }
 
+        // Audio related
         if(isAudios(uri)) {
             Notifier.notice(context, CommonNotice.AUDIOS);
 

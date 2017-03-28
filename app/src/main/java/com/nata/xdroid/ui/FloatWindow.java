@@ -36,11 +36,11 @@ public class FloatWindow {
     private View mContentView;
 
     private static final int WHAT_HIDE = 0x275;
-    private final float DISTANCE = 15.0f;  //  点击偏移量   在上、下、左、右这个范围之内都会触发点击事件
+    private final float DISTANCE = 15.0f;
     private float offsetX, offsetY;
 
     private long lastTouchTimeMillis;
-    private long downTimeMillis;  //  按下事件  暂未使用，可以拓展长按事件
+    private long downTimeMillis;
 
     private boolean mIsShowing;
     private float downX, downY;
@@ -49,16 +49,10 @@ public class FloatWindow {
 
     private View mFloatView, mPlayerView;
 
-    /**
-     * 不带布局参数的构造方法
-     */
     public FloatWindow(Context context) {
         this(context, null, null);
     }
 
-    /**
-     * 带布局参数的构造方法
-     */
     public FloatWindow(Context context, View PlayerView, View floatView) {
         this.mContext = context;
         setFloatView(floatView);
@@ -67,9 +61,6 @@ public class FloatWindow {
         initLayoutParams();
     }
 
-    /**
-     * 设置开启状态的布局视图
-     */
     public void setPlayerView(View PlayerView) {
         if (PlayerView != null) {
             BackgroundView backgroundView = new BackgroundView(getContext());
@@ -82,9 +73,6 @@ public class FloatWindow {
         }
     }
 
-    /**
-     * 设置关闭状态的布局视图
-     */
     public void setFloatView(View floatView) {
         if (floatView != null) {
             this.mFloatView = floatView;
@@ -92,9 +80,6 @@ public class FloatWindow {
         }
     }
 
-    /**
-     * 设置窗口当前布局
-     */
     private void setContentView(View contentView) {
         if (contentView != null) {
             if (isShowing()) {
@@ -108,9 +93,6 @@ public class FloatWindow {
         }
     }
 
-    /**
-     * 配置布局View， 需要在此处获得View的宽、高，并由此获得偏移量
-     */
     private void createContentView(View contentView) {
         this.mContentView = contentView;
         contentView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED); // 主动计算视图View的宽高信息
@@ -119,9 +101,6 @@ public class FloatWindow {
         contentView.setOnTouchListener(new WindowTouchListener());
     }
 
-    /**
-     * 获得上下文信息
-     */
     public Context getContext() {
         return this.mContext;
     }
@@ -133,9 +112,6 @@ public class FloatWindow {
         return mWindowManager;
     }
 
-    /**
-     * 获得WindowManager.LayoutParams参数
-     */
     public WindowManager.LayoutParams getLayoutParams() {
         if (mLayoutParams == null) {
             mLayoutParams = new WindowManager.LayoutParams();
@@ -144,9 +120,6 @@ public class FloatWindow {
         return mLayoutParams;
     }
 
-    /**
-     * 获得显示信息
-     */
     public DisplayMetrics getDisplayMetrics() {
         if (mDisplayMetrics == null) {
             mDisplayMetrics = getContext().getResources().getDisplayMetrics();
@@ -154,25 +127,16 @@ public class FloatWindow {
         return mDisplayMetrics;
     }
 
-    /**
-     * 获得当前视图
-     */
     public View getContentView() {
         return mContentView;
     }
 
-    /**
-     * 初始化窗口管理器
-     */
     private void initWindowManager() {
         mWindowManager = (WindowManager) getContext().getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
         mDisplayMetrics = new DisplayMetrics();
         mWindowManager.getDefaultDisplay().getMetrics(mDisplayMetrics);
     }
 
-    /**
-     * 初始化WindowManager.LayoutParams参数
-     */
     private void initLayoutParams() {
         getLayoutParams().flags = getLayoutParams().flags
                 | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
@@ -191,9 +155,6 @@ public class FloatWindow {
         getLayoutParams().y = (int) (mDisplayMetrics.heightPixels * 1 / 4 - offsetY);
     }
 
-    /**
-     * 获取状态栏的高度
-     */
     public int getStatusBarHeight(Context context) {
         int height = 0;
         int resId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -203,9 +164,6 @@ public class FloatWindow {
         return height;
     }
 
-    /**
-     * 更新窗口的位置
-     */
     private void updateLocation(float x, float y, boolean offset) {
         if (getContentView() != null) {
             if (offset) {
@@ -219,9 +177,6 @@ public class FloatWindow {
         }
     }
 
-    /**
-     * 显示窗口
-     */
     public void show() {
         if (getContentView() != null && !isShowing()) {
             getWindowManager().addView(getContentView(), getLayoutParams());
@@ -232,9 +187,6 @@ public class FloatWindow {
         }
     }
 
-    /**
-     * 隐藏当前显示窗口
-     */
     public void dismiss() {
         if (getContentView() != null && isShowing()) {
             handler.removeMessages(WHAT_HIDE);
@@ -243,16 +195,10 @@ public class FloatWindow {
         }
     }
 
-    /**
-     * 判断当前是否有显示窗口
-     */
     public boolean isShowing() {
         return mIsShowing;
     }
 
-    /**
-     * 自动对齐的一个小动画（自定义属性动画），使自动贴边的时候显得不那么生硬
-     */
     private ValueAnimator alignAnimator(float x, float y) {
         ValueAnimator animator = null;
         if (x <= getDisplayMetrics().widthPixels / 2) {
@@ -281,9 +227,6 @@ public class FloatWindow {
         return animator;
     }
 
-    /**
-     *
-     * */
     public class PointEvaluator implements TypeEvaluator {
 
         @Override
@@ -297,9 +240,6 @@ public class FloatWindow {
         }
     }
 
-    /**
-     * 打开选项菜单
-     */
     public void showPlayer() {
         if (isOpen) {
             return;
@@ -314,9 +254,6 @@ public class FloatWindow {
         isOpen = true;
     }
 
-    /**
-     * 关闭选项菜单
-     */
     public void turnMini() {
         if (!isOpen) {
             return;
@@ -333,9 +270,6 @@ public class FloatWindow {
         handler.sendEmptyMessage(WHAT_HIDE);
     }
 
-    /**
-     * 带有按键监听事件和触摸事件的BackgroundView
-     */
     class BackgroundView extends RelativeLayout {
 
         public BackgroundView(Context context) {
@@ -428,9 +362,6 @@ public class FloatWindow {
         }
     }
 
-    /**
-     * 按下事件处理
-     */
     private void down(MotionEvent event) {
         downX = event.getRawX();
         downY = event.getRawY();
@@ -441,25 +372,19 @@ public class FloatWindow {
 //        updateLocation(event.getRawX(), event.getRawY(), true);
     }
 
-    /**
-     * 移动事件处理
-     */
     private void move(MotionEvent event) {
         lastTouchTimeMillis = System.currentTimeMillis();
         updateLocation(event.getRawX(), event.getRawY(), true);
     }
 
-    /**
-     * 抬起事件处理
-     */
     private void up(MotionEvent event) {
         float x = event.getRawX();
         float y = event.getRawY();
         if (x >= downX - DISTANCE && x <= downX + DISTANCE && y >= downY - DISTANCE && y <= downY + DISTANCE) {
             if (System.currentTimeMillis() - downTimeMillis > 1200) {
-                //  长按
+                //  Long Click
             } else {
-                showPlayer();  //点击
+                showPlayer();  //Click
             }
         } else {
             ValueAnimator animator = alignAnimator(x, y);

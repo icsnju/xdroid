@@ -115,7 +115,6 @@ public class SettinigsActivity extends AppCompatActivity {
             prefMgr.setSharedPreferencesName("pref_mine");
             prefMgr.setSharedPreferencesMode(MODE_WORLD_READABLE);
 
-
             SharedPreferences sp = prefMgr.getSharedPreferences();
             final Context context = getActivity().getApplicationContext();
 
@@ -128,7 +127,6 @@ public class SettinigsActivity extends AppCompatActivity {
                      .putStringSet("cov_acts",new HashSet<String>())
                      .apply();
 
-
             Preference crash = findPreference("crash");
             crash.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
@@ -140,19 +138,6 @@ public class SettinigsActivity extends AppCompatActivity {
                 }
             });
 
-//            Preference userdata = findPreference("userdata");
-//            userdata.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-//                @Override
-//                public boolean onPreferenceClick(Preference pref) {
-//
-//                    List<UserData> userDatas = new UserDataDao(context).getAll();
-//                    String userData = FormatUtil.getUserDataInfo(userDatas);
-//
-//                    UserDataDialog.show(context, userData);
-//                    return true;
-//                }
-//            });
-
             Preference test = findPreference("test");
             test.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
@@ -163,62 +148,6 @@ public class SettinigsActivity extends AppCompatActivity {
                     return true;
                 }
             });
-
-//            Preference coverage = findPreference("coverage");
-//            coverage.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-//                @Override
-//                public boolean onPreferenceClick(Preference pref) {
-//                    SharedPreferences sp = context.getSharedPreferences("monkey_coverage",MODE_WORLD_READABLE);
-//                    Map<String,Set<String>> map = (Map<String,Set<String>>)sp.getAll();
-//                    String message = "";
-//                    for(Map.Entry<String,Set<String>> entry: map.entrySet()) {
-//                        String packageName = entry.getKey();
-//                        Set<String> activities = entry.getValue();
-//                        List<String> actLists = ActivityUtil.getActivities(context, packageName);
-//                        float coverage = (float)activities.size() /actLists.size();
-//                        message += packageName + " : " + "\n" ;
-//                        message += coverage + " => " + activities.size() + "\\" + actLists.size() + "\n";
-//                    }
-//                    AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(getActivity());
-//                    alertDialogBuilder.setMessage(message);
-//                    AlertDialog alertDialog = alertDialogBuilder.create();
-//                    alertDialog.show();//将dialog显示出来
-//                    return true;
-//                }
-//            });
-
-//            Preference clearCoverage = findPreference("clear_coverage");
-//            clearCoverage.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-//                @Override
-//                public boolean onPreferenceClick(Preference pref) {
-//                    SharedPreferences sp = context.getSharedPreferences("monkey_coverage",MODE_WORLD_READABLE);
-//                    sp.edit().clear().apply();
-//                    return true;
-//                }
-//            });
-
-//            final SwitchPreference open = (SwitchPreference)findPreference("open");
-//            open.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-//                @Override
-//                public boolean onPreferenceChange(Preference preference, Object newVal) {
-//                    final boolean value = (Boolean) newVal;
-////                    open.setChecked(value);
-////                    if(value) getActivity().bindService();
-//                    return true;
-//                }
-//            });
-
-//            Preference broadcast = findPreference("broadcast");
-//            broadcast.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-//                @Override
-//                public boolean onPreferenceClick(Preference pref) {
-//                    Intent intent = new Intent("com.fsck.k9.service.CoreReceiver.wakeLockRelease");
-//                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-//                    return true;
-//                }
-//            });
-
-
         }
     }
 }

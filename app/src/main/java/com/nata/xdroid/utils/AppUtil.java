@@ -15,7 +15,7 @@ import java.util.List;
 public class AppUtil {
 
     /**
-     * 检测某个应用是否安装
+     * Test if an application is installed
      *
      * @param context
      * @param packageName
@@ -37,7 +37,7 @@ public class AppUtil {
             PackageInfo packageInfo = packages.get(i);
             if((packageInfo.applicationInfo.flags& ApplicationInfo.FLAG_SYSTEM)==0)
             {
-                packageList.add(packageInfo.packageName);//如果非系统应用，则添加至appList
+                packageList.add(packageInfo.packageName);
             }
 
         }

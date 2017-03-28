@@ -31,24 +31,6 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
  */
 
 public class Main implements IXposedHookLoadPackage {
-
-//    String[] suts = {
-//        "com.amazon.mShop.android.shopping",
-//        "com.contextlogic.wish",
-//        "com.facebook.orca",
-//        "com.instagram.android",
-//        "com.pinterest",
-//        "com.snapchat.android",
-//        "com.spotify.music",
-//        "com.tencent.mm",
-//        "com.twitter.android",
-//        "com.whatsapp",
-//        "com.facebook.katana",
-//        "com.google.android.youtube"
-//    };
-//    List<String> appList = Arrays.asList(suts);
-
-
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam loadPackageParam) throws Throwable {
         final ClassLoader loader = loadPackageParam.classLoader;
         final String packageName = loadPackageParam.packageName;
@@ -59,15 +41,12 @@ public class Main implements IXposedHookLoadPackage {
 
 
         if (targetPackage.equals(packageName) || packageName.equals("android")) {
-//        if (appList.contains(packageName) || packageName.equals("android")) {
             findAndHookMethod(Application.class, "onCreate", new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     Application context = (Application) param.thisObject;
 
                     if (packageName.equals("android")) {
-//                        int uid = context.getApplicationInfo().uid;
-//                        new BroadcastHook(uid).hook(loader);
                         new ANRHook(context).hook(loader);
                         new CrashHook(context).hook(loader);
                     } else {
@@ -75,55 +54,34 @@ public class Main implements IXposedHookLoadPackage {
                         new ActivityCoverageHook(context).hook(loader);
 
                         if(isXMonkey) {
-                            // 启动 TestRunner
                             XMonkey runner = new XMonkey(context);
                             runner.start();
-
-                            // Hook 生命周期
                             new XMonkeyHook(runner).hook(loader);
                         }
 
-                        // 如果开启插入依赖的选项
+                        // if the dependency injection option is opened
                         if (isInjection) {
-
-                            // Activity相关Hook
                             new ActivityHook(context, packageName).hook(loader);
-
-                            // 获取被赋予权限的Permission
                             List<String> permissions = PermissionUtil.getGrantedPermissions(context, packageName);
 
-                            // 联系人相关Hook
-//                            if (permissions.contains(Manifest.permission.READ_CONTACTS)) {
-                                new ContentsHook(context).hook(loader);
-//                                XposedBridge.log("检测到读取联系人的权限, hook联系人");
-//                            }
+                            new ContentsHook(context).hook(loader);
 
-                            // 蓝牙相关Hook
+                            // Bluetooth related Hook
                             if (permissions.contains(Manifest.permission.BLUETOOTH)) {
                                 new BluetoothHook(context).hook(loader);
-                                XposedBridge.log("检测到蓝牙权限, hook蓝牙");
                             }
 
-                            // 日历相关Hook
-//                            if (permissions.contains(Manifest.permission.READ_CALENDAR)) {
-//                                new CalendarHook(context).hook(loader);
-//                                XposedBridge.log("检测到日历权限, hook蓝牙");
-//                            }
-
-                            // 位置相关Hook
+                            // GPS related Hook
                             if (permissions.contains(Manifest.permission.ACCESS_FINE_LOCATION) ||
                                     permissions.contains(Manifest.permission.ACCESS_COARSE_LOCATION)) {
                                 new LocationHook(context).hook(loader);
-                                XposedBridge.log("检测到位置权限, hook GPS");
                             }
 
-                            // 网络相关权限
+                            // Network related Hook
                             if (permissions.contains(Manifest.permission.INTERNET)) {
                                 new NetworkHook(context).hook(loader);
-                                XposedBridge.log("检测到位置权限, hook 网络相关权限");
                             }
                         }
-
                     }
                 }
             });

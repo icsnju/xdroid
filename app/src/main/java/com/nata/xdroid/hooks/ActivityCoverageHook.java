@@ -34,9 +34,6 @@ public class ActivityCoverageHook {
                 String packageName = context.getPackageName();
                 Intent intent = NewActivityReceiver.getNewActivityIntent(activityName);
                 context.sendBroadcast(intent);
-
-//                Intent monkeyIntent = MonkeyCoverageReceiver.getNewActivityIntent(packageName, activityName);
-//                context.sendBroadcast(monkeyIntent);
             }
         });
     }

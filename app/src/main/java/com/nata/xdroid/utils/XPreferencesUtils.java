@@ -25,22 +25,13 @@ public class XPreferencesUtils {
         return instance;
     }
 
-    /**
-     * 是否处于监控模式
-     * @return
-     */
     public static boolean inMonitorMode() {
         return  !inTestMode();
     }
 
-    /**
-     * 是否处于测试模式
-     * @return
-     */
     public static boolean inTestMode() {
         return getInstance().getBoolean("test_mode", false);
     }
-
 
     public static boolean isNetWorkConnected() {
         return getInstance().getBoolean("network", false);
@@ -71,29 +62,6 @@ public class XPreferencesUtils {
     public static boolean isAutoInput() {
         return getInstance().getBoolean("input", true);
     }
-
-
-
-//
-//    public static boolean notWhisper() {
-//        return getInstance().getBoolean("not_whisper", false);
-//    }
-//
-//    public static boolean notMute() {
-//        return getInstance().getBoolean("not_mute", false);
-//    }
-//
-//    public static boolean delay() {
-//        return getInstance().getBoolean("delay", false);
-//    }
-//
-//    public static int delayTime() {
-//        return getInstance().getInt("delay_time", 0);
-//    }
-//
-//    public static boolean quickOpen() {
-//        return getInstance().getBoolean("quick_open", true);
-//    }
 
 }
 

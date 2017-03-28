@@ -38,25 +38,25 @@ public class CrashDialog {
             e.printStackTrace();
         }
         AlertDialog alertDialog = new AlertDialog.Builder(context, AlertDialog.THEME_HOLO_LIGHT)
-                .setTitle((appName != null ? appName : "") + " 错误报告")
+                .setTitle((appName != null ? appName : "") + " Crash reports")
                 .setMessage(exceptionDetail)
-                .setNegativeButton("取消", null)
-                .setNeutralButton("复制", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Cancel", null)
+                .setNeutralButton("Copy", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ClipboardManager cm = (ClipboardManager) context.getSystemService(Service.CLIPBOARD_SERVICE);
                         cm.setText(exceptionDetail);
                     }
                 })
-                .setPositiveButton("发送", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Send", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent target = new Intent(Intent.ACTION_SEND);
                         target.setType("text/plain");
-                        target.putExtra(Intent.EXTRA_SUBJECT, "发送");
+                        target.putExtra(Intent.EXTRA_SUBJECT, "Send");
                         target.putExtra(Intent.EXTRA_TEXT, exceptionDetail);
 
-                        Intent shareIntent = Intent.createChooser(target, "发送");
+                        Intent shareIntent = Intent.createChooser(target, "Send");
                         shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(shareIntent);
                     }

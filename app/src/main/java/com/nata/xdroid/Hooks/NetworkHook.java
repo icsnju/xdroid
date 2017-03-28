@@ -56,7 +56,7 @@ public class NetworkHook implements Hook{
             }
         });
 
-        // API23后被废弃
+        // deprecated after API23
         if(android.os.Build.VERSION.SDK_INT <23 ) {
             findAndHookMethod("android.net.http.AndroidHttpClient", loader, "execute",HttpUriRequest.class, new XC_MethodHook() {
                 @Override
@@ -72,6 +72,7 @@ public class NetworkHook implements Hook{
             });
         }
 
+        // can cause some errors
 //        findAndHookMethod("android.webkit.WebView", loader, "loadUrl",String.class, new XC_MethodHook() {
 //            @Override
 //            protected void afterHookedMethod(MethodHookParam param) throws Throwable {

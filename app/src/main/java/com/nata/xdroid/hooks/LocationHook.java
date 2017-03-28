@@ -43,7 +43,6 @@ public class LocationHook implements Hook {
                 if(scanResults.size() == 0) {
                     Notifier.notice(context, CommonNotice.WIFI_LOCATION);
                 }
-//                param.setResult(null);
             }
         });
 
@@ -55,7 +54,6 @@ public class LocationHook implements Hook {
                 if(cl == null) {
                     ToastNotifier.makeToast(context,CommonNotice.LTE_LOCATION);
                 }
-//                param.setResult(null);
             }
         });
 
@@ -94,21 +92,14 @@ public class LocationHook implements Hook {
                         } else if(provider.equals(LocationManager.PASSIVE_PROVIDER) &&  !lm.isProviderEnabled(LocationManager.PASSIVE_PROVIDER)) {
                             Notifier.notice(context,CommonNotice.NO_PASSIVE_PROVIDER);
                         } else {
-                            // 如果没有配置模拟位置
-                            // 使用真实的数据
-                            // 如果配置了模拟位置
-                            //位置监听器,当位置改变时会触发onLocationChanged方法
                             if(XPreferencesUtils.isFakeGps()) {
                                 LocationListener ll = (LocationListener) param.args[3];
                                 fackGPSLocation(ll);
                             }
                         }
-
-
                     }
                 });
 
-//        让APP相信GPS工作良好
         findAndHookMethod("android.location.LocationManager", loader, "getGpsStatus", GpsStatus.class,
                 new XC_MethodHook() {
                     /**
@@ -146,7 +137,6 @@ public class LocationHook implements Hook {
             if (m != null) {
                 Object[] args = new Object[1];
                 Location l = new Location(LocationManager.GPS_PROVIDER);
-                //台北经纬度:121.53407,25.077796
                 double la = 121.53407;
                 double lo = 25.077796;
                 l.setLatitude(la);

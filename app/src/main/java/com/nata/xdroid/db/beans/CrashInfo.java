@@ -15,7 +15,6 @@ import java.io.Serializable;
 public class CrashInfo implements Serializable {
 
     Throwable throwable;
-    //--------表结构
     @DatabaseField(generatedId = true)
     private int _id;
     @DatabaseField

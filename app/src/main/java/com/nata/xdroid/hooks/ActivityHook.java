@@ -86,10 +86,10 @@ public class ActivityHook {
             else if (action.equals(MediaStore.ACTION_IMAGE_CAPTURE)) {
                 Notifier.notice(context, CommonNotice.ACTION_CAMERA);
             }else if(action.equals(Intent.ACTION_PICK)) {
-                if(intent.getType().startsWith("image")) { // 图片
+                if(intent.getType().startsWith("image")) { // Images
                     Notifier.notice(context,"App opens image galley");
-                } else if(intent.getType().startsWith("videos")) {// 视频
-
+                } else if(intent.getType().startsWith("videos")) {// Videos
+                    Notifier.notice(context,"App opens video files");
                 }
             }
         }

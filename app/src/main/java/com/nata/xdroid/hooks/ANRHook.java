@@ -22,13 +22,11 @@ public class ANRHook implements Hook {
 
     @Override
     public void hook(final ClassLoader loader) {
-
         // Handle ANR
         findAndHookMethod("com.android.server.am.ActivityManagerService", loader, "appNotResponding", "com.android.server.am.ProcessRecord", "com.android.server.am.ActivityRecord", "com.android.server.am.ActivityRecord",boolean.class,String.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 String annotation = (String) param.args[4];
-//                Notifier.notice(context, CommonNotice.ANR+annotation);
                 log("ANR: " + context.getPackageName() + annotation);
             }
         });

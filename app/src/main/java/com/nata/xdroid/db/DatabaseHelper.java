@@ -56,7 +56,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 
     /**
-     * 单例获取该Helper
+     * Get helper
      *
      * @param context
      * @return
@@ -95,7 +95,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
 
     /**
-     * 释放资源
+     * Release resources
      */
     @Override
     public void close()
@@ -108,22 +108,4 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             dao = null;
         }
     }
-
-
-
-//    public Dao<CrashInfo, Integer> getRecordDao() {
-//        ConnectionSource connectionSource = new AndroidConnectionSource(this);
-//        Dao<CrashInfo, Integer> dao = null;
-//        try {
-//            dao = getDao(CrashInfo.class);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-////        try {
-////            dao = BaseDaoImpl.createDao(connectionSource, UserData.class);
-////        } catch (SQLException e) {
-////            e.printStackTrace();
-////        }
-//        return dao;
-//    }
 }

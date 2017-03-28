@@ -18,7 +18,6 @@ import static de.robv.android.xposed.XposedHelpers.findAndHookMethod;
 public class AutoTestHook implements Hook{
     @Override
     public void hook(ClassLoader loader) {
-
         findAndHookMethod("android.app.Activity", loader, "startActivty", Intent.class, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -29,7 +28,6 @@ public class AutoTestHook implements Hook{
                 }
             }
         });
-
 
         findAndHookMethod("android.app.Activity", loader, "onResume", new XC_MethodHook() {
             @Override

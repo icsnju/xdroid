@@ -18,7 +18,6 @@ public class ExceptionHook implements Hook {
         hookAllConstructors(IOException.class, new XC_MethodHook() {
             @Override
             protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                /* 所有网络 IO，本地 IO 等 IO 错误都会被捕获 */
                 log("Throwable " + (Throwable) param.thisObject);
             }
         });
