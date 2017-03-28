@@ -136,6 +136,11 @@ public class XMonkeyActivity extends AppCompatActivity implements View.OnClickLi
         }
     };
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        collectActivityCoverage();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

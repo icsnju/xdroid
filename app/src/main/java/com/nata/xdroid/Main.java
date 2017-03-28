@@ -93,10 +93,10 @@ public class Main implements IXposedHookLoadPackage {
                             List<String> permissions = PermissionUtil.getGrantedPermissions(context, packageName);
 
                             // 联系人相关Hook
-                            if (permissions.contains(Manifest.permission.READ_CONTACTS)) {
+//                            if (permissions.contains(Manifest.permission.READ_CONTACTS)) {
                                 new ContentsHook(context).hook(loader);
-                                XposedBridge.log("检测到读取联系人的权限, hook联系人");
-                            }
+//                                XposedBridge.log("检测到读取联系人的权限, hook联系人");
+//                            }
 
                             // 蓝牙相关Hook
                             if (permissions.contains(Manifest.permission.BLUETOOTH)) {
