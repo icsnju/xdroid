@@ -35,6 +35,5 @@ public class CrashHook implements Hook {
                 log(CommonNotice.CRASH + info.throwClassName + "->" + info.exceptionClassName + " -> " + info.exceptionMessage + " -> " + info.stackTrace);
             }
         });
-
     }
 }

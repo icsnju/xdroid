@@ -38,7 +38,6 @@ public class MonkeyTouchEvent extends MonkeyMotionEvent {
 	@Override
 	public int fireEvent(Instrumentation testRuner) {
 		MotionEvent event = getEvent();
-//		System.out.println(":Touching Key (" + getTypeLabel() + "): ");
 		printInfo();
 		try {
 			testRuner.sendPointerSync(event);
@@ -49,8 +48,6 @@ public class MonkeyTouchEvent extends MonkeyMotionEvent {
 			event.recycle();
 		}
  
-		// testRuner.clickOnScreen(event.getRawX(), event.getRawY());
-
 		return MonkeyEvent.INJECT_SUCCESS;
 	}
 }

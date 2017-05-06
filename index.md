@@ -21,38 +21,38 @@ We selected 12 commercial apps which are used by millions of users from [Google 
 
 ## Code coverage results for open-source apps
 
-|Subject       |               |	   |	  |	   | Monkey |	| 	| Xdroid |	|           | 	| Manual	| | |
-| ------       | --------      |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |
-|Subject Name	 | Category      |	#Activity	| App pkg	| Version	| Cov |	#ANR	| #Crash	| Manual(min) |	Cov	| #ANR	 | #Crash	| Cov	| #ANR	| #Crash |
-|AnyMemo       |	Education	   | 35	| org.liberty.android.fantastischmemo	| 8.3.1 |	25.32 |	0	|1	|3	|27.21 |	1	| 1	| 35.92 |	0	| 1|
-|BookCatalogue |	Productivity | 22	| com.eleybourn.bookcatalogue	| 3.8	| 18.45 |	0	| 1	| 4	 |43.13 |	0	|2	| 43.32 |	0	|0|
-|Mileage	     |  Finance	     | 51	| com.evancharlton.mileage	|3.1.1	|	23.22 |	0	|0	|3	| 55.08 |	0	|3	|53.68 |	0	|2|
-|Multi SMS	   |  Tools        |	7	|com.hectorone.multismssender	|2.3	| 41.33 |	0	|0	|3	| 66.34 |	0	|0	|65.57 |	0|	0|
-|Nectroid      |	Media	       |7|	com.kvance.Nectroid|	1.2.4	| 31.64 |	0	|0	|2.5	| 	50.66 |	0	|1	|60.33 |	0|	1|
-|MyExpenses	   |  Finance      |	13|	org.totschnig.myexpenses|	1.6.0|	20.77 |	0	|0	|2.5|		38.05 |	0	|1	|56.19 |	0|	0|
-|K-9Mail       |	Mail         |	25	|com.fsck.k9|	3.512| 5.06 |	0	|1	|6|		30.87 |	0	|4	|	32.49 |	0	|1|
-|KeePassDroid  |	Tools        |	15|	com.android.keepass|	1.9.8	| 5.02 |	0	|0 | 3	|	11.32 |	0 |	1 | 8.78 | 0 |0|
+|Subject       |               |	   |	  |	   | Monkey |	| 	| Xdroid |	|           | 	| Manual	|    |     | Sapienz	| | |
+| ------       | --------      |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |
+|Subject Name	 | Category      |	#Activity	| App pkg	| Version	| Cov |	#ANR	| #Crash	| Manual(min) |	Cov	| #ANR	 | #Crash	| Cov	| #ANR	| #Crash | Cov	| #ANR	| #Crash |
+|AnyMemo       |	Education	   | 35	| org.liberty.android.fantastischmemo	| 8.3.1 |	25.32 |	0	|1	|3	|27.21 |	1	| 1	| 35.92 |	0	| 1 | 5.59 | 0 | 0 |
+|BookCatalogue |	Productivity | 22	| com.eleybourn.bookcatalogue	| 3.8	| 18.45 |	0	| 1	| 4	 |43.13 |	0	|2	| 43.32 |	0	|0|3.15 | 0 | 0 |
+|Mileage	     |  Finance	     | 51	| com.evancharlton.mileage	|3.1.1	|	23.22 |	0	|0	|3	| 55.08 |	0	|3	|53.68 |	0	|2|20.68  | 0 | 0 |
+|Multi SMS	   |  Tools        |	7	|com.hectorone.multismssender	|2.3	| 41.33 |	0	|0	|3	| 66.34 |	0	|0	|65.57 |	0|	0| 29.18 | 0 | 0 |
+|Nectroid      |	Media	       |7|	com.kvance.Nectroid|	1.2.4	| 31.64 |	0	|0	|2.5	| 	50.66 |	0	|1	|60.33 |	0|	1| 26.53 | 0 | 0 |
+|MyExpenses	   |  Finance      |	13|	org.totschnig.myexpenses|	1.6.0|	20.77 |	0	|0	|2.5|		38.05 |	0	|1	|56.19 |	0|	0| 17.65 | 0 | 0 |
+|K-9Mail       |	Mail         |	25	|com.fsck.k9|	3.512| 5.06 |	0	|1	|6|		30.87 |	0	|4	|	32.49 |	0	|1| 2.42 | 0 | 0 | 2.42  | 0 | 0 |
+|KeePassDroid  |	Tools        |	15|	com.android.keepass|	1.9.8	| 5.02 |	0	|0 | 3	|	11.32 |	0 |	1 | 8.78 | 0 |0| 1.94 | 0 | 0 |
 
 ![](images/open.png)
 
 ## Activity coverage results for commercial apps
 
-|Subject |  |	|	|	| Monkey |	| 	| Xdroid |	|           | 	| Manual	| | |
+|Subject |  |	|	|	| Monkey |	| 	| Xdroid |	|           | 	| Manual	| | | Sapienz		| | |
 | ---- | --- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |
-|Subject Name	| Category |	#Activity	| App pkg	| Version	| Cov |	#ANR	| #Crash	| Manual(min) |	Cov	| #ANR	 | #Crash	| Cov	| #ANR	| #Crash |
-|wish        |	Shopping	    | 49	| com.contextlogic.wish	  | 4.2.1             |	12.24 |	0	| 0	| 5	|	30.61 |	0	| 0	| 	42.85 |	0	| 0 |
-|Messenger   |	Communication | 121	| com.facebook.orca	      |33.0.0.31.250	    |	1.24 	| 0	|0	|	6	| 19.00  |	0	| 0	|19.80  | 	0	|0|
-|instagram   |  Media	        | 26	| com.instagram.android	  |10.3.0	 	          | 11.50 |	0	|0	|	3	| 26.92  |	0 |	0	|	34.61 | 	0	|0|
-|pinterest   |  Media         |	34	| com.pinterest	          |6.6.0	            |	8.82 	| 0	|0	|	6 | 22.06  |	0 |	1	|	39.70 |	0	|0|
-|snapchat    |	Communication	|  9  |	com.snapchat.android    |8.0.0	            |	22.22 |	0	|0	| 2 | 44.44  |	0	| 0	| 44.44 |	0	|0|
-|spotify	   |  Media         |	97  |	com.spotify.music       |7.0.0.1.1369		    | 4.64 	| 0	|0	| 7 | 15.46  |  0	| 3 |	17.52 |	0	|1|
-|Wechat      |  Social        |	705	| com.fsck.k9             |6.3.32	 	          | 0.57 	| 1	|0	|	5 | 8.22   |	0	| 0	| 12.40 | 0 |	0|
-|twitter     |	Social        |	176 |	com.twitter.android     |6.28.0	 	          | 2.27 	| 0	|0	|	5	| 27.27  |	1 | 0	|	31.25 |	0	|0|
-|facebook    |	Social        |	418 |	com.facebook.katana     |106.0.0.26.68      | 1.43 	| 1	|0	| 4 | 6.34   | 	0	| 4 |	8.13  | 0 |	0|
-|Google      |	Tools         |	25  |	com.google.android.apps.translate | 5.6.0   | 38.00 |	0	|0	|	6	| 52.00  |	0	| 0	|52.00 	| 0	|0|
-|whatsapp    |	Communication |	122 |	com.whatsapp            |	2.16.396	 	      | 2.86  |	0	|0	|	4	| 28.68  |	0	| 1	|40.16  | 0 |	0|
+|Subject Name	| Category |	#Activity	| App pkg	| Version	| Cov |	#ANR	| #Crash	| Manual(min) |	Cov	| #ANR	 | #Crash	| Cov	| #ANR	| #Crash | Cov	| #ANR	| #Crash |
+|wish        |	Shopping	    | 49	| com.contextlogic.wish	  | 4.2.1             |	12.24 |	0	| 0	| 5	|	30.61 |	0	| 0	| 	42.85 |	0	| 0 | 12.24  | 0 | 0 |
+|Messenger   |	Communication | 121	| com.facebook.orca	      |33.0.0.31.250	    |	1.24 	| 0	|0	|	6	| 19.00  |	0	| 0	|19.80  | 	0	|0| 1.60  | 0 | 0 |
+|instagram   |  Media	        | 26	| com.instagram.android	  |10.3.0	 	          | 11.50 |	0	|0	|	3	| 26.92  |	0 |	0	|	34.61 | 	0	|0| 11.53 | 0 | 0 |
+|pinterest   |  Media         |	34	| com.pinterest	          |6.6.0	            |	8.82 	| 0	|0	|	6 | 22.06  |	0 |	1	|	39.70 |	0	|0|8.82 | 0 | 0 |
+|snapchat    |	Communication	|  9  |	com.snapchat.android    |8.0.0	            |	22.22 |	0	|0	| 2 | 44.44  |	0	| 0	| 44.44 |	0	|0|22.22 | 0 | 0 |
+|spotify	   |  Media         |	97  |	com.spotify.music       |7.0.0.1.1369		    | 4.64 	| 0	|0	| 7 | 15.46  |  0	| 3 |	17.52 |	0	|1|5.15 | 0 | 0 |
+|Wechat      |  Social        |	705	| com.fsck.k9             |6.3.32	 	          | 0.57 	| 1	|0	|	5 | 8.22   |	0	| 0	| 12.40 | 0 |	0| 1.27  | 0 | 0 |
+|twitter     |	Social        |	176 |	com.twitter.android     |6.28.0	 	          | 2.27 	| 0	|0	|	5	| 27.27  |	1 | 0	|	31.25 |	0	|0|4.54 | 0 | 2 |
+|facebook    |	Social        |	418 |	com.facebook.katana     |106.0.0.26.68      | 1.43 	| 1	|0	| 4 | 6.34   | 	0	| 4 |	8.13  | 0 |	0| 1.67  | 0 | 0 |
+|Google      |	Tools         |	25  |	com.google.android.apps.translate | 5.6.0   | 38.00 |	0	|0	|	6	| 52.00  |	0	| 0	|52.00 	| 0	|0|40.00 | 0 | 0 |
+|whatsapp    |	Communication |	122 |	com.whatsapp            |	2.16.396	 	      | 2.86  |	0	|0	|	4	| 28.68  |	0	| 1	|40.16  | 0 |	0|1.63 |0 | 0 |
 |yahoo mail  |	Mail          |	56  |	com.yahoo.mobile.client.android.mail|5.11.6 | 10.71 | 0	|0	|	5	| 30.35	 |	0	| 1	| 35.71 |	0	|0|
-
+7.14 | 0 | 0 |
 ![](images/google.png)
 
 ## Bugs Found
@@ -62,6 +62,7 @@ We selected 12 commercial apps which are used by millions of users from [Google 
 | Manual      |     6    |
 | Monkey      |     5    |
 | Xdroid      |     26   |
+| Sapienz     |     2    |
 
 
 ### Xdroid：26 Bugs
@@ -1160,4 +1161,118 @@ Caused by: java.lang.IllegalStateException: Called while creating a loader
 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:899)
 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:694)
 	at de.robv.android.xposed.XposedBridge.main(XposedBridge.java:102)
+```
+
+### Sapienz : 2 Bugs
+
+**twitter** : 2
+```
+// CRASH: com.twitter.android (pid 5195)
+// Short Msg: java.lang.RuntimeException
+// Long Msg: java.lang.RuntimeException: Can't create handler inside thread that has not called Looper.prepare()
+// Build Label: google/razor/flo:4.4.2/KOT49H/937116:user/release-keys
+// Build Changelist: 937116
+// Build Time: 1386201442000
+// com.twitter.async.service.AsyncExecutionException
+// 	at com.twitter.async.service.AsyncService$g.run(Twttr:429)
+// 	at android.os.Handler.handleCallback(Handler.java:733)
+// 	at android.os.Handler.dispatchMessage(Handler.java:95)
+// 	at android.os.Looper.loop(Looper.java:136)
+// 	at android.app.ActivityThread.main(ActivityThread.java:5017)
+// 	at java.lang.reflect.Method.invokeNative(Native Method)
+// 	at java.lang.reflect.Method.invoke(Method.java:515)
+// 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:779)
+// 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:595)
+// 	at de.robv.android.xposed.XposedBridge.main(XposedBridge.java:132)
+// 	at dalvik.system.NativeStart.main(Native Method)
+// Caused by: java.lang.RuntimeException: Can't create handler inside thread that has not called Looper.prepare()
+// 	at android.os.Handler.<init>(Handler.java:200)
+// 	at android.os.Handler.<init>(Handler.java:114)
+// 	at android.telephony.PhoneStateListener$2.<init>(PhoneStateListener.java:349)
+// 	at android.telephony.PhoneStateListener.<init>(PhoneStateListener.java:349)
+// 	at crq$a.<init>(Twttr:87)
+// 	at crq$a.<init>(Twttr:87)
+// 	at crq.<init>(Twttr:49)
+// 	at alp.e(Twttr:136)
+// 	at amb.a(Twttr:27)
+// 	at amb.b(Twttr:10)
+// 	at dagger.internal.b.b(Twttr:47)
+// 	at bnm.a(Twttr:34)
+// 	at bnm.b(Twttr:11)
+// 	at dagger.internal.b.b(Twttr:47)
+// 	at ale.R(Twttr:1024)
+// 	at com.twitter.library.network.forecaster.c.a(Twttr:21)
+// 	at bsh.b(Twttr:196)
+// 	at bsh.a(Twttr:133)
+// 	at com.twitter.library.network.j.a(Twttr:157)
+// 	at com.twitter.library.network.j.b(Twttr:123)
+// 	at com.twitter.network.d.a(Twttr:33)
+// 	at com.twitter.network.HttpOperation.w(Twttr:864)
+// 	at com.twitter.network.HttpOperation.c(Twttr:409)
+// 	at com.twitter.library.service.b.a_(Twttr:333)
+// 	at com.twitter.library.service.s.Q(Twttr:483)
+// 	at com.twitter.library.service.s.d(Twttr:40)
+// 	at com.twitter.async.service.AsyncService$b.b(Twttr:295)
+// 	at com.twitter.async.service.AsyncService$b.e(Twttr:232)
+// 	at com.twitter.async.service.AsyncService$b$1.a(Twttr:276)
+// 	at com.twitter.async.service.AsyncService$b$1.call(Twttr:259)
+// 	at cpa.a(Twttr:47)
+// 	at com.twitter.async.service.AsyncService$b.run(Twttr:259)
+// 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:422)
+// 	at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+// 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1112)
+// 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:587)
+// 	at java.lang.Thread.run(Thread.java:841)
+//
+```
+
+```
+// Short Msg: java.lang.ClassNotFoundException
+// Long Msg: java.lang.ClassNotFoundException: Didn't find class "com.twitter.async.service.AsyncExecutionException" on path: DexPathList[[zip file "/data/app/com.nata.xdroid-1.apk"],nativeLibraryDirectories=[/data/app-lib/com.nata.xdroid-1, /vendor/lib, /system/lib]]
+// Build Label: google/razor/flo:4.4.2/KOT49H/937116:user/release-keys
+// Build Changelist: 937116
+// Build Time: 1386201442000
+// java.lang.RuntimeException: Unable to start receiver com.nata.xdroid.receivers.CrashReportReceiver: java.lang.RuntimeException: Parcelable encounteredClassNotFoundException reading a Serializable object (name = com.twitter.async.service.AsyncExecutionException)
+// 	at android.app.ActivityThread.handleReceiver(ActivityThread.java:2426)
+// 	at android.app.ActivityThread.access$1700(ActivityThread.java:135)
+// 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1272)
+// 	at android.os.Handler.dispatchMessage(Handler.java:102)
+// 	at android.os.Looper.loop(Looper.java:136)
+// 	at android.app.ActivityThread.main(ActivityThread.java:5017)
+// 	at java.lang.reflect.Method.invokeNative(Native Method)
+// 	at java.lang.reflect.Method.invoke(Method.java:515)
+// 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:779)
+// 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:595)
+// 	at de.robv.android.xposed.XposedBridge.main(XposedBridge.java:132)
+// 	at dalvik.system.NativeStart.main(Native Method)
+// Caused by: java.lang.RuntimeException: Parcelable encounteredClassNotFoundException reading a Serializable object (name = com.twitter.async.service.AsyncExecutionException)
+// 	at android.os.Parcel.readSerializable(Parcel.java:2219)
+// 	at android.os.Parcel.readValue(Parcel.java:2064)
+// 	at android.os.Parcel.readArrayMapInternal(Parcel.java:2314)
+// 	at android.os.Bundle.unparcel(Bundle.java:249)
+// 	at android.os.Bundle.getSerializable(Bundle.java:1295)
+// 	at android.content.Intent.getSerializableExtra(Intent.java:4694)
+// 	at com.nata.xdroid.receivers.CrashReportReceiver.onReceive(CrashReportReceiver.java:31)
+// 	at android.app.ActivityThread.handleReceiver(ActivityThread.java:2419)
+// 	... 11 more
+// Caused by: java.lang.ClassNotFoundException: com.twitter.async.service.AsyncExecutionException
+// 	at java.lang.Class.classForName(Native Method)
+// 	at java.lang.Class.forName(Class.java:251)
+// 	at java.io.ObjectInputStream.resolveClass(ObjectInputStream.java:2262)
+// 	at java.io.ObjectInputStream.readNewClassDesc(ObjectInputStream.java:1638)
+// 	at java.io.ObjectInputStream.readClassDesc(ObjectInputStream.java:658)
+// 	at java.io.ObjectInputStream.readNewObject(ObjectInputStream.java:1781)
+// 	at java.io.ObjectInputStream.readNonPrimitiveContent(ObjectInputStream.java:762)
+// 	at java.io.ObjectInputStream.readObject(ObjectInputStream.java:1981)
+// 	at java.io.ObjectInputStream.readObject(ObjectInputStream.java:1938)
+// 	at android.os.Parcel.readSerializable(Parcel.java:2213)
+// 	... 18 more
+// Caused by: java.lang.NoClassDefFoundError: com/twitter/async/service/AsyncExecutionException
+// 	... 28 more
+// Caused by: java.lang.ClassNotFoundException: Didn't find class "com.twitter.async.service.AsyncExecutionException" on path: DexPathList[[zip file "/data/app/com.nata.xdroid-1.apk"],nativeLibraryDirectories=[/data/app-lib/com.nata.xdroid-1, /vendor/lib, /system/lib]]
+// 	at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+// 	at java.lang.ClassLoader.loadClass(ClassLoader.java:497)
+// 	at java.lang.ClassLoader.loadClass(ClassLoader.java:457)
+// 	... 28 more
+//
 ```

@@ -4,7 +4,6 @@ package com.nata.xdroid.receivers;
  * Created by Calvin on 2016/11/26.
  */
 
-import android.app.ApplicationErrorReport;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -33,7 +32,6 @@ public class CrashReportReceiver extends BroadcastReceiver {
 
             final String exceptionDetail = FormatUtil.getExceptionDetail(throwable);
 
-            //存到数据库
             CrashInfo crashInfo = new CrashInfo();
             crashInfo.setPackageName(packageName);
             crashInfo.setStampTime((int) (System.currentTimeMillis() / 1000));
