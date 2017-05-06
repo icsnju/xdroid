@@ -12,7 +12,7 @@ Xdroid provides a convenient float window to start/stop the test process and use
 ## Experiment setup
 Since automated testing can not provide the resources that apps depend on, manual testing is expensive and cannot effectively detect bugs as random testing. We conduct experiments to evaluate if Xdroid can combine the benefits of both manual testing and random testing to increase test efficiency.
 
-We evaluated Xdroid with two other effective approaches in this study: manual testing and Monkey test tool provided by Android. For manual testing and Xdroid, we invited five users to help with the process of test and all five users we chose in this study are students at Nanjing University who have experience using Android apps.
+We evaluated Xdroid with three other effective approaches in this study: manual testing and Monkey test tool provided by Android and Sapienz. For manual testing and Xdroid, we invited five users to help with the process of test and all five users we chose in this study are students at Nanjing University who have experience using Android apps.
 
 ## List of apps
 We selected 12 commercial apps which are used by millions of users from [Google play top charts](https://play.google.com/store/apps/top) and 8 open-source apps from the Android open-source apps repository [F-Droid](https://f-droid.org/). The number of activities listed in the AndroidManifest file of these apps ranges from 7 to 705, with a mean of 100. The SLOC of open source apps ranges from 1k to 21K, with a mean of 8K.
