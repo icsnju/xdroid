@@ -30,7 +30,7 @@ We selected 12 commercial apps which are used by millions of users from [Google 
 |Multi SMS	   |  Tools        |	7	|com.hectorone.multismssender	|2.3	| 41.33 |	0	|0	|3	| 66.34 |	0	|0	|65.57 |	0|	0| 29.18 | 0 | 0 |
 |Nectroid      |	Media	       |7|	com.kvance.Nectroid|	1.2.4	| 31.64 |	0	|0	|2.5	| 	50.66 |	0	|1	|60.33 |	0|	1| 26.53 | 0 | 0 |
 |MyExpenses	   |  Finance      |	13|	org.totschnig.myexpenses|	1.6.0|	20.77 |	0	|0	|2.5|		38.05 |	0	|1	|56.19 |	0|	0| 17.65 | 0 | 0 |
-|K-9Mail       |	Mail         |	25	|com.fsck.k9|	3.512| 5.06 |	0	|1	|6|		30.87 |	0	|4	|	32.49 |	0	|1| 2.42 | 0 | 0 | 2.42  | 0 | 0 |
+|K-9Mail       |	Mail         |	25	|com.fsck.k9|	3.512| 5.06 |	0	|1	|6|		30.87 |	0	|4	|	32.49 |	0	|1| 2.42 | 0 | 0 |
 |KeePassDroid  |	Tools        |	15|	com.android.keepass|	1.9.8	| 5.02 |	0	|0 | 3	|	11.32 |	0 |	1 | 8.78 | 0 |0| 1.94 | 0 | 0 |
 
 ![](images/open.png)
@@ -38,7 +38,7 @@ We selected 12 commercial apps which are used by millions of users from [Google 
 ## Activity coverage results for commercial apps
 
 |Subject |  |	|	|	| Monkey |	| 	| Xdroid |	|           | 	| Manual	| | | Sapienz		| | |
-| ---- | --- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |
+| ---- | --- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |--- |
 |Subject Name	| Category |	#Activity	| App pkg	| Version	| Cov |	#ANR	| #Crash	| Manual(min) |	Cov	| #ANR	 | #Crash	| Cov	| #ANR	| #Crash | Cov	| #ANR	| #Crash |
 |wish        |	Shopping	    | 49	| com.contextlogic.wish	  | 4.2.1             |	12.24 |	0	| 0	| 5	|	30.61 |	0	| 0	| 	42.85 |	0	| 0 | 12.24  | 0 | 0 |
 |Messenger   |	Communication | 121	| com.facebook.orca	      |33.0.0.31.250	    |	1.24 	| 0	|0	|	6	| 19.00  |	0	| 0	|19.80  | 	0	|0| 1.60  | 0 | 0 |
@@ -53,6 +53,7 @@ We selected 12 commercial apps which are used by millions of users from [Google 
 |whatsapp    |	Communication |	122 |	com.whatsapp            |	2.16.396	 	      | 2.86  |	0	|0	|	4	| 28.68  |	0	| 1	|40.16  | 0 |	0|1.63 |0 | 0 |
 |yahoo mail  |	Mail          |	56  |	com.yahoo.mobile.client.android.mail|5.11.6 | 10.71 | 0	|0	|	5	| 30.35	 |	0	| 1	| 35.71 |	0	|0|
 7.14 | 0 | 0 |
+
 ![](images/google.png)
 
 ## Bugs Found
